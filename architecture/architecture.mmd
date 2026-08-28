@@ -1,0 +1,12 @@
+flowchart TD
+    U["User / reviewer"] --> API["FastAPI / CLI"]
+    API --> G["Governing engineering agent"]
+    G -->|"validated delegation"| E["Engineering specialist"]
+    E --> T["Deterministic hydraulic tool"]
+    T --> S["SQLite workflow state + event audit"]
+    S --> V["Verification / evidence specialist"]
+    V --> H["Human review gate"]
+    H --> R["Verified released result"]
+    API -.->|"live path; implemented, not yet executed"| ADK["Google ADK + Gemini 3.5 Flash"]
+    ADK -.-> G
+    CR["Cloud Run deployment prepared — NOT DEPLOYED"] -.-> API

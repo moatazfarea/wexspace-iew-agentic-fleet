@@ -1,0 +1,63 @@
+{
+  "manifest_id": "WEXSPACE-HACKATHON-PRIOR-WORK-R01",
+  "competition_project_created_at": "2026-08-28T23:03:16Z",
+  "disclosure_complete_for_known_prior_work": true,
+  "final_entrant_ownership_confirmation_required": true,
+  "components": [
+    {
+      "component_id": "PRIOR-001",
+      "component_name": "WEXSPACE AI / IEW AI product vision and branding direction",
+      "original_source": "pre-existing user-owned ChatGPT Project context",
+      "source_revision": "pre-competition",
+      "source_timestamp": "before 2026-08-03T16:00:00Z",
+      "source_SHA256": null,
+      "ownership_basis": "entrant ownership claim; final entrant confirmation required",
+      "license_basis": "private concept; no third-party license asserted",
+      "pre_existing": true,
+      "use_in_competition": "problem framing and project naming",
+      "whether_modified": true,
+      "hackathon_delta": "competition-specific positioning and implementation",
+      "competition_destination": "README and submission materials",
+      "verification_status": "DISCLOSED_USER_CONFIRMATION_REQUIRED"
+    },
+    {
+      "component_id": "PRIOR-002",
+      "component_name": "UTL-NET-001 workflow concept and earlier qualification history",
+      "original_source": "IEW Task 7 controlled state",
+      "source_revision": "TASK7 R45 PASS_CLOSED_IMMUTABLE; R46 verification artifacts",
+      "source_timestamp": "pre-competition-project",
+      "source_SHA256": null,
+      "reference_checkpoint_SHA256": "28a8beaae723cf8c289dd8017ff17651580f55093074f1926545d87640467e04",
+      "ownership_basis": "entrant-owned prior project reference; final confirmation required",
+      "license_basis": "reference-only; no prior source file copied",
+      "pre_existing": true,
+      "use_in_competition": "neutral workflow selection and domain requirements",
+      "whether_modified": true,
+      "hackathon_delta": "new synthetic input and new competition code written from scratch",
+      "competition_destination": "data and deterministic tool",
+      "verification_status": "REFERENCE_ONLY_NOT_COPIED"
+    },
+    {
+      "component_id": "PRIOR-003",
+      "component_name": "Persistence, recovery, orchestration, governance, and evidence concepts",
+      "original_source": "pre-existing IEW project methodologies",
+      "source_revision": "multiple controlled project revisions",
+      "source_timestamp": "pre-competition-project",
+      "source_SHA256": null,
+      "ownership_basis": "entrant-owned methodology claim; final confirmation required",
+      "license_basis": "conceptual reference only",
+      "pre_existing": true,
+      "use_in_competition": "design principles",
+      "whether_modified": true,
+      "hackathon_delta": "new bounded SQLite state machine, registry, traces, and tests",
+      "competition_destination": "src, security, tests, evidence",
+      "verification_status": "DISCLOSED_REFERENCE_ONLY"
+    }
+  ],
+  "excluded_from_repository": [
+    "prior IEW repository and runtime bundles",
+    "employer or customer confidential data",
+    "real plant layouts and production parameters",
+    "credentials and secrets"
+  ]
+}

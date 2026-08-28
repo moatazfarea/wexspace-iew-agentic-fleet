@@ -1,0 +1,61 @@
+{
+  "registry_id": "WEXSPACE-AGENT-REGISTRY",
+  "registry_version": "0.1.0",
+  "data_classification": "PUBLIC_SAFE_SYNTHETIC_ONLY",
+  "agents": [
+    {
+      "agent_id": "governing_engineering_agent",
+      "name": "Governing Engineering Agent",
+      "version": "0.1.0",
+      "domain": "industrial engineering governance",
+      "organizational_role": "engineering workflow controller",
+      "purpose": "Validate goals and inputs, enforce policy, route work, control state, and hold release for human review.",
+      "owner_function": "Engineering Governance",
+      "input_contract": "goal + synthetic network JSON",
+      "output_contract": "controlled workflow state",
+      "allowed_tools": ["policy_check", "validate_network_input", "workflow_state"],
+      "allowed_data_scope": ["synthetic cooling-water input", "workflow metadata"],
+      "authority_scope": ["route", "block", "pause", "resume", "request human review"],
+      "prohibited_actions": ["release without human approval", "read secrets", "execute shell", "access arbitrary files"],
+      "status": "ACTIVE",
+      "agent_card": "security/governing_engineering_agent.md",
+      "implementation_reference": "src/wexspace/agents.py"
+    },
+    {
+      "agent_id": "engineering_specialist",
+      "name": "Hydraulic Engineering Specialist",
+      "version": "0.1.0",
+      "domain": "cooling-water hydraulics",
+      "organizational_role": "deterministic calculation specialist",
+      "purpose": "Invoke the bounded hydraulic calculation tool and return structured results.",
+      "owner_function": "Mechanical Engineering",
+      "input_contract": "validated synthetic network JSON",
+      "output_contract": "deterministic calculation JSON",
+      "allowed_tools": ["calculate_network"],
+      "allowed_data_scope": ["validated synthetic network input"],
+      "authority_scope": ["calculate"],
+      "prohibited_actions": ["modify source input", "approve result", "access network", "read secrets"],
+      "status": "ACTIVE",
+      "agent_card": "security/engineering_specialist.md",
+      "implementation_reference": "src/wexspace/hydraulics.py"
+    },
+    {
+      "agent_id": "verification_specialist",
+      "name": "Verification and Evidence Specialist",
+      "version": "0.1.0",
+      "domain": "independent engineering verification",
+      "organizational_role": "quality and evidence specialist",
+      "purpose": "Independently recalculate, compare, classify failure, and package provenance.",
+      "owner_function": "Independent Verification",
+      "input_contract": "validated input + deterministic result",
+      "output_contract": "verification and provenance JSON",
+      "allowed_tools": ["independently_verify", "canonical_sha256"],
+      "allowed_data_scope": ["synthetic input", "calculation result", "workflow trace"],
+      "authority_scope": ["verify", "reject", "request human review"],
+      "prohibited_actions": ["change calculation", "self-approve release", "read secrets", "write outside evidence scope"],
+      "status": "ACTIVE",
+      "agent_card": "security/verification_specialist.md",
+      "implementation_reference": "src/wexspace/agents.py"
+    }
+  ]
+}

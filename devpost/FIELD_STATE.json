@@ -1,0 +1,31 @@
+{
+  "artifact_id": "DEVPOST-DRAFT-FIELD-STATE-R01",
+  "draft_access": "ACCESSIBLE_NOT_AUTHENTICATED",
+  "existing_draft_verification": "BLOCKED_BY_AUTHENTICATION",
+  "do_not_create_second_project": true,
+  "known_user_entered_values": {
+    "project_name": "WEXSPACE AI — IEW Agentic Engineering Fleet",
+    "submitter_type": "Individual",
+    "country": "Yemen",
+    "category": "Fortified Enterprise Fleet",
+    "start_date": "08-29-26",
+    "built_with": ["Python"],
+    "startup_excellence": false
+  },
+  "safe_additions_now": ["Google Agent Development Kit"],
+  "conditional_additions": [
+    {
+      "value": "Gemini 3.5 Flash",
+      "required_gate": "verified live model response",
+      "state": "BLOCKED"
+    },
+    {
+      "value": "Google Cloud Run",
+      "required_gate": "verified deployment and invocation",
+      "state": "BLOCKED"
+    }
+  ],
+  "prohibited_current_additions": ["Firestore", "hosted URL", "repository URL", "video URL"],
+  "final_submit_authority": "USER_ONLY",
+  "final_submit_state": "NOT_AUTHORIZED"
+}

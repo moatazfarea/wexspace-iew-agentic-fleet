@@ -1,0 +1,51 @@
+{
+  "project_id": "UTL-NET-001-HACKATHON-SYNTHETIC",
+  "source_node": "P-101",
+  "source_pressure_kpa": 450.0,
+  "fluid": {
+    "name": "water",
+    "temperature_c": 25.0,
+    "density_kg_m3": 997.0,
+    "dynamic_viscosity_pa_s": 0.00089
+  },
+  "velocity_limits_m_s": {
+    "min": 0.5,
+    "max": 3.0
+  },
+  "min_residual_pressure_kpa": 150.0,
+  "segments": [
+    {
+      "segment_id": "S-001",
+      "from_node": "P-101",
+      "to_node": "J-101",
+      "length_m": 20.0,
+      "diameter_mm": 100.0,
+      "roughness_mm": 0.045,
+      "flow_m3_h": 30.0,
+      "k_local": 1.2,
+      "elevation_gain_m": 1.0
+    },
+    {
+      "segment_id": "S-002",
+      "from_node": "J-101",
+      "to_node": "HX-101",
+      "length_m": 30.0,
+      "diameter_mm": 65.0,
+      "roughness_mm": 0.045,
+      "flow_m3_h": 18.0,
+      "k_local": 3.5,
+      "elevation_gain_m": 4.0
+    },
+    {
+      "segment_id": "S-003",
+      "from_node": "J-101",
+      "to_node": "HX-102",
+      "length_m": 25.0,
+      "diameter_mm": 50.0,
+      "roughness_mm": 0.045,
+      "flow_m3_h": 12.0,
+      "k_local": 4.0,
+      "elevation_gain_m": 2.0
+    }
+  ]
+}
