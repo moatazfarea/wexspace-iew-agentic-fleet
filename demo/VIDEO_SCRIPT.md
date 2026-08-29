@@ -69,9 +69,11 @@ Status: **script and recording plan ready; recording/upload remain open until li
 
 - Duration is 3:20–3:50 and never exceeds 4:00.
 - English audio or complete English subtitles.
-- Publicly visible on YouTube or Vimeo, not private/unlisted if rules require public.
+- Publicly visible on YouTube or Vimeo; do not use private or unlisted visibility.
 - Real live execution only; no fabricated log or hosted URL.
 - Google Cloud proof is legible.
 - Repository commit and diagram match the video.
 - No API key, email, billing detail, private path, token, or employer/customer data is visible.
 - URL opens in a signed-out browser.
+
+Use [CLOUD_PROOF_CAPTURE_CHECKLIST.md](CLOUD_PROOF_CAPTURE_CHECKLIST.md) as the only Gate 7/video insertion checklist.

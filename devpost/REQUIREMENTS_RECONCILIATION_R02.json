@@ -1,0 +1,73 @@
+{
+  "artifact_id": "DEVPOST-REQUIREMENTS-RECONCILIATION-R02",
+  "verified_at": "2026-08-29T15:24:00Z",
+  "official_sources": {
+    "rules": "https://allthingsagentichackathon.devpost.com/rules",
+    "faq": "https://allthingsagentichackathon.devpost.com/details/faqs",
+    "resources": "https://allthingsagentichackathon.devpost.com/resources",
+    "updates": "https://allthingsagentichackathon.devpost.com/updates"
+  },
+  "submission_deadline": {
+    "display": "August 31, 2026 at 5:00 PM PDT",
+    "utc": "2026-09-01T00:00:00Z",
+    "state": "OPEN"
+  },
+  "mandatory_technology": [
+    {
+      "requirement": "Gemini 3.5 or newer through Gemini API or Vertex AI",
+      "project_mapping": "gemini-3.7-flash through Gemini Developer API",
+      "state": "PASS_PREVIOUSLY_VERIFIED_CURRENT_CLOUD_TRACE_OPEN"
+    },
+    {
+      "requirement": "at least one Google agent framework",
+      "project_mapping": "Google Agent Development Kit",
+      "state": "PASS"
+    },
+    {
+      "requirement": "at least one Google Cloud infrastructure service",
+      "project_mapping": "Google Cloud Run",
+      "state": "OPEN_NOT_DEPLOYED"
+    }
+  ],
+  "required_submission_assets": [
+    {
+      "asset": "code repository",
+      "state": "LOCAL_CONTROLLED_CANDIDATE_READY_REMOTE_PUBLICATION_OPEN"
+    },
+    {
+      "asset": "architecture diagram",
+      "state": "READY_MERMAID_AND_SVG"
+    },
+    {
+      "asset": "short write-up",
+      "state": "DRAFT_READY_AUTHENTICATED_FIELD_VERIFICATION_OPEN"
+    },
+    {
+      "asset": "demo video",
+      "constraints": "maximum four minutes; publicly visible on YouTube or Vimeo; English or complete English subtitles",
+      "state": "SCRIPT_AND_SHOT_LIST_READY_RECORDING_UPLOAD_OPEN"
+    }
+  ],
+  "cloud_proof": {
+    "required": true,
+    "accepted_examples": [
+      "legible Google Cloud Console or Cloud Run dashboard evidence",
+      "live .run URL visible in the browser address bar",
+      "Cloud logs tied to the demonstrated invocation"
+    ],
+    "project_state": "OPEN",
+    "capture_plan": "demo/CLOUD_PROOF_CAPTURE_CHECKLIST.md"
+  },
+  "track": {
+    "selected": "Fortified Enterprise Fleet",
+    "single_track_required": true,
+    "state": "MATCHES_PROJECT_CORE"
+  },
+  "credit_and_trial_boundary": {
+    "credit_or_free_trial_is_submission_requirement": false,
+    "financial_or_activation_investigation_performed": false,
+    "current_account_state_claimed": false
+  },
+  "final_submit_authority": "USER_ONLY",
+  "status": "PASS_REQUIREMENTS_RECONCILED_EXTERNAL_ASSETS_OPEN"
+}

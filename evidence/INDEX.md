@@ -10,5 +10,6 @@ Every `PASS` is tied to an executed or reopened artifact. External gates remain 
 | `qualification/R07_INDEPENDENT_DAG_QUALIFICATION_R01.json` | fresh-process resume, async worker, registry, provenance, human gate, scans | PASS |
 | `qualification/R07_WORK_INTERRUPTION_AND_PROVIDER_PROCESSING_R01.json` | allowance interruption recovery and provider-delay responsibility case | PASS behavior; Cloud readiness unverified |
 | `FINAL_QUALIFICATION_MATRIX_R01.md` | current mandatory-gate reconciliation | CONTROLLED PRE-FREEZE |
+| `../devpost/REQUIREMENTS_RECONCILIATION_R02.json` | official requirements, deadline, technology and asset mapping | PASS reconciliation; external assets open |
 
 Cloud Run evidence will be added under `evidence/cloud/` only after a real deployment, invocation, and log capture.

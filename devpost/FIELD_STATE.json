@@ -1,5 +1,6 @@
 {
-  "artifact_id": "DEVPOST-DRAFT-FIELD-STATE-R01",
+  "artifact_id": "DEVPOST-DRAFT-FIELD-STATE-R02",
+  "requirements_reconciliation": "REQUIREMENTS_RECONCILIATION_R02.json",
   "draft_access": "ACCESSIBLE_NOT_AUTHENTICATED",
   "existing_draft_verification": "BLOCKED_BY_AUTHENTICATION",
   "do_not_create_second_project": true,
@@ -21,6 +22,14 @@
     }
   ],
   "current_revision_gemini_trace": "OPEN_REQUALIFICATION_REQUIRED",
+  "official_deadline_utc": "2026-09-01T00:00:00Z",
+  "mandatory_cloud_proof": "OPEN",
+  "video_constraints": {
+    "maximum_duration_minutes": 4,
+    "hosting": ["YouTube", "Vimeo"],
+    "visibility": "PUBLIC",
+    "language": "ENGLISH_OR_COMPLETE_ENGLISH_SUBTITLES"
+  },
   "prohibited_current_additions": ["Firestore", "hosted URL", "repository URL", "video URL"],
   "final_submit_authority": "USER_ONLY",
   "final_submit_state": "NOT_AUTHORIZED"
