@@ -14,7 +14,7 @@ Status: **script and recording plan ready; recording/upload remain open until li
 
 **Narration:**
 
-“A language model is not the numerical authority. One governing agent controls policy and routing. A bounded specialist invokes deterministic equations. A separate verification agent recomputes the result, and a human controls release.”
+“A language model is not the numerical authority. The WEXSPACE Governing Agent controls context, policy, and routing. The IEW Engineering Specialist invokes deterministic equations. The WEXSPACE Verification and Evidence Specialist recomputes the result, and a human controls release.”
 
 **Screen:** Architecture diagram; pause on the solid verified path.
 
@@ -22,7 +22,7 @@ Status: **script and recording plan ready; recording/upload remain open until li
 
 **Narration, only after live gates pass:**
 
-“The live route runs three agents in Google ADK with Gemini 3.5 Flash and is deployed as a FastAPI service on Google Cloud Run. Deterministic Python tools calculate and verify the engineering result. SQLite demonstrates workflow persistence and restart/resume locally; I do not claim it is durable across Cloud Run instance replacement.”
+“The live route runs three agents in Google ADK with Gemini 3.7 Flash and is deployed as a FastAPI service on Google Cloud Run. Deterministic Python tools calculate and verify the engineering result. SQLite demonstrates workflow persistence and restart/resume locally; I do not claim it is durable across Cloud Run instance replacement.”
 
 **Screen:** Architecture, then agent registry. If Gemini or Cloud remains unverified, do not record the final video; the diagram currently labels those gates open.
 
@@ -47,7 +47,7 @@ Status: **script and recording plan ready; recording/upload remain open until li
 
 “The registry makes agents discoverable and versioned. SQLite preserves workflow identity, results, evidence hashes, and timestamped events across a fresh process. A worker handles queued work. Missing parameters are blocked instead of guessed, injected instructions are rejected again at tool boundaries, and traces contain actions and outcomes—never hidden chain-of-thought.”
 
-**Screen:** Registry, test output `14 tests ... OK`, the blocked missing-input result, and event trace.
+**Screen:** Registry, current full-suite `OK` output, the blocked missing-input result, the blocked unallowlisted-context result, and the event trace.
 
 ## 3:15–3:38 — Google Cloud proof
 

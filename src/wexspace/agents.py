@@ -29,7 +29,11 @@ class AgentFleet:
         self.registry_path = Path(registry_path) if registry_path else default_registry_path()
         self.registry = json.loads(self.registry_path.read_text(encoding="utf-8"))
         self._agent_ids = {agent["agent_id"] for agent in self.registry["agents"]}
-        required = {"governing_engineering_agent", "engineering_specialist", "verification_specialist"}
+        required = {
+            "wexspace_governing_agent",
+            "iew_engineering_specialist",
+            "wexspace_verification_evidence_specialist",
+        }
         if not required.issubset(self._agent_ids):
             raise ValueError("agent registry is missing required specialists")
 
@@ -45,7 +49,7 @@ class AgentFleet:
         self.store.create_workflow(workflow_id, goal, payload)
         self.store.add_event(
             workflow_id,
-            "governing_engineering_agent",
+            "wexspace_governing_agent",
             "workflow_created",
             "QUEUED",
             {"goal": goal, "input_sha256": canonical_sha256(payload)},
@@ -61,9 +65,25 @@ class AgentFleet:
         if workflow["current_step"] == "GOVERNANCE":
             policy = policy_check(workflow["goal"], workflow["input"])
             errors = validate_network_input(workflow["input"])
+            context_gate = policy["context_gate"]
+            scope_gate = policy["scope_relevance_actionability"]
             self.store.add_event(
                 workflow_id,
-                "governing_engineering_agent",
+                "wexspace_governing_agent",
+                "context_allowlist_decision",
+                "PASS" if context_gate["allowed"] else "BLOCK",
+                context_gate,
+            )
+            self.store.add_event(
+                workflow_id,
+                "wexspace_governing_agent",
+                "scope_relevance_actionability_gate",
+                "PASS" if scope_gate["allowed"] else "BLOCK",
+                scope_gate,
+            )
+            self.store.add_event(
+                workflow_id,
+                "wexspace_governing_agent",
                 "policy_decision",
                 "PASS" if policy["allowed"] else "BLOCK",
                 policy,
@@ -79,7 +99,7 @@ class AgentFleet:
             if errors:
                 self.store.add_event(
                     workflow_id,
-                    "governing_engineering_agent",
+                    "wexspace_governing_agent",
                     "missing_input_control",
                     "BLOCK",
                     {"errors": errors},
@@ -93,11 +113,11 @@ class AgentFleet:
                 return self.status(workflow_id)
             self.store.add_event(
                 workflow_id,
-                "governing_engineering_agent",
+                "wexspace_governing_agent",
                 "delegation",
                 "ROUTED",
                 {
-                    "to_agent": "engineering_specialist",
+                    "to_agent": "iew_engineering_specialist",
                     "task": "deterministic hydraulic calculation",
                     "tool": "calculate_network",
                 },
@@ -109,7 +129,7 @@ class AgentFleet:
             calculation = calculate_network(workflow["input"])
             self.store.add_event(
                 workflow_id,
-                "engineering_specialist",
+                "iew_engineering_specialist",
                 "deterministic_tool_call",
                 "PASS",
                 {
@@ -129,7 +149,7 @@ class AgentFleet:
                 self.store.update(workflow_id, status="PAUSED", current_step="VERIFICATION")
                 self.store.add_event(
                     workflow_id,
-                    "governing_engineering_agent",
+                    "wexspace_governing_agent",
                     "state_transition",
                     "PAUSED",
                     {"resume_from": "VERIFICATION"},
@@ -140,11 +160,11 @@ class AgentFleet:
         if workflow["current_step"] == "VERIFICATION":
             self.store.add_event(
                 workflow_id,
-                "governing_engineering_agent",
+                "wexspace_governing_agent",
                 "delegation",
                 "ROUTED",
                 {
-                    "to_agent": "verification_specialist",
+                    "to_agent": "wexspace_verification_evidence_specialist",
                     "task": "independent recalculation and evidence packaging",
                 },
             )
@@ -158,10 +178,13 @@ class AgentFleet:
                 "agent_registry_sha256": hashlib.sha256(self.registry_path.read_bytes()).hexdigest(),
                 "provenance_chain": [
                     "synthetic_input",
+                    "competition_context_allowlist",
+                    "scope_relevance_actionability_gate",
                     "governing_policy",
-                    "engineering_specialist",
+                    "wexspace_governing_agent",
+                    "iew_engineering_specialist",
                     "deterministic_calculation",
-                    "verification_specialist",
+                    "wexspace_verification_evidence_specialist",
                     "independent_recalculation",
                     "human_review_gate",
                 ],
@@ -169,7 +192,7 @@ class AgentFleet:
             }
             self.store.add_event(
                 workflow_id,
-                "verification_specialist",
+                "wexspace_verification_evidence_specialist",
                 "independent_validation",
                 "PASS" if verification["verified"] else "FAIL",
                 {
@@ -195,7 +218,7 @@ class AgentFleet:
             )
             self.store.add_event(
                 workflow_id,
-                "governing_engineering_agent",
+                "wexspace_governing_agent",
                 "human_review_gate",
                 "WAITING",
                 {"consequential_transition": "release verified engineering result"},
@@ -223,7 +246,7 @@ class AgentFleet:
         )
         self.store.add_event(
             workflow_id,
-            "governing_engineering_agent",
+            "wexspace_governing_agent",
             "human_review_gate",
             "APPROVED",
             {"reviewer": reviewer},

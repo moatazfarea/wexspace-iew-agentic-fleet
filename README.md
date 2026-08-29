@@ -4,31 +4,31 @@ A governed three-agent workflow for auditable industrial engineering. The compet
 
 Competition category: **Fortified Enterprise Fleet**  
 Submission type: **Individual**  
-Current state: **local qualification passed; live Gemini and Google Cloud qualification remain open**  
+Current state: **R07 governed core locally qualified; prior Gemini/ADK execution preserved; current-source live trace and Google Cloud deployment remain open**
 Submission state: **not submitted**
 
 ## Why this exists
 
-Industrial engineering work cannot safely rely on a chatbot inventing numerical answers. It needs explicit authority, reproducible equations, complete inputs, independent checking, durable state, operational traces, and accountable release. This project separates those responsibilities across a governing agent, a hydraulic specialist, and a verification/evidence specialist.
+Industrial engineering work cannot safely rely on a chatbot inventing numerical answers. It needs explicit authority, reproducible equations, complete inputs, independent checking, durable state, operational traces, and accountable release. This project separates those responsibilities across the WEXSPACE Governing Agent, the IEW Engineering Specialist, and the WEXSPACE Verification / Evidence Specialist.
 
 ## Verified capability snapshot
 
 | Capability | Current evidence-backed state |
 |---|---|
 | Python package and API | PASS locally |
-| Google ADK | PASS locally with deterministic model doubles; no Gemini claim |
-| Gemini 3.5 Flash integration | Implemented, NOT EXECUTED — API key unavailable |
+| Google ADK | Current R07 local three-agent smoke PASS; historical authenticated execution PASS; current live trace open |
+| Gemini 3.7 Flash | Historical direct execution PASS; current R07 route pinned to the Gemini Developer API |
 | Cloud Run deployment | Prepared, NOT DEPLOYED — Google Cloud authentication/project unavailable |
-| Three-agent routing and delegation | PASS locally |
+| R07 three-agent routing and delegation | PASS locally through named WEXSPACE → IEW → verification roles |
 | Deterministic engineering tool | PASS locally |
 | Independent verification | PASS locally |
 | SQLite persistence and restart/resume | PASS locally |
 | Async queue/worker | PASS locally |
 | Missing-input and prompt-injection controls | PASS locally |
 | Human release gate | PASS locally |
-| Fresh-environment test | PASS locally |
+| Isolated dependency environment | Current R07 source PASS (16/16); R03 fresh-install checkpoint PASS (14/14) |
 
-The project does not claim a Gemini response, hosted URL, Cloud Run deployment, or cloud-persistent database until those are executed and captured as evidence.
+The project preserves the prior verified Gemini response and ADK execution as historical evidence. It does not claim a current-source live three-agent Gemini trace, hosted URL, Cloud Run deployment, or cloud-persistent database until each is executed and captured against the current revision.
 
 ## Architecture
 
@@ -36,14 +36,14 @@ The [architecture diagram](architecture/architecture.svg) distinguishes verified
 
 The primary local workflow is:
 
-1. The governing agent validates the fixed goal, data scope, input completeness, and injection policy.
-2. It records a delegation event to the engineering specialist.
+1. The WEXSPACE Governing Agent validates the explicit competition context allowlist, authority/relevance/scope compatibility, fixed goal, input completeness, and injection policy.
+2. It records a delegation event to the IEW Engineering Specialist.
 3. The specialist invokes a deterministic Darcy–Weisbach calculation using the Swamee–Jain friction approximation.
 4. State and operational events are committed to SQLite.
-5. The verification specialist independently recomputes with the Haaland approximation and checks agreement within 5%.
+5. The WEXSPACE Verification / Evidence Specialist independently recomputes with the Haaland approximation and checks agreement within 5%.
 6. A human must approve the verified result before its state becomes `RELEASED`.
 
-The live Google path uses a Google ADK `SequentialAgent` containing the same three roles, targets the eligible `gemini-3.5-flash` model, and exposes only three bounded deterministic tools. It is available at `POST /adk/live` when an API key is configured.
+The live Google path uses a Google ADK `SequentialAgent` containing the same three roles, targets `gemini-3.7-flash`, explicitly pins the verified Gemini Developer API route (`GOOGLE_GENAI_USE_VERTEXAI=FALSE`), and exposes only three bounded deterministic tools. It is available at `POST /adk/live` when an API key is configured.
 
 ## Repository map
 
@@ -78,7 +78,7 @@ python -m pip install .
 python -m unittest discover -s tests -v
 ```
 
-Expected test count for revision 0.1.0: **14 tests**.
+Expected test count for the R07 source revision: **16 tests**.
 
 ### Run the governed deterministic workflow
 
@@ -139,7 +139,7 @@ Key endpoints:
 - `POST /workflows` — governed deterministic workflow
 - `POST /worker/once` — process one queued/paused workflow
 - `POST /workflows/{id}/review` — attributable human release decision
-- `POST /adk/live` — live Gemini 3.5 Flash workflow through Google ADK
+- `POST /adk/live` — live Gemini 3.7 Flash workflow through Google ADK
 
 ## Engineering method
 
@@ -156,6 +156,7 @@ Current limitation: the default Cloud Run filesystem is ephemeral. This revision
 ## Security and data control
 
 - Only the fixed synthetic cooling-water analysis goal is authorized.
+- Context sources are denied by default unless their family is competition-allowlisted and authority, relevance, and scope compatibility all pass.
 - Agent tool, data, action, and prohibited-action scopes are versioned in `security/agent_registry.json`.
 - Required inputs are validated before routing.
 - Common prompt/tool-injection strings are blocked at both workflow and ADK tool boundaries.
@@ -172,7 +173,7 @@ Reviewed evidence is stored under `evidence/`. Generated runtime databases and a
 
 Known open gates:
 
-- live Gemini 3.5 Flash execution;
+- current-source live Gemini 3.7 Flash three-agent execution trace;
 - authenticated Google Cloud project and Cloud Run deployment/invocation;
 - visible Cloud deployment proof;
 - GitHub repository creation/push and judge access as applicable;
@@ -182,8 +183,8 @@ Known open gates:
 
 ## Google technologies
 
-- **Google Agent Development Kit 2.8.0:** executed locally.
-- **Gemini 3.5 Flash:** integration implemented, execution not yet verified.
+- **Google Agent Development Kit:** historical authenticated and local execution verified; current R07 live trace open.
+- **Gemini 3.7 Flash:** historical direct response verified; current R07 three-agent trace open.
 - **Google Cloud Run:** deployment files prepared, deployment not yet verified.
 
 Only technologies with completed evidence should be entered as actually used in the final Devpost fields.
@@ -204,7 +205,7 @@ This repository, its competition architecture, source code, Google ADK/Gemini/Cl
 - FAQ: https://allthingsagentichackathon.devpost.com/details/faqs
 - Resources: https://allthingsagentichackathon.devpost.com/resources
 - Updates: https://allthingsagentichackathon.devpost.com/updates
-- Gemini model: https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash
+- Gemini models: https://ai.google.dev/gemini-api/docs/models
 - Google ADK workflow agents: https://google.github.io/adk-docs/agents/workflow-agents/sequential-agents/
 - Cloud Run ADK deployment: https://docs.cloud.google.com/run/docs/quickstarts/build-and-deploy/deploy-python-adk-service
 

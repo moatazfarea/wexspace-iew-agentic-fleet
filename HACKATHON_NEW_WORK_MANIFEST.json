@@ -11,15 +11,15 @@
     },
     {
       "component_id": "NEW-002",
-      "component_name": "Google ADK and Gemini 3.5 Flash integration",
+      "component_name": "Google ADK and Gemini 3.7 Flash integration",
       "paths": ["src/wexspace/adk_fleet.py", "tests/test_adk.py"],
-      "status": "ADK_LOCAL_PASS_GEMINI_LIVE_BLOCKED"
+      "status": "HISTORICAL_ADK_AND_GEMINI_PASS_CURRENT_R07_TRACE_OPEN"
     },
     {
       "component_id": "NEW-003",
       "component_name": "three-agent governed workflow and versioned registry",
       "paths": ["src/wexspace/agents.py", "security/agent_registry.json", "security/*.md"],
-      "status": "LOCAL_PASS"
+      "status": "R07_LOCAL_PASS"
     },
     {
       "component_id": "NEW-004",
@@ -47,5 +47,6 @@
     }
   ],
   "source_hash_index": "FINAL_SHA256SUMS.txt when final freeze begins",
-  "repository_commit": "PENDING_LOCAL_GIT_COMMIT"
+  "repository_parent_commit": "d2997c41c73a26a016e1ced6857695eca4fd83b5",
+  "repository_commit": "PENDING_R07_LOCAL_GIT_COMMIT"
 }

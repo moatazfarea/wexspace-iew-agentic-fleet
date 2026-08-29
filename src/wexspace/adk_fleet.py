@@ -5,7 +5,7 @@ Two execution modes are intentionally separate:
 * ``run_local_adk_smoke`` executes the real Google ADK runner with deterministic
   local model doubles.  It proves framework wiring without claiming a Gemini
   response.
-* ``run_live_gemini`` uses the eligible ``gemini-3.5-flash`` model.  It fails
+* ``run_live_gemini`` uses the eligible ``gemini-3.7-flash`` model.  It fails
   closed with a structured blocker when no API key is available.
 
 Engineering numbers always come from bounded Python tools, never from model
@@ -34,7 +34,7 @@ from .hydraulics import calculate_network, independently_verify, validate_networ
 from .security import policy_check
 
 APP_NAME = "wexspace_iew_agentic_fleet"
-ELIGIBLE_MODEL = "gemini-3.5-flash"
+ELIGIBLE_MODEL = "gemini-3.7-flash"
 
 
 def _decode_input(input_json: str) -> dict[str, Any]:
@@ -58,7 +58,7 @@ def govern_engineering_request(goal: str, input_json: str) -> dict[str, Any]:
     policy = policy_check(goal, data)
     errors = validate_network_input(data)
     return {
-        "route": "engineering_specialist" if policy["allowed"] and not errors else "BLOCK",
+        "route": "iew_engineering_specialist" if policy["allowed"] and not errors else "BLOCK",
         "policy": policy,
         "validation_errors": errors,
         "input_sha256": canonical_sha256(data),
@@ -107,18 +107,18 @@ class StaticEvidenceModel(BaseLlm):
 
 def _build_sequential_fleet(models: tuple[BaseLlm | str, BaseLlm | str, BaseLlm | str]) -> SequentialAgent:
     governing = LlmAgent(
-        name="governing_engineering_agent",
+        name="wexspace_governing_agent",
         description="Governed goal intake, policy validation, and routing.",
         model=models[0],
         instruction=(
             "Validate the user goal and synthetic JSON. Call govern_engineering_request. "
-            "If it routes to engineering_specialist, state the bounded delegation; otherwise stop."
+            "If it routes to iew_engineering_specialist, state the bounded delegation; otherwise stop."
         ),
         tools=[govern_engineering_request],
         output_key="governance_result",
     )
     engineer = LlmAgent(
-        name="engineering_specialist",
+        name="iew_engineering_specialist",
         description="Bounded deterministic cooling-water calculation specialist.",
         model=models[1],
         instruction=(
@@ -129,7 +129,7 @@ def _build_sequential_fleet(models: tuple[BaseLlm | str, BaseLlm | str, BaseLlm 
         output_key="engineering_result",
     )
     verifier = LlmAgent(
-        name="verification_specialist",
+        name="wexspace_verification_evidence_specialist",
         description="Independent validation and evidence specialist.",
         model=models[2],
         instruction=(
@@ -189,7 +189,7 @@ async def _run_agent(root: SequentialAgent, message: str, session_id: str) -> di
 async def run_local_adk_smoke() -> dict[str, Any]:
     """Execute all three ADK agents with local deterministic model doubles."""
     models = (
-        StaticEvidenceModel(model="local-evidence-model", response_text="POLICY_PASS ROUTE engineering_specialist"),
+        StaticEvidenceModel(model="local-evidence-model", response_text="POLICY_PASS ROUTE iew_engineering_specialist"),
         StaticEvidenceModel(model="local-evidence-model", response_text="SPECIALIST_EXECUTION_BOUND_TO_DETERMINISTIC_TOOL"),
         StaticEvidenceModel(model="local-evidence-model", response_text="VERIFICATION_COMPLETE HUMAN_REVIEW_REQUIRED"),
     )
@@ -201,9 +201,9 @@ async def run_local_adk_smoke() -> dict[str, Any]:
     )
     authors = [event["author"] for event in result["events"]]
     expected = [
-        "governing_engineering_agent",
-        "engineering_specialist",
-        "verification_specialist",
+        "wexspace_governing_agent",
+        "iew_engineering_specialist",
+        "wexspace_verification_evidence_specialist",
     ]
     result.update(
         {
@@ -218,8 +218,24 @@ async def run_local_adk_smoke() -> dict[str, Any]:
     return result
 
 
+def configure_gemini_developer_api(key: str) -> dict[str, Any]:
+    """Pin ADK to the verified Gemini Developer API route without logging secrets."""
+    os.environ["GOOGLE_GENAI_USE_VERTEXAI"] = "FALSE"
+    os.environ.pop("GOOGLE_CLOUD_PROJECT", None)
+    os.environ.pop("GOOGLE_CLOUD_LOCATION", None)
+    if not os.getenv("GOOGLE_API_KEY"):
+        os.environ["GOOGLE_API_KEY"] = key
+    return {
+        "backend": "GEMINI_DEVELOPER_API",
+        "google_genai_use_vertexai": False,
+        "vertex_project_location_configured": False,
+        "credential_present": True,
+        "secret_values_logged": False,
+    }
+
+
 async def run_live_gemini_payload(payload: dict[str, Any]) -> dict[str, Any]:
-    """Execute the live Gemini 3.5 Flash ADK workflow or return an exact blocker."""
+    """Execute the live Gemini 3.7 Flash ADK workflow or return an exact blocker."""
     key = os.getenv("GOOGLE_API_KEY") or os.getenv("GEMINI_API_KEY")
     if not key:
         return {
@@ -229,8 +245,7 @@ async def run_live_gemini_payload(payload: dict[str, Any]) -> dict[str, Any]:
             "secret_values_logged": False,
             "required_environment_variable": "GOOGLE_API_KEY or GEMINI_API_KEY",
         }
-    if not os.getenv("GOOGLE_API_KEY"):
-        os.environ["GOOGLE_API_KEY"] = key
+    route = configure_gemini_developer_api(key)
     policy = policy_check("Analyze synthetic cooling-water network", payload)
     errors = validate_network_input(payload)
     if not policy["allowed"] or errors:
@@ -240,6 +255,7 @@ async def run_live_gemini_payload(payload: dict[str, Any]) -> dict[str, Any]:
             "model": ELIGIBLE_MODEL,
             "policy": policy,
             "validation_errors": errors,
+            "execution_route": route,
             "secret_values_logged": False,
         }
     payload_text = json.dumps(payload, sort_keys=True)
@@ -256,19 +272,21 @@ async def run_live_gemini_payload(payload: dict[str, Any]) -> dict[str, Any]:
             "model": ELIGIBLE_MODEL,
             "error_type": type(exc).__name__,
             "error": str(exc)[:500],
+            "execution_route": route,
             "secret_values_logged": False,
         }
     authors = {event["author"] for event in result["events"]}
     required = {
-        "governing_engineering_agent",
-        "engineering_specialist",
-        "verification_specialist",
+        "wexspace_governing_agent",
+        "iew_engineering_specialist",
+        "wexspace_verification_evidence_specialist",
     }
     result.update(
         {
             "passed": required.issubset(authors),
             "status": "PASS" if required.issubset(authors) else "INCOMPLETE_AGENT_TRACE",
             "model": ELIGIBLE_MODEL,
+            "execution_route": route,
             "secret_values_logged": False,
         }
     )

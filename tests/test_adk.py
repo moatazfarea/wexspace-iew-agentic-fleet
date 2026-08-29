@@ -1,7 +1,14 @@
 import asyncio
+import os
 import unittest
+from unittest.mock import patch
 
-from wexspace.adk_fleet import ELIGIBLE_MODEL, build_live_root_agent, run_local_adk_smoke
+from wexspace.adk_fleet import (
+    ELIGIBLE_MODEL,
+    build_live_root_agent,
+    configure_gemini_developer_api,
+    run_local_adk_smoke,
+)
 
 
 class AdkTests(unittest.TestCase):
@@ -16,11 +23,23 @@ class AdkTests(unittest.TestCase):
         self.assertEqual(len(root.sub_agents), 3)
         self.assertTrue(all(agent.model == ELIGIBLE_MODEL for agent in root.sub_agents))
         self.assertEqual([agent.name for agent in root.sub_agents], [
-            "governing_engineering_agent",
-            "engineering_specialist",
-            "verification_specialist",
+            "wexspace_governing_agent",
+            "iew_engineering_specialist",
+            "wexspace_verification_evidence_specialist",
         ])
         self.assertEqual([len(agent.tools) for agent in root.sub_agents], [1, 1, 1])
+        self.assertEqual(ELIGIBLE_MODEL, "gemini-3.7-flash")
+
+    def test_gemini_route_is_pinned_without_secret_logging(self):
+        with patch.dict(os.environ, {}, clear=True):
+            route = configure_gemini_developer_api("test-only-not-a-real-key")
+            self.assertEqual(os.environ["GOOGLE_GENAI_USE_VERTEXAI"], "FALSE")
+            self.assertEqual(os.environ["GOOGLE_API_KEY"], "test-only-not-a-real-key")
+            self.assertNotIn("GOOGLE_CLOUD_PROJECT", os.environ)
+            self.assertNotIn("GOOGLE_CLOUD_LOCATION", os.environ)
+            self.assertEqual(route["backend"], "GEMINI_DEVELOPER_API")
+            self.assertFalse(route["vertex_project_location_configured"])
+            self.assertFalse(route["secret_values_logged"])
 
 
 if __name__ == "__main__":

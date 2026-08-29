@@ -31,14 +31,14 @@ Industrial engineers spend significant time gathering parameters, running repeat
 
 ## What it does
 
-The demo accepts one neutral, synthetic cooling-water network. The governing engineering agent enforces a fixed purpose, checks required parameters, blocks prompt/tool injection patterns, records the workflow, and delegates the bounded calculation. The hydraulic specialist invokes Darcy–Weisbach equations with a Swamee–Jain friction approximation. The verification/evidence specialist independently recomputes with Haaland, checks continuity, velocity and residual-pressure rules, compares methods, and packages hashes and provenance. The result stops at a meaningful human approval gate before release.
+The demo accepts one neutral, synthetic cooling-water network. The WEXSPACE Governing Agent enforces the competition context allowlist, authority/relevance/scope compatibility, fixed purpose, required parameters, and prompt/tool-injection controls before it delegates the bounded calculation. The IEW Engineering Specialist invokes Darcy–Weisbach equations with a Swamee–Jain friction approximation. The WEXSPACE Verification / Evidence Specialist independently recomputes with Haaland, checks continuity, velocity and residual-pressure rules, compares methods, and packages hashes and provenance. The result stops at a meaningful human approval gate before release.
 
 The same workflow has a versioned agent registry, explicit data/tool/action scopes, timestamped operational traces, SQLite process-persistent state, restart/resume, and a bounded async queue/worker. The public fixture is synthetic and contains no employer or customer data.
 
 ## How we built it
 
 - Python 3.12 for the engineering and workflow runtime.
-- Google Agent Development Kit 2.8.0 for a three-agent sequential fleet. The real ADK runner is locally qualified; the live topology targets `gemini-3.5-flash` and exposes only three deterministic tools.
+- Google Agent Development Kit for a three-agent sequential fleet. Prior authenticated ADK and Gemini execution is verified; the current R07 topology targets `gemini-3.7-flash`, pins the Gemini Developer API route, and exposes only three deterministic tools. A fresh current-revision live trace remains required.
 - FastAPI for agent discovery, workflow, worker, review, and live-ADK endpoints.
 - SQLite for local persistent state, workflow identity, and operational events.
 - Darcy–Weisbach, Swamee–Jain, and Haaland equations for reproducible calculation and independent validation.
@@ -60,7 +60,7 @@ The hardest design choice was keeping the model useful without allowing it to be
 - Persistent workflow identity that resumes in a fresh process.
 - Background queue/worker behavior and a non-cosmetic human review gate.
 - Structured traces and provenance hashes without exposing hidden chain-of-thought.
-- Fourteen automated tests passing both in the working environment and after a fresh package installation.
+- Sixteen automated tests passing against the current R07 source in an isolated dependency environment; the earlier R03 checkpoint also preserved a 14/14 fresh-install PASS.
 
 Do not add live Gemini or Cloud accomplishments until those gates pass.
 
@@ -70,7 +70,7 @@ Agentic engineering is strongest when model reasoning, deterministic tools, work
 
 ## What's next
 
-The mandatory next steps are live Gemini 3.5 Flash execution, authenticated Cloud Run deployment and proof, repository publication/access verification, and a public English demo video. A future product revision could add a managed cloud state backend, stronger identity/policy enforcement, OpenTelemetry export, and additional neutral engineering specialists; none are claimed as implemented here.
+The mandatory next steps are a current-revision live Gemini 3.7 Flash fleet trace, authenticated Cloud Run deployment and proof, repository publication/access verification, and a public English demo video. A future product revision could add a managed cloud state backend, stronger identity/policy enforcement, OpenTelemetry export, and additional neutral engineering specialists; none are claimed as implemented here.
 
 ## Data sources
 
@@ -86,8 +86,9 @@ The WEXSPACE AI / IEW AI vision, prior engineering methodologies, the earlier UT
 - FastAPI
 - SQLite
 - Google Agent Development Kit
+- Gemini 3.7 Flash
 
-Add **Gemini 3.5 Flash** only after a verified live model response. Add **Google Cloud Run** only after deployment and invocation evidence. Do not add Firestore; it is not implemented.
+Gemini 3.7 Flash is supported by the recovered verified direct execution and ADK evidence; do not describe the current R07 three-agent live trace as complete until it is re-run. Add **Google Cloud Run** only after deployment and invocation evidence. Do not add Firestore; it is not implemented.
 
 ## Links — do not enter placeholders
 

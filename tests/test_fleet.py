@@ -32,12 +32,24 @@ class FleetTests(unittest.TestCase):
         self.assertTrue(status["result"]["accepted"])
         self.assertTrue(status["verification"]["verified"])
         event_types = [event["event_type"] for event in status["events"]]
+        self.assertIn("context_allowlist_decision", event_types)
+        self.assertIn("scope_relevance_actionability_gate", event_types)
         self.assertIn("delegation", event_types)
         self.assertIn("deterministic_tool_call", event_types)
         self.assertIn("independent_validation", event_types)
         self.assertIn("human_review_gate", event_types)
         released = self.fleet().approve(status["workflow_id"], "qualified-local-reviewer")
         self.assertEqual(released["status"], "RELEASED")
+
+        authors = {event["agent_id"] for event in status["events"]}
+        self.assertEqual(
+            authors,
+            {
+                "wexspace_governing_agent",
+                "iew_engineering_specialist",
+                "wexspace_verification_evidence_specialist",
+            },
+        )
 
     def test_restart_resume_from_persisted_state(self):
         paused = self.fleet().start(
@@ -73,6 +85,23 @@ class FleetTests(unittest.TestCase):
         status = self.fleet().start("Analyze synthetic cooling-water network", payload)
         self.assertEqual(status["status"], "BLOCKED_POLICY")
         self.assertFalse(status["evidence"]["policy"]["allowed"])
+
+    def test_unallowlisted_context_is_classified_do_not_use(self):
+        payload = dict(self.payload)
+        payload["context_sources"] = [
+            {
+                "source_id": "similar-but-unrelated",
+                "family": "UNRELATED_ENGINEERING_HISTORY",
+                "authority": True,
+                "relevance": True,
+                "scope_compatibility": True,
+            }
+        ]
+        status = self.fleet().start("Analyze synthetic cooling-water network", payload)
+        self.assertEqual(status["status"], "BLOCKED_POLICY")
+        context_gate = status["evidence"]["policy"]["context_gate"]
+        self.assertFalse(context_gate["allowed"])
+        self.assertEqual(context_gate["sources"][0]["classification"], "DO_NOT_USE")
 
     def test_agent_registry_has_bounded_authority(self):
         registry = json.loads(REGISTRY.read_text(encoding="utf-8"))

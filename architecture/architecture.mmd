@@ -1,12 +1,12 @@
 flowchart TD
     U["User / reviewer"] --> API["FastAPI / CLI"]
-    API --> G["Governing engineering agent"]
-    G -->|"validated delegation"| E["Engineering specialist"]
+    API --> G["WEXSPACE Governing Agent"]
+    G -->|"allowlist + bounded delegation"| E["IEW Engineering Specialist"]
     E --> T["Deterministic hydraulic tool"]
     T --> S["SQLite workflow state + event audit"]
-    S --> V["Verification / evidence specialist"]
+    S --> V["WEXSPACE Verification / Evidence Specialist"]
     V --> H["Human review gate"]
     H --> R["Verified released result"]
-    API -.->|"live path; implemented, not yet executed"| ADK["Google ADK + Gemini 3.5 Flash"]
+    API -.->|"prior PASS; current R07 trace open"| ADK["Google ADK + Gemini 3.7 Flash"]
     ADK -.-> G
     CR["Cloud Run deployment prepared — NOT DEPLOYED"] -.-> API

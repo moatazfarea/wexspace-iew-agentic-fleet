@@ -13,11 +13,11 @@
 
 ## Authority boundaries
 
-The registry is the public control plane. Every agent has a version, purpose, contract, allowed tools, allowed data, allowed actions, and prohibited actions. The governing agent may route/block/pause/resume but cannot calculate or release without review. The engineering specialist may calculate only. The verifier may independently verify/reject/request review but cannot change or approve a result.
+The registry is the public control plane. Every agent has a version, purpose, contract, allowed tools, allowed data, allowed actions, and prohibited actions. The WEXSPACE Governing Agent may route/block/pause/resume but cannot calculate or release without review. The IEW Engineering Specialist may calculate only. The WEXSPACE Verification / Evidence Specialist may independently verify/reject/request review but cannot change or approve a result.
 
 ## Injection and input controls
 
-Untrusted strings are treated as data. A fixed goal allowlist prevents arbitrary tasks. A small denylist blocks common attempts to override policy, reveal secrets, execute commands, or disable controls. The check is applied before the custom workflow routes and again inside ADK deterministic tool boundaries. Structural and numeric validation rejects missing/invalid parameters rather than filling them with model guesses.
+Untrusted strings are treated as data. A fixed goal allowlist prevents arbitrary tasks. Context is `DO_NOT_USE` by default: each declared source must belong to the R07 competition allowlist and independently pass authority, relevance, and scope-compatibility checks. A small denylist blocks common attempts to override policy, reveal secrets, execute commands, or disable controls. These checks are applied before the custom workflow routes and again inside ADK deterministic tool boundaries. Structural and numeric validation rejects missing/invalid parameters rather than filling them with model guesses.
 
 This denylist is a minimum competition control, not a complete production content-security system.
 
@@ -35,4 +35,4 @@ Events record workflow ID, timestamp, agent identity, action type, outcome, and 
 - SQLite access is process-local and has no tenant authentication layer.
 - Cloud Run's default filesystem is ephemeral; cloud-durable state is not claimed.
 - No UI or identity provider is implemented.
-- Live Gemini and Cloud behavior remain unqualified until external credentials and deployment evidence exist.
+- The prior Gemini/ADK execution is historical evidence; the current R07 source still requires a fresh live trace. Cloud behavior remains unqualified until deployment evidence exists.

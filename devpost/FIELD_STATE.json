@@ -12,19 +12,15 @@
     "built_with": ["Python"],
     "startup_excellence": false
   },
-  "safe_additions_now": ["Google Agent Development Kit"],
+  "safe_additions_now": ["Google Agent Development Kit", "Gemini 3.7 Flash"],
   "conditional_additions": [
-    {
-      "value": "Gemini 3.5 Flash",
-      "required_gate": "verified live model response",
-      "state": "BLOCKED"
-    },
     {
       "value": "Google Cloud Run",
       "required_gate": "verified deployment and invocation",
       "state": "BLOCKED"
     }
   ],
+  "current_revision_gemini_trace": "OPEN_REQUALIFICATION_REQUIRED",
   "prohibited_current_additions": ["Firestore", "hosted URL", "repository URL", "video URL"],
   "final_submit_authority": "USER_ONLY",
   "final_submit_state": "NOT_AUTHORIZED"
