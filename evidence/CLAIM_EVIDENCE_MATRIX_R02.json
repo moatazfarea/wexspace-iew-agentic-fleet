@@ -106,7 +106,7 @@
       "implementation": ["Dockerfile", "deployment/deploy_cloud_run.sh", "src/wexspace/api.py"],
       "test": ["deployment/QUALIFICATION.md"],
       "artifact": ["demo/CLOUD_PROOF_CAPTURE_CHECKLIST.md"],
-      "state": "BLOCKED_EXTERNAL_NOT_DEPLOYED"
+      "state": "BLOCKED_EXTERNAL_WORK_RUNTIME_ACCESS_NOT_DEPLOYED"
     },
     {
       "claim": "Public compliant demonstration video",

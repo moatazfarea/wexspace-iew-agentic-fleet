@@ -28,7 +28,7 @@ Generated 2026-08-29 after the current official Rules/FAQ/Updates delta check. T
 | Evidence claim mapping | PASS | `CLAIM_EVIDENCE_MATRIX_R02.json` |
 | Official-rule delta check | PASS | `devpost/OFFICIAL_RULE_DELTA_R03.json` |
 | Repository publication and judge access | BLOCKED_EXTERNAL | empty public GitHub target does not exist in the connected installation |
-| Google Cloud infrastructure | BLOCKED_EXTERNAL | Cloud Run prepared but not deployed or observable from Work |
+| Google Cloud infrastructure | BLOCKED_EXTERNAL_WORK_RUNTIME_ACCESS | bounded current Console recheck timed out; project/account failure is not inferred |
 | Cloud invocation, logs, and proof | BLOCKED_EXTERNAL | no URL, revision, invocation, or log proof claimed |
 | First Technical Victory | BLOCKED_EXTERNAL — 6/7 PASS | Gate 7 remains open |
 | Devpost accurate copy | PASS_PREPARED | verified-fact draft; authenticated existing-project field entry remains external |

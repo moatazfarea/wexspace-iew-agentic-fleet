@@ -22,7 +22,7 @@
     "status": "PASS"
   },
   "artifact_validation": {
-    "json_files_after_this_artifact": 17,
+    "json_files_in_current_candidate": 19,
     "all_json_parsed": true,
     "svg_xml_parsed": true,
     "png_render_dimensions": "2800x2320",
@@ -31,7 +31,7 @@
   },
   "publication_security_scan": {
     "scope": "TRACKED_AND_PENDING_REPOSITORY_FILES_EXCLUDING_GIT_METADATA",
-    "files_scanned_after_this_artifact": 56,
+    "files_scanned_in_current_candidate": 58,
     "credential_patterns": 0,
     "private_key_patterns": 0,
     "private_user_paths": 0,
@@ -77,7 +77,7 @@
     },
     "claim_evidence_matrix": {
       "path": "evidence/CLAIM_EVIDENCE_MATRIX_R02.json",
-      "sha256": "e8eda7249e22ddeda6de5cd7b04a93d886891557fc407ddc501c04f10f48690e",
+      "sha256": "33a7dc8686bd2d9e07503a3c3829b53adf328459c901917da8537426acef9cb9",
       "state": "PASS"
     }
   },

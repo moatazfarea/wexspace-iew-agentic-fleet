@@ -1,0 +1,20 @@
+{
+  "artifact_id": "DEVPOST-AUTHENTICATED-STATE-R03",
+  "observed_at": "2026-08-29T17:31:50Z",
+  "public_competition_pages": "ACCESSIBLE",
+  "rules_and_faq": "READ_CURRENT",
+  "existing_project_draft": "NOT_AUTHENTICATED_FROM_WORK",
+  "visible_session_state": "LOG_IN_REQUIRED",
+  "user_owned_browser_tabs": 0,
+  "browser_auth_capability_available": false,
+  "duplicate_project_created": false,
+  "final_submit_attempted": false,
+  "prepared_assets": [
+    "DRAFT.md",
+    "FIELD_STATE.json",
+    "REQUIREMENTS_RECONCILIATION_R03.json",
+    "OFFICIAL_RULE_DELTA_R03.json"
+  ],
+  "resume_condition": "the existing Devpost project becomes available in an authenticated authorized browser session",
+  "status": "BLOCKED_EXTERNAL_AUTHENTICATION"
+}
