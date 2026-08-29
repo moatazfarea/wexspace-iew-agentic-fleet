@@ -1,0 +1,152 @@
+{
+  "schema_version": "1.0",
+  "competition_branch": "GOOGLE_ALL_THINGS_AGENTIC_2026",
+  "competition_identity": "WEXSPACE AI — IEW Agentic Engineering Fleet",
+  "checkpoint_id": "HACKATHON-R07-RECOVERY-CHECKPOINT_R01",
+  "revision": 1,
+  "parent": {
+    "context_handoff": "HACKATHON-R07-CONTEXT-BLOCKER-HANDOFF_R00",
+    "repository_checkpoint": "HACKATHON-R03-CONTEXT-MIGRATION-R01",
+    "repository_parent_commit": "d2997c41c73a26a016e1ced6857695eca4fd83b5"
+  },
+  "timestamp": "2026-08-29T09:46:15Z",
+  "current_project_context": "WEXSPACE_CLEAN",
+  "context_qualification": {
+    "current_project_source_scope": "WEXSPACE_AND_IEW_COMPETITION_ONLY",
+    "unrelated_context_as_authority": false,
+    "out_of_scope_default": "DO_NOT_USE",
+    "allowlist_id": "WEXSPACE-COMPETITION-ALLOWLIST-R07"
+  },
+  "competition_objective": "ACTIVE",
+  "r07_state": "RESUMABLE",
+  "r07_command_recovery": {
+    "status": "PASS",
+    "artifact": "HACKATHON-BRIDGE-R07.txt",
+    "lines": 4744,
+    "bytes": 93294,
+    "sha256": "fc1d87355b650343a6c7a62aefa650773ab8c640ea24fa851fc7b0dc8635dcb6",
+    "readback": "PASS_EXACT"
+  },
+  "current_state": "R07_CORE_LOCAL_PASS_EXTERNAL_CLOUD_GATE_OPEN",
+  "completed_items": [
+    "Qualified current ChatGPT Project as WEXSPACE_CLEAN",
+    "Recovered and exactly hash-verified the full HACKATHON-BRIDGE-R07 command",
+    "Confirmed R00 is the newest prior R07 context checkpoint in the recovered control lineage",
+    "Recovered the R03 competition repository archive and verified its SHA-256 and git lineage",
+    "Preserved the existing Google Cloud project and Gemini/ADK historical PASS state without rebuilding",
+    "Implemented the R07 competition context allowlist and authority/relevance/scope-compatibility gate",
+    "Implemented the WEXSPACE Governing Agent, IEW Engineering Specialist, and WEXSPACE Verification / Evidence Specialist identities",
+    "Executed 16 of 16 current-source tests successfully in an isolated dependency environment",
+    "Executed the current R07 three-agent Google ADK local model-double sequence successfully",
+    "Executed the governed deterministic workflow through delegation, tool invocation, independent verification, structured evidence, and the human-release wait state",
+    "Verified negative controls for missing input, prompt injection, and unallowlisted context"
+  ],
+  "open_items": [
+    "Execute and capture a fresh current-revision Gemini 3.7 Flash three-agent trace",
+    "Deploy and invoke the current revision on the existing Google Cloud project",
+    "Capture visible Cloud Run revision, URL, logs, and request evidence",
+    "Create or verify a competition GitHub remote and judge access",
+    "Record and validate the public English demo video",
+    "Finalize Devpost fields; final submission remains user-authorized only"
+  ],
+  "blocked_nodes": [
+    {
+      "node": "CURRENT_R07_LIVE_GEMINI_TRACE",
+      "condition": "This runtime has no Gemini credential; no secret was requested or exposed",
+      "resume_condition": "Authenticated competition runtime with the existing credential route"
+    },
+    {
+      "node": "GOOGLE_CLOUD_DEPLOYMENT_AND_PROOF",
+      "condition": "This runtime has no gcloud CLI or authenticated Google Cloud project environment",
+      "resume_condition": "Authenticated Cloud Shell for wexspace-agentic-2026"
+    },
+    {
+      "node": "GITHUB_REMOTE_PUSH",
+      "condition": "No verified remote exists in the recovered repository or connected account search",
+      "resume_condition": "Create or identify one competition repository remote without replacing the local lineage"
+    }
+  ],
+  "independent_nodes_completed": [
+    "Official rules, FAQ, deadline, and mandatory stack reconciliation",
+    "Repository integrity, clean parent commit, and source inspection",
+    "Current core and Google ADK local regression suite",
+    "Context-isolation negative testing",
+    "Evidence indexing and SHA-256 verification"
+  ],
+  "first_technical_victory": {
+    "state": "IN_PROGRESS_6_OF_7_GATES_PASS",
+    "gates": {
+      "1_runnable_repository": "PASS_CURRENT",
+      "2_eligible_gemini_responds": "PASS_RECOVERED_VERIFIED_GEMINI_3_7_FLASH",
+      "3_google_adk_executes": "PASS_RECOVERED_LIVE_AND_CURRENT_LOCAL",
+      "4_wexspace_governing_agent_delegates": "PASS_CURRENT_LOCAL_EXECUTION",
+      "5_iew_specialist_invokes_deterministic_tool": "PASS_CURRENT_LOCAL_EXECUTION",
+      "6_verification_specialist_returns_structured_evidence": "PASS_CURRENT_LOCAL_EXECUTION",
+      "7_google_cloud_deployment": "OPEN"
+    }
+  },
+  "user_context_action": "COMPLETE_OPENED_WEXSPACE_AI_WORKSPACE",
+  "first_incomplete_technical_action": "In authenticated Cloud Shell for the existing project wexspace-agentic-2026, restore repository implementation commit fb8c4cbfe9d18a63f3922d8aa96035f0f544f7e5 and execute the full current R07 Google ADK fleet with gemini-3.7-flash via the verified Gemini Developer API route; capture the three named agents, both deterministic tool events, and structured verification before Cloud Run deployment.",
+  "resume_instruction": "Do not rebuild Google Cloud, credentials, ADK, or the repository. Resume at the current-source live fleet trace; if it passes, deploy this exact implementation commit to Cloud Run, invoke it, capture evidence, then close First Technical Victory gate 7.",
+  "repository": {
+    "name": "wexspace-iew-agentic-fleet",
+    "branch": "hackathon-r07-recovery",
+    "implementation_commit": "fb8c4cbfe9d18a63f3922d8aa96035f0f544f7e5",
+    "implementation_tree": "ac978c567487e55de8b422ba30d1c11c5e69470a",
+    "working_tree_at_implementation_commit": "CLEAN",
+    "remote": "NOT_VERIFIED"
+  },
+  "resource_continuity": {
+    "google_cloud_project": {
+      "project_id": "wexspace-agentic-2026",
+      "historical_state": "EXISTS_ACCESSIBLE_AND_VERIFIED_IN_PRIOR_AUTHENTICATED_RUNTIME",
+      "current_runtime_access": "BLOCKED_TOOLING_NOT_ABSENCE"
+    },
+    "gemini": {
+      "model": "gemini-3.7-flash",
+      "historical_state": "PASS",
+      "verified_response": "WEXSPACE_GEMINI_SAFE_OK",
+      "current_revision_trace": "OPEN"
+    },
+    "google_adk": {
+      "historical_state": "PASS",
+      "verified_response": "[root_agent]: WEXSPACE_ADK_OK",
+      "current_local_state": "PASS"
+    },
+    "google_drive": {
+      "connection": "PASS",
+      "competition_handoff_mirror": "PENDING_WRITE_READBACK"
+    }
+  },
+  "artifact_locations": {
+    "r07_command_library_id": "libfile_85d9f1628548819188a48bcdc4b6062f",
+    "r00_handoff_library_id": "libfile_58ef898f7e888191af74b837744ddacd",
+    "r03_source_archive_library_id": "libfile_fab38393d7788191861baffc724befb2",
+    "local_execution_evidence": "evidence/recovery/R07_LOCAL_TECHNICAL_VICTORY_R01.json",
+    "local_source_hash_index": "evidence/recovery/R07_SOURCE_SHA256_R01.txt"
+  },
+  "hashes": {
+    "r07_command_sha256": "fc1d87355b650343a6c7a62aefa650773ab8c640ea24fa851fc7b0dc8635dcb6",
+    "r03_source_archive_sha256": "42dbb20967320a1fbd53585b2ae545e5f0e3cf227dfbf34e323b905052cb5d40",
+    "implementation_commit": "fb8c4cbfe9d18a63f3922d8aa96035f0f544f7e5",
+    "implementation_tree": "ac978c567487e55de8b422ba30d1c11c5e69470a",
+    "agent_registry_sha256": "9c714bec3dc11e13c53354a62f9c1c01e4c161b035664fd6ce6da24e591f20de",
+    "local_execution_evidence_sha256": "0c72edb891d7479c2b53c2e0049c0887c96c7a76f4d263c4b8ae6bbfc0a5224f"
+  },
+  "cp08_return_pointer": {
+    "state": "ACTIVE_CORRECTIVE_RESOLUTION",
+    "ledger": "TASK8_CP08_CORRECTIVE-MICRO-CHECKPOINT-LEDGER_R51.json",
+    "micro_checkpoint": "MC-003",
+    "status": "IN_PROGRESS",
+    "instruction": "Return only after the competition branch is safely checkpointed or user reprioritizes"
+  },
+  "deadline": {
+    "submission_deadline_utc": "2026-09-01T00:00:00Z",
+    "remaining_at_checkpoint": "2d 14h 13m 45s",
+    "risk": "CRITICAL"
+  },
+  "portable_handoff_state": "LOCAL_REPOSITORY_PASS_REMOTE_MIRROR_PENDING",
+  "final_submission_authority": "USER_ONLY",
+  "final_submission_state": "NOT_AUTHORIZED",
+  "replacement_resources_created": false
+}

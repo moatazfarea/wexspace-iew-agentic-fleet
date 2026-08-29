@@ -43,10 +43,10 @@
       "component_id": "NEW-007",
       "component_name": "competition tests, evidence, documentation, architecture, and submission assets",
       "paths": ["tests", "evidence", "docs", "architecture", "demo", "devpost"],
-      "status": "IN_PROGRESS"
+      "status": "R07_LOCAL_EVIDENCE_PASS_EXTERNAL_GATES_OPEN"
     }
   ],
   "source_hash_index": "FINAL_SHA256SUMS.txt when final freeze begins",
   "repository_parent_commit": "d2997c41c73a26a016e1ced6857695eca4fd83b5",
-  "repository_commit": "PENDING_R07_LOCAL_GIT_COMMIT"
+  "repository_commit": "fb8c4cbfe9d18a63f3922d8aa96035f0f544f7e5"
 }
