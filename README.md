@@ -22,8 +22,8 @@ Industrial engineering work cannot safely rely on a chatbot inventing numerical 
 | R07 three-agent routing and delegation | PASS locally through named WEXSPACE → IEW → verification roles |
 | Deterministic engineering tool | PASS locally |
 | Independent verification | PASS locally |
-| SQLite persistence and restart/resume | PASS locally |
-| Async queue/worker | PASS locally |
+| SQLite persistence and restart/resume | PASS locally, including a current fresh-process qualification |
+| Async queue/worker | PASS locally, including bounded no-duplicate worker proof |
 | Missing-input and prompt-injection controls | PASS locally |
 | Human release gate | PASS locally |
 | Isolated dependency environment | Current R07 source PASS (16/16); R03 fresh-install checkpoint PASS (14/14) |
@@ -169,7 +169,9 @@ See [docs/SECURITY_AND_DATA_CONTROL.md](docs/SECURITY_AND_DATA_CONTROL.md).
 
 ## Evidence and limitations
 
-Reviewed evidence is stored under `evidence/`. Generated runtime databases and ad hoc logs are ignored. Every PASS in the compliance matrix must link to an executed artifact; unexecuted external gates remain `BLOCKED` or `USER_ACTION_REQUIRED`.
+Reviewed evidence is indexed in [evidence/INDEX.md](evidence/INDEX.md). Generated runtime databases and ad hoc logs are ignored. Every PASS in the qualification matrix links to an executed or reopened artifact; unexecuted external gates remain open without fabricated proof.
+
+The current [qualification matrix](evidence/FINAL_QUALIFICATION_MATRIX_R01.md) records fresh-process persistence/resume, bounded async behavior, registry authority, audit/provenance, the human gate, repository scans, and the exact Cloud boundary. Direct dependency licensing is recorded in [docs/THIRD_PARTY_DEPENDENCY_LICENSE_REGISTER.json](docs/THIRD_PARTY_DEPENDENCY_LICENSE_REGISTER.json).
 
 Known open gates:
 

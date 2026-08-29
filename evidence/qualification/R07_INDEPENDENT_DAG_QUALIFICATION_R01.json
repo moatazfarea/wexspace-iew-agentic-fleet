@@ -1,0 +1,123 @@
+{
+  "artifact_id": "R07-INDEPENDENT-DAG-QUALIFICATION-R01",
+  "competition_branch": "GOOGLE_ALL_THINGS_AGENTIC_2026",
+  "repository_branch": "hackathon-r07-recovery",
+  "repository_checkpoint_commit_before_artifact": "00a431fc3fbc9841d31b37b9ae38f9ec087cdf28",
+  "implementation_commit": "fb8c4cbfe9d18a63f3922d8aa96035f0f544f7e5",
+  "executed_at": "2026-08-29T15:16:58.755404+00:00",
+  "mode": "FRESH_PROCESS_TARGETED_QUALIFICATION_NO_FULL_TEST_RERUN",
+  "source_changed_before_execution": false,
+  "baseline_preserved": "16/16 PASS",
+  "restart_resume": {
+    "workflow_id": "WFX-FBA87F708A47",
+    "paused_status": "PAUSED",
+    "paused_step": "VERIFICATION",
+    "resumed_status": "AWAITING_HUMAN_REVIEW",
+    "resumed_step": "HUMAN_REVIEW",
+    "same_workflow_id_across_fresh_processes": true,
+    "event_count": 10,
+    "event_types": [
+      "workflow_created",
+      "context_allowlist_decision",
+      "scope_relevance_actionability_gate",
+      "policy_decision",
+      "delegation",
+      "deterministic_tool_call",
+      "state_transition",
+      "delegation",
+      "independent_validation",
+      "human_review_gate"
+    ],
+    "agent_ids": [
+      "iew_engineering_specialist",
+      "wexspace_governing_agent",
+      "wexspace_verification_evidence_specialist"
+    ],
+    "database_integrity": "ok"
+  },
+  "bounded_async": {
+    "workflow_id": "WFX-664506BCB618",
+    "queued_status": "QUEUED",
+    "fresh_worker_status": "AWAITING_HUMAN_REVIEW",
+    "same_workflow_id_across_processes": true,
+    "second_worker_result": null,
+    "duplicate_workflow_created": false,
+    "database_integrity": "ok"
+  },
+  "provenance": {
+    "input_sha256": "31eb746e1abc89edcb68e5a0c46ea4049699f9cc2189167a443efe5e9e1949fb",
+    "calculation_sha256": "4c066c7a3e6806a85db735b45b1f8266433b8fdac16f10d70c5572b67f32edd8",
+    "verification_sha256": "e6cc03e0a3b120276f61072d5b5a85f9cb22f7de02894bbcc5d9b0a2a01c9a87",
+    "agent_registry_sha256": "9c714bec3dc11e13c53354a62f9c1c01e4c161b035664fd6ce6da24e591f20de",
+    "hashes_recomputed_and_matched": true,
+    "provenance_chain": [
+      "synthetic_input",
+      "competition_context_allowlist",
+      "scope_relevance_actionability_gate",
+      "governing_policy",
+      "wexspace_governing_agent",
+      "iew_engineering_specialist",
+      "deterministic_calculation",
+      "wexspace_verification_evidence_specialist",
+      "independent_recalculation",
+      "human_review_gate"
+    ]
+  },
+  "human_review": {
+    "status": "AWAITING_HUMAN_REVIEW",
+    "release_required": true,
+    "release_performed": false,
+    "review_record": null,
+    "repeat_resume_auto_released": false
+  },
+  "versioned_agent_catalog": {
+    "registry_version": "0.2.0-r07",
+    "agent_count": 3,
+    "agent_ids": [
+      "wexspace_governing_agent",
+      "iew_engineering_specialist",
+      "wexspace_verification_evidence_specialist"
+    ],
+    "required_contract_fields_complete": true,
+    "bounded_tool_data_action_and_prohibition_scopes": true,
+    "sha256": "9c714bec3dc11e13c53354a62f9c1c01e4c161b035664fd6ce6da24e591f20de"
+  },
+  "tracked_repository_scan": {
+    "scope": "TRACKED_REPOSITORY_TEXT_ONLY",
+    "tracked_files_scanned": 42,
+    "unreadable_files": [],
+    "private_pattern_hit_counts": {
+      "google_api_key": 0,
+      "private_key": 0,
+      "aws_access_key": 0,
+      "github_token": 0,
+      "generic_secret_assignment": 0,
+      "private_user_path": 0,
+      "personal_email_address": 0
+    },
+    "allowlisted_public_contact": {
+      "value": "support@devpost.com",
+      "path": "devpost/ELIGIBILITY_CLARIFICATION.md",
+      "line": 22,
+      "classification": "PUBLIC_ORGANIZER_CONTACT_NOT_PERSONAL_PII"
+    },
+    "status": "PASS"
+  },
+  "checks": {
+    "persistent_state": "PASS",
+    "fresh_process_restart_resume": "PASS",
+    "bounded_async_worker": "PASS",
+    "versioned_agent_catalog": "PASS",
+    "tool_and_data_authority": "PASS",
+    "audit_and_provenance": "PASS",
+    "human_review_gate": "PASS_AWAITING_REVIEW_NO_RELEASE",
+    "secret_credential_private_path_and_personal_pii_scan": "PASS"
+  },
+  "status": "PASS",
+  "claims_boundary": {
+    "cloud_persistent_state_claimed": false,
+    "cloud_run_deployed_claimed": false,
+    "live_current_source_gemini_claimed": false,
+    "final_submission_claimed": false
+  }
+}
