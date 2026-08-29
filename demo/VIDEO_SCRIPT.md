@@ -2,7 +2,15 @@
 
 Status: **script and recording plan ready; recording/upload remain open until live Gemini and Cloud evidence exist.** Record in English or add complete English subtitles. Use one continuous execution where practical. Do not show fake logs, secret values, personal browser data, or functionality that did not pass.
 
-## 0:00–0:25 — Problem and value
+## 0:00–0:15 — Show the real result first
+
+**Narration, only after Cloud Gate 7 passes:**
+
+“This is WEXSPACE AI running on Google Cloud Run: a governed three-agent engineering workflow using Google ADK and Gemini 3.7 Flash.”
+
+**Screen:** Live `.run` URL, successful `/health`, then a two-second cut to the structured `/adk/live` result. No title-only opening.
+
+## 0:15–0:35 — Problem and value
 
 **Narration:**
 
@@ -10,7 +18,7 @@ Status: **script and recording plan ready; recording/upload remain open until li
 
 **Screen:** Title card, then the synthetic network JSON. Keep the word `SYNTHETIC` visible.
 
-## 0:25–0:45 — Why a fleet, not a chatbot
+## 0:35–0:55 — Why a fleet, not a chatbot
 
 **Narration:**
 
@@ -18,7 +26,7 @@ Status: **script and recording plan ready; recording/upload remain open until li
 
 **Screen:** Architecture diagram; pause on the solid verified path.
 
-## 0:45–1:10 — Architecture and Google stack
+## 0:55–1:15 — Architecture and Google stack
 
 **Narration, only after live gates pass:**
 
@@ -26,7 +34,7 @@ Status: **script and recording plan ready; recording/upload remain open until li
 
 **Screen:** Architecture, then agent registry. If Gemini or Cloud remains unverified, do not record the final video; the diagram currently labels those gates open.
 
-## 1:10–2:40 — Unedited execution
+## 1:15–2:25 — Actual execution
 
 **Narration and actions:**
 
@@ -34,14 +42,21 @@ Status: **script and recording plan ready; recording/upload remain open until li
 2. Open `GET /agents` and show the three agent IDs, versions, bounded tools, data scopes, authority, and prohibited actions.
 3. Invoke `POST /adk/live` with `UTL-NET-001_SYNTHETIC_INPUT.json`.
 4. Show the verified Google ADK/Gemini trace: governing agent, routed delegation, engineering tool call, verification tool call, and final human-review requirement.
-5. Invoke the deterministic `/workflows` route with a pause after engineering if exposed for the demo, or show the CLI pause/resume in an adjacent terminal.
-6. Show the workflow ID, `PAUSED`, reopen in a fresh process, resume to `AWAITING_HUMAN_REVIEW`, then approve with an attributable demo reviewer.
+5. Show the structured result, agent/tool trace, calculation hash, verification hash, and `AWAITING_HUMAN_REVIEW` state.
 
 **Narration:**
 
 “The primary method is Darcy–Weisbach with Swamee–Jain. The independent verifier uses Haaland and requires every segment to agree within five percent. Here both endpoint residual pressures pass, and release remains blocked until review.”
 
-## 2:40–3:15 — Fortified controls
+## 2:25–2:55 — Persistence, restart, and human control
+
+**Narration:**
+
+“The same workflow identity can pause after engineering, reopen in a fresh process, resume at verification, and still cannot release itself. An attributable reviewer is required.”
+
+**Screen:** One pre-recorded CLI sequence showing the same workflow ID at `PAUSED`, after fresh-process resume at `AWAITING_HUMAN_REVIEW`, and after the explicit demo-reviewer action.
+
+## 2:55–3:20 — Fortified controls
 
 **Narration:**
 
@@ -49,7 +64,7 @@ Status: **script and recording plan ready; recording/upload remain open until li
 
 **Screen:** Registry, current full-suite `OK` output, the blocked missing-input result, the blocked unallowlisted-context result, and the event trace.
 
-## 3:15–3:38 — Google Cloud proof
+## 3:20–3:38 — Google Cloud proof
 
 **Narration, only with real evidence:**
 
@@ -70,6 +85,7 @@ Status: **script and recording plan ready; recording/upload remain open until li
 - Duration is 3:20–3:50 and never exceeds 4:00.
 - English audio or complete English subtitles.
 - Publicly visible on YouTube or Vimeo; do not use private or unlisted visibility.
+- The first 10–15 seconds show the real application working, not a title screen.
 - Real live execution only; no fabricated log or hosted URL.
 - Google Cloud proof is legible.
 - Repository commit and diagram match the video.

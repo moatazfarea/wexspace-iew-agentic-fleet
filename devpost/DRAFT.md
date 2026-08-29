@@ -1,6 +1,6 @@
 # Devpost submission draft
 
-Status: **prepared locally; existing Devpost draft could not be verified because the browser session is not authenticated. Do not create a second project. Do not final-submit without explicit user authorization.**
+Status: **submission copy is complete except for verified repository, Cloud, and video facts; the existing Devpost draft remains behind an authentication boundary. Do not create a second project. Do not final-submit without explicit user authorization.**
 
 ## Existing draft values to preserve and verify
 
@@ -70,7 +70,7 @@ Agentic engineering is strongest when model reasoning, deterministic tools, work
 
 ## What's next
 
-The mandatory next steps are a current-revision live Gemini 3.7 Flash fleet trace, authenticated Cloud Run deployment and proof, repository publication/access verification, and a public English demo video. A future product revision could add a managed cloud state backend, stronger identity/policy enforcement, OpenTelemetry export, and additional neutral engineering specialists; none are claimed as implemented here.
+The mandatory next steps are a current-revision live Gemini 3.7 Flash fleet trace, authenticated Cloud Run deployment and proof, repository publication/access verification, and a public English demo video. A future product revision could add a managed cloud state backend, managed enterprise identity/policy services, OpenTelemetry export, and additional neutral engineering specialists; none are claimed as implemented here.
 
 ## Data sources
 
@@ -93,9 +93,13 @@ Gemini 3.7 Flash is supported by the recovered verified direct execution and ADK
 ## Links — do not enter placeholders
 
 - Repository URL: `OPEN — enter only after GitHub/GitLab/Bitbucket repository exists and access is verified`
-- Hosted project URL: `OPEN — enter only after deployment and invocation verification; field is optional if unavailable`
+- Hosted project URL: `OPEN — enter only after deployment and invocation verification; officially encouraged but not mandatory when unavailable`
 - Video URL: `OPEN — enter only after public YouTube/Vimeo upload and validation`
 
 ## Testing instructions
 
 Use the README's reproducible setup. Run `python -m unittest discover -s tests -v`, then execute the local workflow and ADK smoke. Live judges should invoke `/health`, `/agents`, `/workflows`, and `/adk/live` only after the submitted deployment evidence confirms access. Never place a secret or private credential in this text.
+
+## Official lock warning
+
+Before the deadline the draft may be updated as often as needed. At **2026-09-01 00:00 UTC**, the submitted form and all linked materials must remain unchanged until winners are announced. Post-deadline WEXSPACE work belongs on a separate continuation branch or copy.

@@ -1,0 +1,120 @@
+{
+  "artifact_id": "WEXSPACE-R07-CLAIM-EVIDENCE-MATRIX-R02",
+  "generated_at": "2026-08-29T17:31:50Z",
+  "claims_boundary": "Only executed or durably reopened evidence may support PASS; external gates remain BLOCKED_EXTERNAL.",
+  "claims": [
+    {
+      "claim": "WEXSPACE root governing-agent execution",
+      "implementation": ["src/wexspace/agents.py", "security/wexspace_governing_agent.md"],
+      "test": ["tests/test_fleet.py"],
+      "artifact": ["recovery/R07_LOCAL_TECHNICAL_VICTORY_R01.json"],
+      "state": "PASS"
+    },
+    {
+      "claim": "Real WEXSPACE to IEW specialist delegation",
+      "implementation": ["src/wexspace/agents.py"],
+      "test": ["tests/test_fleet.py", "tests/test_adk.py"],
+      "artifact": ["qualification/R07_INDEPENDENT_DAG_QUALIFICATION_R01.json"],
+      "state": "PASS_LOCAL_CURRENT_CLOUD_TRACE_OPEN"
+    },
+    {
+      "claim": "Deterministic engineering calculation",
+      "implementation": ["src/wexspace/hydraulics.py"],
+      "test": ["tests/test_hydraulics.py", "tests/test_fleet.py"],
+      "artifact": ["qualification/R07_INDEPENDENT_DAG_QUALIFICATION_R01.json"],
+      "state": "PASS"
+    },
+    {
+      "claim": "Independent verification and structured evidence",
+      "implementation": ["src/wexspace/hydraulics.py", "src/wexspace/agents.py"],
+      "test": ["tests/test_hydraulics.py", "tests/test_fleet.py"],
+      "artifact": ["qualification/R07_INDEPENDENT_DAG_QUALIFICATION_R01.json"],
+      "state": "PASS"
+    },
+    {
+      "claim": "Missing-input and prompt/tool-injection protection",
+      "implementation": ["src/wexspace/security.py", "src/wexspace/agents.py", "src/wexspace/adk_fleet.py"],
+      "test": ["tests/test_fleet.py", "tests/test_adk.py"],
+      "artifact": ["recovery/R07_LOCAL_TECHNICAL_VICTORY_R01.json"],
+      "state": "PASS"
+    },
+    {
+      "claim": "Persistent state and fresh-process restart/resume",
+      "implementation": ["src/wexspace/state.py", "src/wexspace/cli.py"],
+      "test": ["tests/test_fleet.py"],
+      "artifact": ["qualification/R07_INDEPENDENT_DAG_QUALIFICATION_R01.json"],
+      "state": "PASS_LOCAL_PROCESS_PERSISTENCE_NO_CLOUD_DURABILITY_CLAIM"
+    },
+    {
+      "claim": "Bounded asynchronous worker with no duplicate processing",
+      "implementation": ["src/wexspace/state.py", "src/wexspace/agents.py", "src/wexspace/cli.py"],
+      "test": ["tests/test_fleet.py"],
+      "artifact": ["qualification/R07_INDEPENDENT_DAG_QUALIFICATION_R01.json"],
+      "state": "PASS"
+    },
+    {
+      "claim": "Versioned agent discovery and bounded authority",
+      "implementation": ["security/agent_registry.json", "src/wexspace/api.py"],
+      "test": ["tests/test_api.py", "tests/test_fleet.py"],
+      "artifact": ["qualification/R07_INDEPENDENT_DAG_QUALIFICATION_R01.json"],
+      "state": "PASS"
+    },
+    {
+      "claim": "Auditability and canonical provenance",
+      "implementation": ["src/wexspace/state.py", "src/wexspace/agents.py"],
+      "test": ["tests/test_fleet.py"],
+      "artifact": ["qualification/R07_INDEPENDENT_DAG_QUALIFICATION_R01.json"],
+      "state": "PASS"
+    },
+    {
+      "claim": "Attributable human review before release",
+      "implementation": ["src/wexspace/agents.py", "src/wexspace/api.py"],
+      "test": ["tests/test_fleet.py", "tests/test_api.py"],
+      "artifact": ["qualification/R07_INDEPENDENT_DAG_QUALIFICATION_R01.json"],
+      "state": "PASS_AWAITING_REVIEW_NO_RELEASE_IN_QUALIFICATION"
+    },
+    {
+      "claim": "Synthetic and de-identified competition data",
+      "implementation": ["data/UTL-NET-001_SYNTHETIC_INPUT.json", "docs/SECURITY_AND_DATA_CONTROL.md"],
+      "test": ["tracked repository data and private-reference scan"],
+      "artifact": ["qualification/R07_INDEPENDENT_DAG_QUALIFICATION_R01.json"],
+      "state": "PASS"
+    },
+    {
+      "claim": "Google ADK execution",
+      "implementation": ["src/wexspace/adk_fleet.py"],
+      "test": ["tests/test_adk.py"],
+      "artifact": ["recovery/R07_LOCAL_TECHNICAL_VICTORY_R01.json", "durable historical authenticated execution evidence"],
+      "state": "PASS_PRESERVED_CURRENT_CLOUD_TRACE_OPEN"
+    },
+    {
+      "claim": "Eligible Gemini model execution",
+      "implementation": ["src/wexspace/adk_fleet.py"],
+      "test": ["live route guard and preserved execution evidence"],
+      "artifact": ["durable historical gemini-3.7-flash execution evidence"],
+      "state": "PASS_PRESERVED_CURRENT_CLOUD_TRACE_OPEN"
+    },
+    {
+      "claim": "Judge-accessible repository publication",
+      "implementation": ["controlled local Git branch hackathon-r07-recovery"],
+      "test": ["exact connected-GitHub target search"],
+      "artifact": ["HACKATHON-R07-RECOVERY-CHECKPOINT_R05 external durable mirror"],
+      "state": "BLOCKED_EXTERNAL_REPOSITORY_NOT_CREATED"
+    },
+    {
+      "claim": "Google Cloud Run deployment, invocation, logs, and visible proof",
+      "implementation": ["Dockerfile", "deployment/deploy_cloud_run.sh", "src/wexspace/api.py"],
+      "test": ["deployment/QUALIFICATION.md"],
+      "artifact": ["demo/CLOUD_PROOF_CAPTURE_CHECKLIST.md"],
+      "state": "BLOCKED_EXTERNAL_NOT_DEPLOYED"
+    },
+    {
+      "claim": "Public compliant demonstration video",
+      "implementation": ["demo/VIDEO_SCRIPT.md", "demo/SHOT_LIST.md"],
+      "test": ["duration, visibility, language, privacy, and Cloud-proof checklist"],
+      "artifact": ["demo/CLOUD_PROOF_CAPTURE_CHECKLIST.md"],
+      "state": "BLOCKED_EXTERNAL_CLOUD_PROOF_AND_PUBLIC_UPLOAD_REQUIRED"
+    }
+  ],
+  "status": "PASS_MAPPING_COMPLETE_EXTERNAL_GATES_EXPLICIT"
+}

@@ -4,7 +4,7 @@ A governed three-agent workflow for auditable industrial engineering. The compet
 
 Competition category: **Fortified Enterprise Fleet**  
 Submission type: **Individual**  
-Current state: **R07 governed core locally qualified; prior Gemini/ADK execution preserved; current-source live trace and Google Cloud deployment remain open**
+Current state: **R07 governed core locally qualified; R05 continuity verified; prior Gemini/ADK execution preserved; current-source live trace and Google Cloud deployment remain open**
 Submission state: **not submitted**
 
 ## Why this exists
@@ -18,7 +18,7 @@ Industrial engineering work cannot safely rely on a chatbot inventing numerical 
 | Python package and API | PASS locally |
 | Google ADK | Current R07 local three-agent smoke PASS; historical authenticated execution PASS; current live trace open |
 | Gemini 3.7 Flash | Historical direct execution PASS; current R07 route pinned to the Gemini Developer API |
-| Cloud Run deployment | Prepared, NOT DEPLOYED — Google Cloud authentication/project unavailable |
+| Cloud Run deployment | Prepared, NOT DEPLOYED — authenticated project state is not observable from the current Work runtime |
 | R07 three-agent routing and delegation | PASS locally through named WEXSPACE → IEW → verification roles |
 | Deterministic engineering tool | PASS locally |
 | Independent verification | PASS locally |
@@ -32,7 +32,7 @@ The project preserves the prior verified Gemini response and ADK execution as hi
 
 ## Architecture
 
-The [architecture diagram](architecture/architecture.svg) distinguishes verified local execution from external integrations that are implemented but not yet qualified. Its editable Mermaid source is in [architecture/architecture.mmd](architecture/architecture.mmd).
+The [submission architecture diagram](architecture/architecture_submission.svg) distinguishes verified application execution, verified Drive continuity, open external deployment gates, and future managed services. A Devpost-ready [PNG render](architecture/architecture_submission.png) and editable [Mermaid source](architecture/architecture.mmd) are included.
 
 The primary local workflow is:
 
@@ -171,7 +171,7 @@ See [docs/SECURITY_AND_DATA_CONTROL.md](docs/SECURITY_AND_DATA_CONTROL.md).
 
 Reviewed evidence is indexed in [evidence/INDEX.md](evidence/INDEX.md). Generated runtime databases and ad hoc logs are ignored. Every PASS in the qualification matrix links to an executed or reopened artifact; unexecuted external gates remain open without fabricated proof.
 
-The current [qualification matrix](evidence/FINAL_QUALIFICATION_MATRIX_R01.md) records fresh-process persistence/resume, bounded async behavior, registry authority, audit/provenance, the human gate, repository scans, and the exact Cloud boundary. Direct dependency licensing is recorded in [docs/THIRD_PARTY_DEPENDENCY_LICENSE_REGISTER.json](docs/THIRD_PARTY_DEPENDENCY_LICENSE_REGISTER.json).
+The current [qualification matrix](evidence/FINAL_QUALIFICATION_MATRIX_R02.md) records fresh-process persistence/resume, bounded async behavior, registry authority, audit/provenance, the human gate, current publication scans, official-rule deltas, and the exact external boundaries. Direct dependency licensing is recorded in [docs/THIRD_PARTY_DEPENDENCY_LICENSE_REGISTER.json](docs/THIRD_PARTY_DEPENDENCY_LICENSE_REGISTER.json).
 
 Known open gates:
 
@@ -180,7 +180,7 @@ Known open gates:
 - visible Cloud deployment proof;
 - GitHub repository creation/push and judge access as applicable;
 - public video recording/upload and duration/language verification;
-- organizer clarification and entrant self-verification for legal eligibility;
+- entrant confirmation of legal eligibility, ownership, and employer-policy compatibility;
 - Devpost draft verification and final submission authorization.
 
 ## Google technologies
@@ -194,6 +194,10 @@ Only technologies with completed evidence should be entered as actually used in 
 ## Deployment
 
 Read [deployment/QUALIFICATION.md](deployment/QUALIFICATION.md). The guarded script requires explicit project, region, and Secret Manager names and must not be run until authentication, billing/cost authority, and secret configuration are confirmed.
+
+## Competition freeze rule
+
+The official final-call update says the Devpost submission, linked repository, video, and other linked materials lock when the submission period ends at **2026-09-01 00:00 UTC**. After that point, this judged candidate must remain unchanged until winners are announced. Continued WEXSPACE development must use a separate post-competition branch or copy.
 
 ## Prior work and new work
 

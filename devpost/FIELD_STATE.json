@@ -1,6 +1,6 @@
 {
-  "artifact_id": "DEVPOST-DRAFT-FIELD-STATE-R02",
-  "requirements_reconciliation": "REQUIREMENTS_RECONCILIATION_R02.json",
+  "artifact_id": "DEVPOST-DRAFT-FIELD-STATE-R03",
+  "requirements_reconciliation": "REQUIREMENTS_RECONCILIATION_R03.json",
   "draft_access": "ACCESSIBLE_NOT_AUTHENTICATED",
   "existing_draft_verification": "BLOCKED_BY_AUTHENTICATION",
   "do_not_create_second_project": true,
@@ -24,6 +24,9 @@
   "current_revision_gemini_trace": "OPEN_REQUALIFICATION_REQUIRED",
   "official_deadline_utc": "2026-09-01T00:00:00Z",
   "mandatory_cloud_proof": "OPEN",
+  "official_rule_delta": "OFFICIAL_RULE_DELTA_R03.json",
+  "post_deadline_linked_material_freeze": "MANDATORY_UNTIL_WINNERS_ANNOUNCED",
+  "hackathon_cloud_credit_state": "USD150_CREDITS_EXHAUSTED_FREE_TRIAL_SEPARATE",
   "video_constraints": {
     "maximum_duration_minutes": 4,
     "hosting": ["YouTube", "Vimeo"],

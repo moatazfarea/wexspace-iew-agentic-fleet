@@ -1,0 +1,69 @@
+{
+  "artifact_id": "WEXSPACE-R07-OFFICIAL-RULE-DELTA-R03",
+  "checked_at": "2026-08-29T17:31:50Z",
+  "scope": "ONE_CURRENT_OFFICIAL_DELTA_CHECK_NO_BROAD_RESEARCH",
+  "official_sources": [
+    "https://allthingsagentichackathon.devpost.com/rules",
+    "https://allthingsagentichackathon.devpost.com/details/faqs",
+    "https://allthingsagentichackathon.devpost.com/resources",
+    "https://allthingsagentichackathon.devpost.com/updates",
+    "https://allthingsagentichackathon.devpost.com/updates/45670-final-call-for-submissions"
+  ],
+  "deadline": {
+    "official_display": "August 31, 2026 at 5:00 PM Pacific Time",
+    "utc": "2026-09-01T00:00:00Z",
+    "changed_from_r02": false,
+    "state_at_check": "OPEN"
+  },
+  "material_deltas": [
+    {
+      "id": "DELTA-001",
+      "fact": "At the deadline the submitted form and linked repository, video, live site, and other project materials lock and must remain unchanged until winners are announced.",
+      "impact": "Freeze the judged candidate and move post-competition work to a separate branch or copy.",
+      "state": "ACTION_REQUIRED_AT_FINAL_FREEZE"
+    },
+    {
+      "id": "DELTA-002",
+      "fact": "The public video must be at most four minutes, in English or fully English-subtitled, show the agent actually working, and visibly prove the backend ran on Google Cloud.",
+      "impact": "The final video cannot be recorded without real Gate 7 proof.",
+      "state": "CLOUD_DEPENDENT"
+    },
+    {
+      "id": "DELTA-003",
+      "fact": "A repository URL, architecture diagram upload, and step-by-step README spin-up guide are explicit submission checklist items.",
+      "impact": "Repository publication is mandatory; the architecture and spin-up guide are already prepared.",
+      "state": "REPOSITORY_EXTERNAL_ARCHITECTURE_AND_README_READY"
+    },
+    {
+      "id": "DELTA-004",
+      "fact": "A hosted-project URL is highly encouraged when available, but the application need not remain publicly running during submission or judging if strict Google Cloud deployment proof is captured.",
+      "impact": "Capture the Cloud Run URL and console/log proof; do not fabricate continuous availability.",
+      "state": "CLOUD_DEPENDENT"
+    },
+    {
+      "id": "DELTA-005",
+      "fact": "The separate 150-dollar hackathon Google Cloud credit allocation is exhausted; the Google Cloud free trial is a distinct route.",
+      "impact": "Do not wait for or re-request hackathon credits. Current free-trial readiness remains unobservable from Work.",
+      "state": "NO_DUPLICATE_CREDIT_REQUEST"
+    },
+    {
+      "id": "DELTA-006",
+      "fact": "Gemini Enterprise Agent Platform products are recommended for Fortified Enterprise Fleet and may earn bonus value, but are not mandatory; Gemini 3.5+, one Google agent framework, and one Google Cloud infrastructure service remain mandatory.",
+      "impact": "Keep the verified application-level fortified controls; do not add risky optional managed products before mandatory closure.",
+      "state": "NO_ARCHITECTURE_EXPANSION"
+    }
+  ],
+  "eligibility": {
+    "yemen_named_as_excluded_jurisdiction": false,
+    "entrant_must_confirm_age_export_control_sanctions_employer_policy_and_ownership": true,
+    "startup_excellence_requires_incorporated_organization_and_corporate_email": true,
+    "startup_excellence_selected": false,
+    "state": "PROVISIONAL_PENDING_ENTRANT_CONFIRMATION"
+  },
+  "mandatory_technology": {
+    "gemini_3_5_or_newer": true,
+    "google_agent_framework": true,
+    "google_cloud_infrastructure_service": true
+  },
+  "result": "MATERIAL_DELTA_CAPTURED_NO_DEADLINE_CHANGE"
+}

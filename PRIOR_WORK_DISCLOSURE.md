@@ -23,3 +23,5 @@ The dedicated repository, three-agent architecture, Google ADK/Gemini adapter, C
 The entry is individual. The current employer is not represented as owner, sponsor, or submitter. No employer approval is claimed. No employer/customer production records, confidential layouts, credentials, or proprietary parameters are included. Final publication still requires the entrant to confirm personal ownership, employer-policy compliance, and that the entrant is permitted to submit and receive any prize.
 
 Machine-readable details are in `PRIOR_WORK_MANIFEST.json` and `HACKATHON_NEW_WORK_MANIFEST.json`.
+
+Before final submission, the entrant must personally confirm age/eligibility, export-control status, ownership of the named pre-existing concepts, and compatibility with applicable employer policies. This is a legal and organizational attestation; it is not inferred from the technical evidence.

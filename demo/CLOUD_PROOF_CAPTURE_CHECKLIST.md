@@ -25,8 +25,8 @@ Use this only after a real deployment succeeds. It is the single insertion point
 
 ## Video insertion
 
-- Use the `.run` invocation at 1:10–2:15 in `VIDEO_SCRIPT.md`.
-- Use the Cloud Console revision and logs at 3:15–3:38.
+- Use the immediate `.run` proof at 0:00–0:15 and the full invocation at 1:15–2:25 in `VIDEO_SCRIPT.md`.
+- Use the Cloud Console revision and logs at 3:20–3:38.
 - Keep the final video at or below four minutes, publicly visible on YouTube or Vimeo, and in English or fully subtitled in English.
 - Verify the public video URL in a signed-out browser before entering it in Devpost.
 

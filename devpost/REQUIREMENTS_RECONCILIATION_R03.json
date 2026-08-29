@@ -1,0 +1,78 @@
+{
+  "artifact_id": "DEVPOST-REQUIREMENTS-RECONCILIATION-R03",
+  "verified_at": "2026-08-29T17:31:50Z",
+  "supersedes": "DEVPOST-REQUIREMENTS-RECONCILIATION-R02",
+  "official_delta": "OFFICIAL_RULE_DELTA_R03.json",
+  "submission_deadline": {
+    "display": "August 31, 2026 at 5:00 PM Pacific Time",
+    "utc": "2026-09-01T00:00:00Z",
+    "state": "OPEN"
+  },
+  "mandatory_technology": [
+    {
+      "requirement": "Gemini 3.5 or newer through Gemini API or Vertex AI",
+      "project_mapping": "gemini-3.7-flash through Gemini Developer API",
+      "state": "PASS_PREVIOUSLY_VERIFIED_CURRENT_CLOUD_TRACE_OPEN"
+    },
+    {
+      "requirement": "at least one Google agent framework",
+      "project_mapping": "Google Agent Development Kit",
+      "state": "PASS"
+    },
+    {
+      "requirement": "at least one Google Cloud infrastructure service",
+      "project_mapping": "Google Cloud Run",
+      "state": "BLOCKED_EXTERNAL_NOT_DEPLOYED"
+    }
+  ],
+  "category": {
+    "selected": "Fortified Enterprise Fleet",
+    "single_category_required": true,
+    "managed_geap_products_mandatory": false,
+    "application_level_mapping": "versioned registry, bounded multi-agent delegation, SQLite state/resume, bounded worker, authority controls, injection controls, audit/provenance, and human review",
+    "state": "FIT_VERIFIED_NO_MANAGED_PLATFORM_BONUS_CLAIM"
+  },
+  "required_submission_assets": [
+    {
+      "asset": "repository URL",
+      "state": "BLOCKED_EXTERNAL_EMPTY_PUBLIC_GITHUB_REPOSITORY_REQUIRED"
+    },
+    {
+      "asset": "README spin-up guide",
+      "state": "PASS"
+    },
+    {
+      "asset": "architecture diagram upload",
+      "state": "PASS_SOURCE_AND_RENDER_READY"
+    },
+    {
+      "asset": "text description",
+      "state": "PASS_CONDITIONAL_CLOUD_FACT_INSERTION_OPEN"
+    },
+    {
+      "asset": "public video",
+      "constraints": "maximum four minutes; YouTube or Vimeo; English or complete English subtitles; real application action and visible Google Cloud proof",
+      "state": "BLOCKED_EXTERNAL_CLOUD_PROOF_RECORDING_AND_UPLOAD_OPEN"
+    },
+    {
+      "asset": "hosted project URL",
+      "required": false,
+      "official_state": "HIGHLY_ENCOURAGED_IF_AVAILABLE",
+      "project_state": "BLOCKED_EXTERNAL_CLOUD_NOT_DEPLOYED"
+    }
+  ],
+  "freeze_behavior": {
+    "before_deadline": "draft may be updated",
+    "after_deadline": "submitted form and all linked materials remain unchanged until winner announcement",
+    "post_competition_work_route": "separate branch or copy"
+  },
+  "cloud_credit_boundary": {
+    "hackathon_credit_amount_usd": 150,
+    "hackathon_credit_availability": "EXHAUSTED",
+    "free_trial_is_separate": true,
+    "current_free_trial_state": "UNKNOWN_FROM_WORK",
+    "user_repeat_request_required": false
+  },
+  "final_submit_authority": "USER_ONLY",
+  "status": "PASS_REQUIREMENTS_RECONCILED_EXTERNAL_GATES_OPEN"
+}

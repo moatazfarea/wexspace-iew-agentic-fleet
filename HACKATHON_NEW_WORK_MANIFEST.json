@@ -43,9 +43,26 @@
       "component_id": "NEW-007",
       "component_name": "competition tests, evidence, documentation, architecture, and submission assets",
       "paths": ["tests", "evidence", "docs", "architecture", "demo", "devpost"],
-      "status": "R07_LOCAL_EVIDENCE_PASS_EXTERNAL_GATES_OPEN"
+      "status": "R07_SUBMISSION_HARDENING_PASS_EXTERNAL_GATES_OPEN"
     }
   ],
+  "submission_hardening": {
+    "parent_candidate_commit": "c71ebd77abe10e8ef156412ebd1d2fcb39c3a061",
+    "completed_at": "2026-08-29T17:31:50Z",
+    "artifacts": [
+      "architecture/architecture_submission.svg",
+      "architecture/architecture_submission.png",
+      "devpost/OFFICIAL_RULE_DELTA_R03.json",
+      "devpost/REQUIREMENTS_RECONCILIATION_R03.json",
+      "evidence/CLAIM_EVIDENCE_MATRIX_R02.json",
+      "evidence/FINAL_QUALIFICATION_MATRIX_R02.md"
+    ],
+    "runtime_source_changed": false,
+    "dependency_definition_changed": false,
+    "docker_or_deployment_code_changed": false,
+    "full_test_rerun_required": false,
+    "affected_publication_and_security_rescan_required": true
+  },
   "source_hash_index": "FINAL_SHA256SUMS.txt when final freeze begins",
   "repository_parent_commit": "d2997c41c73a26a016e1ced6857695eca4fd83b5",
   "repository_commit": "fb8c4cbfe9d18a63f3922d8aa96035f0f544f7e5"
