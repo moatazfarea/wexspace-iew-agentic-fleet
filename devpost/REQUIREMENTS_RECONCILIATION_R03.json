@@ -11,7 +11,7 @@
   "mandatory_technology": [
     {
       "requirement": "Gemini 3.5 or newer through Gemini API or Vertex AI",
-      "project_mapping": "gemini-3.7-flash through Gemini Developer API",
+      "project_mapping": "gemini-3.7-flash through Vertex AI using Cloud Run service identity/ADC",
       "state": "PASS_PREVIOUSLY_VERIFIED_CURRENT_CLOUD_TRACE_OPEN"
     },
     {

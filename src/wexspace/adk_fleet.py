@@ -5,8 +5,9 @@ Two execution modes are intentionally separate:
 * ``run_local_adk_smoke`` executes the real Google ADK runner with deterministic
   local model doubles.  It proves framework wiring without claiming a Gemini
   response.
-* ``run_live_gemini`` uses the eligible ``gemini-3.7-flash`` model.  It fails
-  closed with a structured blocker when no API key is available.
+* ``run_live_gemini`` uses the eligible ``gemini-3.7-flash`` model.  The
+  competition deployment uses Vertex AI with Application Default Credentials;
+  the historical Gemini Developer API route remains an explicit fallback.
 
 Engineering numbers always come from bounded Python tools, never from model
 free text.
@@ -219,7 +220,7 @@ async def run_local_adk_smoke() -> dict[str, Any]:
 
 
 def configure_gemini_developer_api(key: str) -> dict[str, Any]:
-    """Pin ADK to the verified Gemini Developer API route without logging secrets."""
+    """Configure the superseded Developer API fallback without logging secrets."""
     os.environ["GOOGLE_GENAI_USE_VERTEXAI"] = "FALSE"
     os.environ.pop("GOOGLE_CLOUD_PROJECT", None)
     os.environ.pop("GOOGLE_CLOUD_LOCATION", None)
@@ -234,18 +235,59 @@ def configure_gemini_developer_api(key: str) -> dict[str, Any]:
     }
 
 
+def configure_vertex_ai(project: str, location: str = "global") -> dict[str, Any]:
+    """Configure ADK for Vertex AI using the runtime service identity and ADC."""
+    os.environ["GOOGLE_GENAI_USE_VERTEXAI"] = "TRUE"
+    os.environ["GOOGLE_CLOUD_PROJECT"] = project
+    os.environ["GOOGLE_CLOUD_LOCATION"] = location
+    return {
+        "backend": "VERTEX_AI",
+        "google_genai_use_vertexai": True,
+        "project": project,
+        "location": location,
+        "credential_source": "APPLICATION_DEFAULT_CREDENTIALS",
+        "api_key_required": False,
+        "secret_values_logged": False,
+    }
+
+
+def _vertex_route_enabled() -> bool:
+    return os.getenv("GOOGLE_GENAI_USE_VERTEXAI", "").strip().lower() in {
+        "1",
+        "true",
+        "yes",
+        "on",
+    }
+
+
 async def run_live_gemini_payload(payload: dict[str, Any]) -> dict[str, Any]:
-    """Execute the live Gemini 3.7 Flash ADK workflow or return an exact blocker."""
-    key = os.getenv("GOOGLE_API_KEY") or os.getenv("GEMINI_API_KEY")
-    if not key:
-        return {
-            "passed": False,
-            "status": "BLOCKED_MISSING_GEMINI_API_KEY",
-            "model": ELIGIBLE_MODEL,
-            "secret_values_logged": False,
-            "required_environment_variable": "GOOGLE_API_KEY or GEMINI_API_KEY",
-        }
-    route = configure_gemini_developer_api(key)
+    """Execute Gemini through Vertex AI/ADC, or the explicit legacy fallback."""
+    if _vertex_route_enabled():
+        project = os.getenv("GOOGLE_CLOUD_PROJECT", "").strip()
+        location = os.getenv("GOOGLE_CLOUD_LOCATION", "global").strip() or "global"
+        if not project:
+            return {
+                "passed": False,
+                "status": "BLOCKED_MISSING_VERTEX_CONFIGURATION",
+                "model": ELIGIBLE_MODEL,
+                "secret_values_logged": False,
+                "required_environment_variable": "GOOGLE_CLOUD_PROJECT",
+            }
+        route = configure_vertex_ai(project, location)
+    else:
+        key = os.getenv("GOOGLE_API_KEY") or os.getenv("GEMINI_API_KEY")
+        if not key:
+            return {
+                "passed": False,
+                "status": "BLOCKED_MISSING_GEMINI_API_KEY",
+                "model": ELIGIBLE_MODEL,
+                "secret_values_logged": False,
+                "required_environment_variable": "GOOGLE_API_KEY or GEMINI_API_KEY",
+                "execution_route": {
+                    "backend": "GEMINI_DEVELOPER_API_LEGACY_FALLBACK"
+                },
+            }
+        route = configure_gemini_developer_api(key)
     policy = policy_check("Analyze synthetic cooling-water network", payload)
     errors = validate_network_input(payload)
     if not policy["allowed"] or errors:

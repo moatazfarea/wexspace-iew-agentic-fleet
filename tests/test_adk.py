@@ -1,13 +1,17 @@
 import asyncio
+import json
 import os
 import unittest
-from unittest.mock import patch
+from pathlib import Path
+from unittest.mock import AsyncMock, patch
 
 from wexspace.adk_fleet import (
     ELIGIBLE_MODEL,
     build_live_root_agent,
     configure_gemini_developer_api,
+    configure_vertex_ai,
     run_local_adk_smoke,
+    run_live_gemini_payload,
 )
 
 
@@ -39,6 +43,46 @@ class AdkTests(unittest.TestCase):
             self.assertNotIn("GOOGLE_CLOUD_LOCATION", os.environ)
             self.assertEqual(route["backend"], "GEMINI_DEVELOPER_API")
             self.assertFalse(route["vertex_project_location_configured"])
+            self.assertFalse(route["secret_values_logged"])
+
+    def test_vertex_route_uses_adc_without_api_key(self):
+        payload = json.loads(
+            Path("data/UTL-NET-001_SYNTHETIC_INPUT.json").read_text(encoding="utf-8")
+        )
+        events = {
+            "events": [
+                {"author": "wexspace_governing_agent"},
+                {"author": "iew_engineering_specialist"},
+                {"author": "wexspace_verification_evidence_specialist"},
+            ]
+        }
+        environment = {
+            "GOOGLE_GENAI_USE_VERTEXAI": "TRUE",
+            "GOOGLE_CLOUD_PROJECT": "wexspace-agentic-2026",
+            "GOOGLE_CLOUD_LOCATION": "global",
+        }
+        with patch.dict(os.environ, environment, clear=True):
+            with patch(
+                "wexspace.adk_fleet._run_agent",
+                new=AsyncMock(return_value=events),
+            ):
+                result = asyncio.run(run_live_gemini_payload(payload))
+            self.assertTrue(result["passed"])
+            self.assertEqual(result["execution_route"]["backend"], "VERTEX_AI")
+            self.assertEqual(
+                result["execution_route"]["credential_source"],
+                "APPLICATION_DEFAULT_CREDENTIALS",
+            )
+            self.assertFalse(result["execution_route"]["api_key_required"])
+            self.assertNotIn("GOOGLE_API_KEY", os.environ)
+            self.assertNotIn("GEMINI_API_KEY", os.environ)
+
+    def test_vertex_configuration_never_logs_or_requires_key(self):
+        with patch.dict(os.environ, {}, clear=True):
+            route = configure_vertex_ai("wexspace-agentic-2026", "global")
+            self.assertEqual(os.environ["GOOGLE_GENAI_USE_VERTEXAI"], "TRUE")
+            self.assertEqual(route["backend"], "VERTEX_AI")
+            self.assertFalse(route["api_key_required"])
             self.assertFalse(route["secret_values_logged"])
 
 

@@ -16,7 +16,7 @@
     {
       "package": "google-genai",
       "declared_version": "2.20.0",
-      "role": "Gemini Developer API SDK",
+      "role": "Google Gen AI / Vertex AI SDK",
       "upstream_repository": "https://github.com/googleapis/python-genai",
       "license": "Apache-2.0",
       "license_source": "https://github.com/googleapis/python-genai/blob/main/LICENSE",

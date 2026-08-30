@@ -9,7 +9,7 @@
 | Verification result | PUBLIC_SAFE_SYNTHETIC | governing and verification | verification tool creates; no agent edits | workflow record/evidence |
 | Workflow state/events | CONTROLLED_DEMO | governing workflow; read-only status API | state store methods only | SQLite until operator deletion |
 | Reviewer identifier | CONTROLLED_DEMO | governing workflow and evidence reviewer | one approval event | SQLite/evidence |
-| API keys/credentials | SECRET | SDK/runtime only | never by an agent | environment/Secret Manager, never repository |
+| Credentials | SECRET | SDK/runtime only | never by an agent | Cloud Run service identity/ADC; never repository |
 
 ## Authority boundaries
 
@@ -23,7 +23,7 @@ This denylist is a minimum competition control, not a complete production conten
 
 ## Secrets
 
-Only environment-variable names are documented. Secret values are never logged. `.env`, private keys, runtime databases, and ad hoc runtime logs are ignored. Cloud deployment is designed to bind `GOOGLE_API_KEY` from Secret Manager by secret name.
+Only environment-variable names are documented. Secret values are never logged. `.env`, private keys, runtime databases, and ad hoc runtime logs are ignored. The primary Cloud deployment uses Vertex AI through the Cloud Run service identity and does not bind `GOOGLE_API_KEY`; the historical secret is retained but detached from the successor revision.
 
 ## Auditability and human control
 

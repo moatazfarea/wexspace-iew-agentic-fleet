@@ -4,7 +4,7 @@ A governed three-agent workflow for auditable industrial engineering. The compet
 
 Competition category: **Fortified Enterprise Fleet**  
 Submission type: **Individual**  
-Current state: **R07 governed core locally qualified; R05 continuity verified; prior Gemini/ADK execution preserved; current-source live trace and Google Cloud deployment remain open**
+Current state: **R11 continuity preserved; canonical repository published; Vertex AI/ADC successor prepared; Cloud Run live qualification remains open**
 Submission state: **not submitted**
 
 ## Why this exists
@@ -17,8 +17,9 @@ Industrial engineering work cannot safely rely on a chatbot inventing numerical 
 |---|---|
 | Python package and API | PASS locally |
 | Google ADK | Current R07 local three-agent smoke PASS; historical authenticated execution PASS; current live trace open |
-| Gemini 3.7 Flash | Historical direct execution PASS; current R07 route pinned to the Gemini Developer API |
-| Cloud Run deployment | Prepared, NOT DEPLOYED — authenticated project state is not observable from the current Work runtime |
+| Gemini 3.7 Flash | Direct Vertex AI route HTTP 200 PASS; successor ADK route uses Vertex AI/ADC; deployed three-agent trace open |
+| Cloud Run deployment | Vertex successor prepared, NOT YET QUALIFIED |
+| Canonical repository | PUBLIC: `moatazfarea/wexspace-iew-agentic-fleet` |
 | R07 three-agent routing and delegation | PASS locally through named WEXSPACE → IEW → verification roles |
 | Deterministic engineering tool | PASS locally |
 | Independent verification | PASS locally |
@@ -26,7 +27,7 @@ Industrial engineering work cannot safely rely on a chatbot inventing numerical 
 | Async queue/worker | PASS locally, including bounded no-duplicate worker proof |
 | Missing-input and prompt-injection controls | PASS locally |
 | Human release gate | PASS locally |
-| Isolated dependency environment | Current R07 source PASS (16/16); R03 fresh-install checkpoint PASS (14/14) |
+| Isolated dependency environment | Unaffected R07 baseline PASS (16/16); two Vertex successor route tests added; live five-check requalification open |
 
 The project preserves the prior verified Gemini response and ADK execution as historical evidence. It does not claim a current-source live three-agent Gemini trace, hosted URL, Cloud Run deployment, or cloud-persistent database until each is executed and captured against the current revision.
 
@@ -43,7 +44,7 @@ The primary local workflow is:
 5. The WEXSPACE Verification / Evidence Specialist independently recomputes with the Haaland approximation and checks agreement within 5%.
 6. A human must approve the verified result before its state becomes `RELEASED`.
 
-The live Google path uses a Google ADK `SequentialAgent` containing the same three roles, targets `gemini-3.7-flash`, explicitly pins the verified Gemini Developer API route (`GOOGLE_GENAI_USE_VERTEXAI=FALSE`), and exposes only three bounded deterministic tools. It is available at `POST /adk/live` when an API key is configured.
+The live Google path uses a Google ADK `SequentialAgent` containing the same three roles, targets `gemini-3.7-flash`, selects Vertex AI (`GOOGLE_GENAI_USE_VERTEXAI=TRUE`), authenticates with the Cloud Run service identity through Application Default Credentials, and exposes only three bounded deterministic tools. It is available at `POST /adk/live`; the primary competition route does not require a Gemini API key.
 
 ## Repository map
 
@@ -64,8 +65,8 @@ docs/               security, data control, and operating notes
 
 - Python 3.11 or newer (qualified on Python 3.12.13)
 - Internet access only for installing dependencies and for live Gemini/Cloud execution
-- For the live Gemini route: one environment variable named `GOOGLE_API_KEY` or `GEMINI_API_KEY`
-- For deployment: authenticated Google Cloud CLI, a user-approved billing-enabled project, Cloud Run API access, and a Secret Manager secret containing the Gemini API key
+- For the live Vertex route: `GOOGLE_GENAI_USE_VERTEXAI`, `GOOGLE_CLOUD_PROJECT`, and `GOOGLE_CLOUD_LOCATION`, plus Application Default Credentials with Vertex access
+- For deployment: authenticated Google Cloud CLI, the verified billing-enabled competition project, Cloud Run access, and the verified runtime service account
 
 Never commit environment files or secret values.
 
@@ -78,7 +79,7 @@ python -m pip install .
 python -m unittest discover -s tests -v
 ```
 
-Expected test count for the R07 source revision: **16 tests**.
+The preserved R07 baseline is **16/16 PASS**. The Vertex successor adds two focused routing tests; only the affected route and live five-check regression are requalified for this revision.
 
 ### Run the governed deterministic workflow
 
@@ -118,13 +119,13 @@ This executes the real ADK runner and all three ADK agents using deterministic l
 
 ### Run the eligible Gemini path
 
-After setting an environment variable locally without writing it to the repository:
+After configuring Vertex AI and Application Default Credentials without writing credentials to the repository:
 
 ```bash
 wexspace-adk live --input data/UTL-NET-001_SYNTHETIC_INPUT.json
 ```
 
-If no key exists, the command exits nonzero with `BLOCKED_MISSING_GEMINI_API_KEY`. A PASS may only be recorded after the response and full three-agent trace are captured.
+The Cloud Run successor sets `GOOGLE_GENAI_USE_VERTEXAI=TRUE`, project `wexspace-agentic-2026`, and location `global`. A PASS may only be recorded after the response and full deployed three-agent trace are captured. The API-key-backed Developer API implementation is retained only as an explicit legacy fallback.
 
 ### Run the API
 
@@ -175,10 +176,10 @@ The current [qualification matrix](evidence/FINAL_QUALIFICATION_MATRIX_R02.md) r
 
 Known open gates:
 
-- current-source live Gemini 3.7 Flash three-agent execution trace;
-- authenticated Google Cloud project and Cloud Run deployment/invocation;
+- deployed Vertex AI-backed Gemini 3.7 Flash three-agent execution trace;
+- Cloud Run successor deployment/invocation;
 - visible Cloud deployment proof;
-- GitHub repository creation/push and judge access as applicable;
+- final remote successor commit/readback verification;
 - public video recording/upload and duration/language verification;
 - entrant confirmation of legal eligibility, ownership, and employer-policy compatibility;
 - Devpost draft verification and final submission authorization.
@@ -186,14 +187,14 @@ Known open gates:
 ## Google technologies
 
 - **Google Agent Development Kit:** historical authenticated and local execution verified; current R07 live trace open.
-- **Gemini 3.7 Flash:** historical direct response verified; current R07 three-agent trace open.
-- **Google Cloud Run:** deployment files prepared, deployment not yet verified.
+- **Gemini 3.7 Flash:** direct Vertex AI response verified; deployed successor three-agent trace open.
+- **Google Cloud Run:** Vertex/ADC successor deployment files prepared; successor deployment not yet verified.
 
 Only technologies with completed evidence should be entered as actually used in the final Devpost fields.
 
 ## Deployment
 
-Read [deployment/QUALIFICATION.md](deployment/QUALIFICATION.md). The guarded script requires explicit project, region, and Secret Manager names and must not be run until authentication, billing/cost authority, and secret configuration are confirmed.
+Read [deployment/QUALIFICATION.md](deployment/QUALIFICATION.md). The guarded script is pinned to the verified project, region, service identity, and scale-to-zero configuration; it removes the historical API-key secret binding from the successor service without deleting the secret.
 
 ## Competition freeze rule
 

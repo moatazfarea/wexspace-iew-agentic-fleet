@@ -66,7 +66,7 @@ def worker_once() -> dict[str, Any]:
 
 @app.post("/adk/live")
 async def live_adk_workflow(request: WorkflowRequest) -> dict[str, Any]:
-    """Run the eligible Gemini-backed Google ADK fleet when credentials exist."""
+    """Run the Gemini-backed ADK fleet through the configured Google route."""
     result = await run_live_gemini_payload(request.engineering_input)
     if not result["passed"]:
         raise HTTPException(status_code=503, detail=result)

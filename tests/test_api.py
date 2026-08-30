@@ -24,7 +24,15 @@ class ApiTests(unittest.TestCase):
                 "project_id": "incomplete-on-purpose"
             },
         }
-        with patch.dict("os.environ", {"GOOGLE_API_KEY": "", "GEMINI_API_KEY": ""}):
+        with patch.dict(
+            "os.environ",
+            {
+                "GOOGLE_GENAI_USE_VERTEXAI": "FALSE",
+                "GOOGLE_API_KEY": "",
+                "GEMINI_API_KEY": "",
+            },
+            clear=True,
+        ):
             response = client.post("/adk/live", json=payload)
         self.assertEqual(response.status_code, 503)
         self.assertEqual(response.json()["detail"]["status"], "BLOCKED_MISSING_GEMINI_API_KEY")

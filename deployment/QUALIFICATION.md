@@ -1,14 +1,15 @@
 # Cloud Run deployment and qualification
 
-Status: **prepared but not deployed**.
+Status: **Vertex AI successor prepared but not yet deployment-qualified**.
 
-Do not execute these steps until the entrant has authenticated, selected an approved billing-enabled project, confirmed any cost exposure, and created a Secret Manager secret. The script scales to zero and caps instances at one, but that is not a guarantee of zero cost.
+The verified competition project and Cloud Run service identity use Vertex AI through Application Default Credentials. The primary deployment does not inject a Gemini API key. The historical Secret Manager secret is retained but not attached to the successor revision. The script scales to zero and caps instances at one, but that is not a guarantee of zero cost.
 
 ## Required environment-variable names
 
 - `GOOGLE_CLOUD_PROJECT`
 - `CLOUD_RUN_REGION`
-- `GOOGLE_API_KEY_SECRET` (secret name, not secret value)
+- `GOOGLE_CLOUD_LOCATION`
+- `SERVICE_ACCOUNT_EMAIL`
 
 ## Deploy
 
@@ -25,11 +26,19 @@ bash deployment/deploy_cloud_run.sh
 3. Invoke `GET /health`; verify `google_cloud_deployment` is `true`.
 4. Invoke `GET /agents`; verify three discoverable versioned records.
 5. Invoke `POST /workflows` with the synthetic input; capture the structured local workflow result.
-6. Invoke `POST /adk/live` with the same input; require a successful `gemini-3.7-flash` three-agent trace and confirm the Gemini Developer API route without exposing the key.
+6. Invoke `POST /adk/live` with the same input; require a successful `gemini-3.7-flash` three-agent trace and confirm `VERTEX_AI`, `APPLICATION_DEFAULT_CREDENTIALS`, project `wexspace-agentic-2026`, and location `global`.
 7. Capture Cloud Run request/application logs for both invocations.
 8. Re-run missing-input and prompt-injection cases against the service.
 9. Save console screenshot(s), raw command output, request/response bodies, revision identity, timestamps, and SHA-256 hashes under `evidence/cloud/`.
 10. Update the compliance matrix only after independent review of those artifacts.
+
+The bounded successor script reruns only the five previously failed live checks and captures the service, revision, invocation, and log proof:
+
+```bash
+EXPECTED_COMMIT=VERIFIED_SUCCESSOR_COMMIT \
+EXPECTED_TREE=VERIFIED_SUCCESSOR_TREE \
+bash deployment/qualify_vertex_cloud_run.sh
+```
 
 ## Accurate limitations
 

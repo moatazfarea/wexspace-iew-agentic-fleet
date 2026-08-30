@@ -38,11 +38,11 @@ The same workflow has a versioned agent registry, explicit data/tool/action scop
 ## How we built it
 
 - Python 3.12 for the engineering and workflow runtime.
-- Google Agent Development Kit for a three-agent sequential fleet. Prior authenticated ADK and Gemini execution is verified; the current R07 topology targets `gemini-3.7-flash`, pins the Gemini Developer API route, and exposes only three deterministic tools. A fresh current-revision live trace remains required.
+- Google Agent Development Kit for a three-agent sequential fleet. The successor topology targets `gemini-3.7-flash` through Vertex AI with Cloud Run service identity/ADC and exposes only three deterministic tools. A deployed current-revision live trace remains required.
 - FastAPI for agent discovery, workflow, worker, review, and live-ADK endpoints.
 - SQLite for local persistent state, workflow identity, and operational events.
 - Darcy–Weisbach, Swamee–Jain, and Haaland equations for reproducible calculation and independent validation.
-- A guarded Docker/Cloud Run deployment path designed to scale to zero and read the Gemini key from Secret Manager.
+- A guarded Docker/Cloud Run deployment path designed to scale to zero and use Vertex AI through the runtime service identity without a primary API-key dependency.
 
 Before final submission, replace the following sentence only if the corresponding evidence exists:
 
