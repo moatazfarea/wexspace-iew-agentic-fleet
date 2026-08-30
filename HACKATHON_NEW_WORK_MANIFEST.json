@@ -13,13 +13,13 @@
       "component_id": "NEW-002",
       "component_name": "Google ADK and Gemini 3.7 Flash integration",
       "paths": ["src/wexspace/adk_fleet.py", "tests/test_adk.py"],
-      "status": "HISTORICAL_ADK_AND_GEMINI_PASS_CURRENT_R07_TRACE_OPEN"
+      "status": "DEPLOYED_PASS_VERTEX_AI_ADC_CLOUD_RUN"
     },
     {
       "component_id": "NEW-003",
       "component_name": "three-agent governed workflow and versioned registry",
       "paths": ["src/wexspace/agents.py", "security/agent_registry.json", "security/*.md"],
-      "status": "R07_LOCAL_PASS"
+      "status": "LOCAL_AND_DEPLOYED_ADK_TRACE_PASS"
     },
     {
       "component_id": "NEW-004",
@@ -37,13 +37,13 @@
       "component_id": "NEW-006",
       "component_name": "FastAPI and Cloud Run adapter",
       "paths": ["src/wexspace/api.py", "Dockerfile", "deployment"],
-      "status": "LOCAL_API_PASS_CLOUD_NOT_DEPLOYED"
+      "status": "CLOUD_RUN_DEPLOYED_AND_INVOKED_PASS"
     },
     {
       "component_id": "NEW-007",
       "component_name": "competition tests, evidence, documentation, architecture, and submission assets",
       "paths": ["tests", "evidence", "docs", "architecture", "demo", "devpost"],
-      "status": "R07_SUBMISSION_HARDENING_PASS_EXTERNAL_GATES_OPEN"
+      "status": "R07_SUBMISSION_HARDENING_PASS_CLOUD_DELTA_RECONCILED_VIDEO_DEVPOST_OPEN"
     }
   ],
   "submission_hardening": {

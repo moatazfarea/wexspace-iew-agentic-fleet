@@ -1,6 +1,6 @@
 # Devpost submission draft
 
-Status: **submission copy is complete except for verified repository, Cloud, and video facts; the existing Devpost draft remains behind an authentication boundary. Do not create a second project. Do not final-submit without explicit user authorization.**
+Status: **repository and Cloud facts are reconciled; the public video URL and authenticated existing-project field entry remain open. Do not create a second project. Do not final-submit without explicit user authorization.**
 
 ## Existing draft values to preserve and verify
 
@@ -38,15 +38,13 @@ The same workflow has a versioned agent registry, explicit data/tool/action scop
 ## How we built it
 
 - Python 3.12 for the engineering and workflow runtime.
-- Google Agent Development Kit for a three-agent sequential fleet. The successor topology targets `gemini-3.7-flash` through Vertex AI with Cloud Run service identity/ADC and exposes only three deterministic tools. A deployed current-revision live trace remains required.
+- Google Agent Development Kit for a three-agent sequential fleet. The deployed topology targets `gemini-3.7-flash` through Vertex AI with Cloud Run service identity/ADC and exposes only three deterministic tools.
 - FastAPI for agent discovery, workflow, worker, review, and live-ADK endpoints.
 - SQLite for local persistent state, workflow identity, and operational events.
 - Darcy–Weisbach, Swamee–Jain, and Haaland equations for reproducible calculation and independent validation.
-- A guarded Docker/Cloud Run deployment path designed to scale to zero and use Vertex AI through the runtime service identity without a primary API-key dependency.
+- A guarded Docker/Cloud Run deployment that scales to zero, caps instances at one, and uses Vertex AI through the runtime service identity without a primary API-key dependency.
 
-Before final submission, replace the following sentence only if the corresponding evidence exists:
-
-`[LIVE GOOGLE EVIDENCE PENDING: state the verified Gemini model response, Cloud Run revision, and cloud invocation here. Do not retain this bracketed note in the final submission.]`
+The live successor runs in Google Cloud project `wexspace-agentic-2026` on Cloud Run service `wexspace-iew-agentic-fleet`, region `us-central1`, revision `wexspace-iew-agentic-fleet-00002-9tw`. Its `/adk/live` endpoint returned HTTP 200 and verified the three required ADK agents, bounded tools, `gemini-3.7-flash` model identity, Vertex AI backend, and Application Default Credentials. The deployed source is commit `da70a9b7bb08280f9c5d3c450e2171f28dea6c96`, tree `6c572860fa041efde6b8bad8a19ed05d54465582`.
 
 ## Challenges
 
@@ -61,8 +59,8 @@ The hardest design choice was keeping the model useful without allowing it to be
 - Background queue/worker behavior and a non-cosmetic human review gate.
 - Structured traces and provenance hashes without exposing hidden chain-of-thought.
 - Sixteen automated tests passing against the current R07 source in an isolated dependency environment; the earlier R03 checkpoint also preserved a 14/14 fresh-install PASS.
-
-Do not add live Gemini or Cloud accomplishments until those gates pass.
+- A live Google ADK three-agent trace using Gemini 3.7 Flash through Vertex AI and ADC on Google Cloud Run.
+- A readback-verified Cloud evidence archive with SHA-256 `7610a5a6d10bae2e7bae90939df572130669e507b686370880e232be64a0c20b` and no secret values logged.
 
 ## What we learned
 
@@ -70,7 +68,7 @@ Agentic engineering is strongest when model reasoning, deterministic tools, work
 
 ## What's next
 
-The mandatory next steps are a current-revision live Gemini 3.7 Flash fleet trace, authenticated Cloud Run deployment and proof, repository publication/access verification, and a public English demo video. A future product revision could add a managed cloud state backend, managed enterprise identity/policy services, OpenTelemetry export, and additional neutral engineering specialists; none are claimed as implemented here.
+The next product revision could add a managed cloud state backend, managed enterprise identity/policy services, OpenTelemetry export, and additional neutral engineering specialists; none are claimed as implemented here. The competition submission itself still requires public video publication, final Devpost field reconciliation, and explicit user authorization before final submit.
 
 ## Data sources
 
@@ -87,18 +85,20 @@ The WEXSPACE AI / IEW AI vision, prior engineering methodologies, the earlier UT
 - SQLite
 - Google Agent Development Kit
 - Gemini 3.7 Flash
+- Vertex AI
+- Google Cloud Run
 
-Gemini 3.7 Flash is supported by the recovered verified direct execution and ADK evidence; do not describe the current R07 three-agent live trace as complete until it is re-run. Add **Google Cloud Run** only after deployment and invocation evidence. Do not add Firestore; it is not implemented.
+Do not add Firestore or other managed products; they are not implemented.
 
 ## Links — do not enter placeholders
 
-- Repository URL: `OPEN — enter only after GitHub/GitLab/Bitbucket repository exists and access is verified`
-- Hosted project URL: `OPEN — enter only after deployment and invocation verification; officially encouraged but not mandatory when unavailable`
+- Repository URL: `https://github.com/moatazfarea/wexspace-iew-agentic-fleet`
+- Hosted project URL: omit unless the exact service URL is independently recovered; the official guidance treats this field as encouraged rather than mandatory.
 - Video URL: `OPEN — enter only after public YouTube/Vimeo upload and validation`
 
 ## Testing instructions
 
-Use the README's reproducible setup. Run `python -m unittest discover -s tests -v`, then execute the local workflow and ADK smoke. Live judges should invoke `/health`, `/agents`, `/workflows`, and `/adk/live` only after the submitted deployment evidence confirms access. Never place a secret or private credential in this text.
+Use the README's reproducible setup. Run `python -m unittest discover -s tests -v`, then execute the local workflow and ADK smoke. Live judges may invoke `/health`, `/agents`, `/workflows`, and `/adk/live` while the submitted Cloud Run service remains available. Never place a secret or private credential in this text.
 
 ## Official lock warning
 

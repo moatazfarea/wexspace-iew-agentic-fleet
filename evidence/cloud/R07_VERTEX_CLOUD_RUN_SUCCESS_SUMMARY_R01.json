@@ -1,0 +1,56 @@
+{
+  "artifact_id": "WEXSPACE-R07-VERTEX-CLOUD-RUN-SUCCESS-SUMMARY-R01",
+  "evidence_class": "DERIVED_PUBLIC_SAFE_SUMMARY_OF_DIRECT_RUNTIME_EVIDENCE",
+  "project_id": "wexspace-agentic-2026",
+  "service_name": "wexspace-iew-agentic-fleet",
+  "region": "us-central1",
+  "ready_revision": "wexspace-iew-agentic-fleet-00002-9tw",
+  "deployed_runtime_source_commit": "da70a9b7bb08280f9c5d3c450e2171f28dea6c96",
+  "deployed_runtime_source_tree": "6c572860fa041efde6b8bad8a19ed05d54465582",
+  "model": "gemini-3.7-flash",
+  "execution_route": {
+    "backend": "VERTEX_AI",
+    "credential_source": "APPLICATION_DEFAULT_CREDENTIALS",
+    "google_genai_use_vertexai": true,
+    "project": "wexspace-agentic-2026",
+    "location": "global",
+    "api_key_required": false
+  },
+  "http_status": {
+    "adk_live": 200
+  },
+  "requalified_checks": {
+    "adk_agents_present": true,
+    "adk_http_200": true,
+    "adk_model": true,
+    "adk_pass": true,
+    "adk_tools_present": true
+  },
+  "vertex_assertions": {
+    "adc_identity": true,
+    "api_key_env_absent": true,
+    "api_key_not_required": true,
+    "backend_vertex_ai": true,
+    "location": true,
+    "logs_present": true,
+    "project": true,
+    "service_account": true
+  },
+  "secret_values_logged": false,
+  "cloud_storage_raw_readback_sha256_verified_by_execution_script": true,
+  "evidence_archive_sha256": "7610a5a6d10bae2e7bae90939df572130669e507b686370880e232be64a0c20b",
+  "secondary_evidence_consumer_state": "PENDING_EXACT_GCS_OBJECT_URI",
+  "service_url_state": "PENDING_IMPORT_FROM_PRIVATE_EVIDENCE_POINTER",
+  "historical_developer_api_429_route": "SUPERSEDED_NOT_RETRIED",
+  "cloud_gate": "PASS",
+  "first_technical_victory": "PASS_7_OF_7",
+  "final_submit_performed": false,
+  "corroboration": {
+    "published_commit_readback": "PASS",
+    "published_tree_match": "PASS",
+    "qualification_script_control_flow_review": "PASS",
+    "archive_hash_format": "PASS_SHA256_64_HEX",
+    "private_archive_secondary_fetch": "PENDING_POINTER"
+  },
+  "claims_boundary": "This is a derived public-safe summary, not the raw Cloud archive. The private archive remains authoritative for raw service, response, and log material."
+}

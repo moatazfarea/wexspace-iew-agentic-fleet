@@ -1,0 +1,127 @@
+{
+  "artifact_id": "WEXSPACE-R07-CLAIM-EVIDENCE-MATRIX-R03",
+  "generated_at": "2026-08-30T23:15:12Z",
+  "claims_boundary": "PASS requires executed or durably reopened evidence; local persistence is not represented as Cloud cross-instance durability.",
+  "claims": [
+    {
+      "claim": "WEXSPACE root governing-agent execution",
+      "implementation": ["src/wexspace/agents.py", "security/wexspace_governing_agent.md"],
+      "test": ["tests/test_fleet.py", "deployed /adk/live"],
+      "artifact": ["recovery/R07_LOCAL_TECHNICAL_VICTORY_R01.json", "cloud/R07_VERTEX_CLOUD_RUN_SUCCESS_SUMMARY_R01.json"],
+      "state": "PASS"
+    },
+    {
+      "claim": "Real WEXSPACE to IEW specialist delegation",
+      "implementation": ["src/wexspace/agents.py", "src/wexspace/adk_fleet.py"],
+      "test": ["tests/test_fleet.py", "tests/test_adk.py", "deployed /adk/live"],
+      "artifact": ["qualification/R07_INDEPENDENT_DAG_QUALIFICATION_R01.json", "cloud/R07_VERTEX_CLOUD_RUN_SUCCESS_SUMMARY_R01.json"],
+      "state": "PASS_LOCAL_AND_DEPLOYED"
+    },
+    {
+      "claim": "Deterministic engineering calculation",
+      "implementation": ["src/wexspace/hydraulics.py"],
+      "test": ["tests/test_hydraulics.py", "tests/test_fleet.py", "deployed bounded ADK tools"],
+      "artifact": ["qualification/R07_INDEPENDENT_DAG_QUALIFICATION_R01.json", "cloud/R07_VERTEX_CLOUD_RUN_SUCCESS_SUMMARY_R01.json"],
+      "state": "PASS"
+    },
+    {
+      "claim": "Independent verification and structured evidence",
+      "implementation": ["src/wexspace/hydraulics.py", "src/wexspace/agents.py"],
+      "test": ["tests/test_hydraulics.py", "tests/test_fleet.py", "deployed bounded ADK tools"],
+      "artifact": ["qualification/R07_INDEPENDENT_DAG_QUALIFICATION_R01.json", "cloud/R07_VERTEX_CLOUD_RUN_SUCCESS_SUMMARY_R01.json"],
+      "state": "PASS"
+    },
+    {
+      "claim": "Missing-input and prompt/tool-injection protection",
+      "implementation": ["src/wexspace/security.py", "src/wexspace/agents.py", "src/wexspace/adk_fleet.py"],
+      "test": ["tests/test_fleet.py", "tests/test_adk.py"],
+      "artifact": ["recovery/R07_LOCAL_TECHNICAL_VICTORY_R01.json"],
+      "state": "PASS"
+    },
+    {
+      "claim": "Persistent state and fresh-process restart/resume",
+      "implementation": ["src/wexspace/state.py", "src/wexspace/cli.py"],
+      "test": ["tests/test_fleet.py"],
+      "artifact": ["qualification/R07_INDEPENDENT_DAG_QUALIFICATION_R01.json"],
+      "state": "PASS_LOCAL_PROCESS_PERSISTENCE_NO_CLOUD_DURABILITY_CLAIM"
+    },
+    {
+      "claim": "Bounded asynchronous worker with no duplicate processing",
+      "implementation": ["src/wexspace/state.py", "src/wexspace/agents.py", "src/wexspace/cli.py"],
+      "test": ["tests/test_fleet.py"],
+      "artifact": ["qualification/R07_INDEPENDENT_DAG_QUALIFICATION_R01.json"],
+      "state": "PASS"
+    },
+    {
+      "claim": "Versioned agent discovery and bounded authority",
+      "implementation": ["security/agent_registry.json", "src/wexspace/api.py"],
+      "test": ["tests/test_api.py", "tests/test_fleet.py", "deployed agents assertion"],
+      "artifact": ["qualification/R07_INDEPENDENT_DAG_QUALIFICATION_R01.json", "cloud/R07_VERTEX_CLOUD_RUN_SUCCESS_SUMMARY_R01.json"],
+      "state": "PASS"
+    },
+    {
+      "claim": "Auditability and canonical provenance",
+      "implementation": ["src/wexspace/state.py", "src/wexspace/agents.py", "deployment/qualify_vertex_cloud_run.sh"],
+      "test": ["tests/test_fleet.py", "Cloud archive SHA/readback gate"],
+      "artifact": ["qualification/R07_INDEPENDENT_DAG_QUALIFICATION_R01.json", "cloud/R07_VERTEX_CLOUD_RUN_SUCCESS_SUMMARY_R01.json"],
+      "state": "PASS"
+    },
+    {
+      "claim": "Attributable human review before release",
+      "implementation": ["src/wexspace/agents.py", "src/wexspace/api.py"],
+      "test": ["tests/test_fleet.py", "tests/test_api.py"],
+      "artifact": ["qualification/R07_INDEPENDENT_DAG_QUALIFICATION_R01.json"],
+      "state": "PASS_AWAITING_REVIEW_NO_RELEASE_IN_QUALIFICATION"
+    },
+    {
+      "claim": "Synthetic and de-identified competition data",
+      "implementation": ["data/UTL-NET-001_SYNTHETIC_INPUT.json", "docs/SECURITY_AND_DATA_CONTROL.md"],
+      "test": ["tracked repository data and private-reference scan"],
+      "artifact": ["qualification/R07_INDEPENDENT_DAG_QUALIFICATION_R01.json"],
+      "state": "PASS"
+    },
+    {
+      "claim": "Google ADK execution",
+      "implementation": ["src/wexspace/adk_fleet.py"],
+      "test": ["tests/test_adk.py", "deployed /adk/live"],
+      "artifact": ["recovery/R07_LOCAL_TECHNICAL_VICTORY_R01.json", "cloud/R07_VERTEX_CLOUD_RUN_SUCCESS_SUMMARY_R01.json"],
+      "state": "PASS_DEPLOYED"
+    },
+    {
+      "claim": "Gemini 3.7 Flash through Vertex AI and ADC",
+      "implementation": ["src/wexspace/adk_fleet.py", "deployment/deploy_cloud_run.sh"],
+      "test": ["direct Vertex HTTP 200", "deployed /adk/live model/backend/credential assertions"],
+      "artifact": ["qualification/R07_VERTEX_AI_CORRECTIVE_ROUTE_R01.json", "cloud/R07_VERTEX_CLOUD_RUN_SUCCESS_SUMMARY_R01.json"],
+      "state": "PASS_DEPLOYED"
+    },
+    {
+      "claim": "Judge-accessible repository publication",
+      "implementation": ["canonical public Git history"],
+      "test": ["remote commit/tree and raw content readback"],
+      "artifact": ["https://github.com/moatazfarea/wexspace-iew-agentic-fleet"],
+      "state": "PASS_PUBLIC"
+    },
+    {
+      "claim": "Google Cloud Run deployment, invocation, and logs",
+      "implementation": ["Dockerfile", "deployment/deploy_cloud_run.sh", "src/wexspace/api.py"],
+      "test": ["deployment/qualify_vertex_cloud_run.sh", "deployed /adk/live HTTP 200"],
+      "artifact": ["cloud/R07_VERTEX_CLOUD_RUN_SUCCESS_SUMMARY_R01.json", "private Cloud evidence archive SHA-256 7610a5a6d10bae2e7bae90939df572130669e507b686370880e232be64a0c20b"],
+      "state": "PASS_RAW_ARCHIVE_SECONDARY_POINTER_IMPORT_OPEN"
+    },
+    {
+      "claim": "First Technical Victory",
+      "implementation": ["seven qualified technical gates"],
+      "test": ["five affected live checks plus preserved six gates"],
+      "artifact": ["cloud/R07_VERTEX_CLOUD_RUN_SUCCESS_SUMMARY_R01.json"],
+      "state": "PASS_7_OF_7"
+    },
+    {
+      "claim": "Public compliant demonstration video",
+      "implementation": ["demo/VIDEO_SCRIPT.md", "demo/SHOT_LIST.md"],
+      "test": ["duration, visibility, language, privacy, and Cloud-proof checklist"],
+      "artifact": ["demo/CLOUD_PROOF_CAPTURE_CHECKLIST.md"],
+      "state": "BLOCKED_EXTERNAL_PUBLIC_UPLOAD_REQUIRED"
+    }
+  ],
+  "status": "PASS_MAPPING_COMPLETE_VIDEO_AND_PRIVATE_POINTER_REGISTRATION_OPEN"
+}

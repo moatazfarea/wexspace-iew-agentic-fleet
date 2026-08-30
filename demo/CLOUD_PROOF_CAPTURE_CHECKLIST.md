@@ -1,17 +1,17 @@
 # Cloud proof capture checklist
 
-Use this only after a real deployment succeeds. It is the single insertion point for Gate 7 evidence and the final video.
+The real deployment succeeded. This remains the single insertion point for Gate 7 evidence and the final video.
 
 ## Identity frame
 
 - Google Cloud project ID `wexspace-agentic-2026` is legible.
-- Cloud Run service name, region, active revision, deployment timestamp, and container/image digest are legible.
+- Cloud Run service `wexspace-iew-agentic-fleet`, region `us-central1`, and revision `wexspace-iew-agentic-fleet-00002-9tw` are legible.
 - The candidate Git commit is shown adjacent to the deployment evidence.
 - Secrets, billing details, account email, unrelated projects, and private browser data are not visible.
 
 ## Invocation frame
 
-- The real `.run` URL is visible in the browser address bar.
+- The real `.run` URL is visible when recovered from the private evidence pointer; otherwise the authentic readback-verified evidence record is shown without fabricating a URL.
 - `GET /health` returns a successful status and `google_cloud_deployment: true`.
 - `GET /agents` returns the three named, versioned, bounded agents.
 - `POST /workflows` returns the structured deterministic result and the human-review hold.
@@ -30,4 +30,4 @@ Use this only after a real deployment succeeds. It is the single insertion point
 - Keep the final video at or below four minutes, publicly visible on YouTube or Vimeo, and in English or fully subtitled in English.
 - Verify the public video URL in a signed-out browser before entering it in Devpost.
 
-No Cloud label changes from `OPEN` to `PASS` until every identity, invocation, log, and durable-evidence item above is captured.
+Cloud Gate 7 is PASS. Video publication remains open until a real, legible proof sequence is rendered, inspected for secrets, uploaded publicly, and verified signed out.

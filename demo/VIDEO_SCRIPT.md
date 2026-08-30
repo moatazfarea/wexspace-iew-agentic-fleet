@@ -1,10 +1,10 @@
 # Demo video script — target 3:45
 
-Status: **script and recording plan ready; recording/upload remain open until live Gemini and Cloud evidence exist.** Record in English or add complete English subtitles. Use one continuous execution where practical. Do not show fake logs, secret values, personal browser data, or functionality that did not pass.
+Status: **Cloud proof is available; final video production and public upload remain open.** Record in English or add complete English subtitles. Use one continuous execution where practical. Do not show fake logs, secret values, personal browser data, or functionality that did not pass.
 
 ## 0:00–0:15 — Show the real result first
 
-**Narration, only after Cloud Gate 7 passes:**
+**Narration:**
 
 “This is WEXSPACE AI running on Google Cloud Run: a governed three-agent engineering workflow using Google ADK and Gemini 3.7 Flash.”
 
@@ -28,7 +28,7 @@ Status: **script and recording plan ready; recording/upload remain open until li
 
 ## 0:55–1:15 — Architecture and Google stack
 
-**Narration, only after live gates pass:**
+**Narration:**
 
 “The live route runs three agents in Google ADK with Gemini 3.7 Flash and is deployed as a FastAPI service on Google Cloud Run. Deterministic Python tools calculate and verify the engineering result. SQLite demonstrates workflow persistence and restart/resume locally; I do not claim it is durable across Cloud Run instance replacement.”
 
@@ -66,11 +66,11 @@ Status: **script and recording plan ready; recording/upload remain open until li
 
 ## 3:20–3:38 — Google Cloud proof
 
-**Narration, only with real evidence:**
+**Narration:**
 
 “This is the active Cloud Run revision, its deployment timestamp and image digest, followed by request logs for the exact invocation you just saw. The service is capped at one instance and scales to zero for cost control.”
 
-**Screen:** Google Cloud Console service/revision, project/region, log entries, then live `.run` response. Redact no material proof; hide only secrets and unrelated account data.
+**Screen:** Actual evidence for project `wexspace-agentic-2026`, service `wexspace-iew-agentic-fleet`, revision `wexspace-iew-agentic-fleet-00002-9tw`, live ADK HTTP 200, Vertex AI/ADC assertions, and the archive SHA-256. Use a Cloud Console capture if available; otherwise show the authentic structured evidence record rather than recreating a Cloud UI. Hide secrets and unrelated account data.
 
 ## 3:38–3:45 — Outcome
 

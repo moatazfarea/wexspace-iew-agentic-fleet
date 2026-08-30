@@ -4,7 +4,7 @@ A governed three-agent workflow for auditable industrial engineering. The compet
 
 Competition category: **Fortified Enterprise Fleet**  
 Submission type: **Individual**  
-Current state: **R11 continuity preserved; canonical repository published; Vertex AI/ADC successor prepared; Cloud Run live qualification remains open**
+Current state: **canonical repository published; Vertex AI/ADC successor deployed and live-qualified on Cloud Run; final submission assets are being reconciled**
 Submission state: **not submitted**
 
 ## Why this exists
@@ -16,9 +16,9 @@ Industrial engineering work cannot safely rely on a chatbot inventing numerical 
 | Capability | Current evidence-backed state |
 |---|---|
 | Python package and API | PASS locally |
-| Google ADK | Current R07 local three-agent smoke PASS; historical authenticated execution PASS; current live trace open |
-| Gemini 3.7 Flash | Direct Vertex AI route HTTP 200 PASS; successor ADK route uses Vertex AI/ADC; deployed three-agent trace open |
-| Cloud Run deployment | Vertex successor prepared, NOT YET QUALIFIED |
+| Google ADK | PASS — deployed three-agent trace and all required agents/tools verified |
+| Gemini 3.7 Flash | PASS — deployed through Vertex AI with Application Default Credentials |
+| Cloud Run deployment | PASS — service `wexspace-iew-agentic-fleet`, revision `wexspace-iew-agentic-fleet-00002-9tw`, `us-central1` |
 | Canonical repository | PUBLIC: `moatazfarea/wexspace-iew-agentic-fleet` |
 | R07 three-agent routing and delegation | PASS locally through named WEXSPACE → IEW → verification roles |
 | Deterministic engineering tool | PASS locally |
@@ -27,9 +27,9 @@ Industrial engineering work cannot safely rely on a chatbot inventing numerical 
 | Async queue/worker | PASS locally, including bounded no-duplicate worker proof |
 | Missing-input and prompt-injection controls | PASS locally |
 | Human release gate | PASS locally |
-| Isolated dependency environment | Unaffected R07 baseline PASS (16/16); two Vertex successor route tests added; live five-check requalification open |
+| Isolated dependency environment | Unaffected R07 baseline PASS (16/16); five affected live ADK checks PASS on the deployed successor |
 
-The project preserves the prior verified Gemini response and ADK execution as historical evidence. It does not claim a current-source live three-agent Gemini trace, hosted URL, Cloud Run deployment, or cloud-persistent database until each is executed and captured against the current revision.
+The deployed successor is provenance-mapped to source commit `da70a9b7bb08280f9c5d3c450e2171f28dea6c96` and tree `6c572860fa041efde6b8bad8a19ed05d54465582`. The bounded live qualification returned HTTP 200, verified all three ADK agents and all bounded tools, and captured Cloud Run logs. The evidence archive SHA-256 is `7610a5a6d10bae2e7bae90939df572130669e507b686370880e232be64a0c20b`. This remains separate from the local SQLite restart/resume proof: no cloud-persistent database is claimed.
 
 ## Architecture
 
@@ -44,7 +44,7 @@ The primary local workflow is:
 5. The WEXSPACE Verification / Evidence Specialist independently recomputes with the Haaland approximation and checks agreement within 5%.
 6. A human must approve the verified result before its state becomes `RELEASED`.
 
-The live Google path uses a Google ADK `SequentialAgent` containing the same three roles, targets `gemini-3.7-flash`, selects Vertex AI (`GOOGLE_GENAI_USE_VERTEXAI=TRUE`), authenticates with the Cloud Run service identity through Application Default Credentials, and exposes only three bounded deterministic tools. It is available at `POST /adk/live`; the primary competition route does not require a Gemini API key.
+The live Google path uses a Google ADK `SequentialAgent` containing the same three roles, targets `gemini-3.7-flash`, selects Vertex AI (`GOOGLE_GENAI_USE_VERTEXAI=TRUE`), authenticates with the Cloud Run service identity through Application Default Credentials, and exposes only three bounded deterministic tools. It is deployed at `POST /adk/live`; the primary competition route does not require a Gemini API key.
 
 ## Repository map
 
@@ -125,7 +125,7 @@ After configuring Vertex AI and Application Default Credentials without writing 
 wexspace-adk live --input data/UTL-NET-001_SYNTHETIC_INPUT.json
 ```
 
-The Cloud Run successor sets `GOOGLE_GENAI_USE_VERTEXAI=TRUE`, project `wexspace-agentic-2026`, and location `global`. A PASS may only be recorded after the response and full deployed three-agent trace are captured. The API-key-backed Developer API implementation is retained only as an explicit legacy fallback.
+The qualified Cloud Run successor sets `GOOGLE_GENAI_USE_VERTEXAI=TRUE`, project `wexspace-agentic-2026`, and location `global`. Its live response and three-agent trace passed the five affected checks: agents present, HTTP 200, model identity, overall ADK PASS, and bounded tools present. The API-key-backed Developer API implementation is retained only as an explicit legacy fallback and is not the primary competition route.
 
 ### Run the API
 
@@ -174,27 +174,26 @@ Reviewed evidence is indexed in [evidence/INDEX.md](evidence/INDEX.md). Generate
 
 The current [qualification matrix](evidence/FINAL_QUALIFICATION_MATRIX_R02.md) records fresh-process persistence/resume, bounded async behavior, registry authority, audit/provenance, the human gate, current publication scans, official-rule deltas, and the exact external boundaries. Direct dependency licensing is recorded in [docs/THIRD_PARTY_DEPENDENCY_LICENSE_REGISTER.json](docs/THIRD_PARTY_DEPENDENCY_LICENSE_REGISTER.json).
 
-Known open gates:
+Known open submission gates:
 
-- deployed Vertex AI-backed Gemini 3.7 Flash three-agent execution trace;
-- Cloud Run successor deployment/invocation;
-- visible Cloud deployment proof;
-- final remote successor commit/readback verification;
-- public video recording/upload and duration/language verification;
+- secondary registration of the private Cloud evidence object in the final evidence index;
+- final documentation-only repository commit/readback verification;
+- public video production/upload and duration/language verification;
 - entrant confirmation of legal eligibility, ownership, and employer-policy compatibility;
-- Devpost draft verification and final submission authorization.
+- authenticated Devpost field reconciliation and final submission authorization.
 
 ## Google technologies
 
-- **Google Agent Development Kit:** historical authenticated and local execution verified; current R07 live trace open.
-- **Gemini 3.7 Flash:** direct Vertex AI response verified; deployed successor three-agent trace open.
-- **Google Cloud Run:** Vertex/ADC successor deployment files prepared; successor deployment not yet verified.
+- **Google Agent Development Kit:** deployed three-agent execution verified.
+- **Gemini 3.7 Flash:** deployed through Vertex AI and Cloud Run service identity/ADC.
+- **Vertex AI:** primary deployed model backend; project `wexspace-agentic-2026`, location `global`.
+- **Google Cloud Run:** deployed and invoked successfully in `us-central1`; active revision `wexspace-iew-agentic-fleet-00002-9tw`.
 
 Only technologies with completed evidence should be entered as actually used in the final Devpost fields.
 
 ## Deployment
 
-Read [deployment/QUALIFICATION.md](deployment/QUALIFICATION.md). The guarded script is pinned to the verified project, region, service identity, and scale-to-zero configuration; it removes the historical API-key secret binding from the successor service without deleting the secret.
+Read [deployment/QUALIFICATION.md](deployment/QUALIFICATION.md). The guarded script is pinned to the verified project, region, service identity, and scale-to-zero configuration; it removed the historical API-key secret binding from the successor service without deleting the historical secret. The deployed runtime source is explicitly separated from later documentation-only submission commits, so documentation changes do not trigger an unnecessary redeployment.
 
 ## Competition freeze rule
 

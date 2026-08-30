@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="980" viewBox="0 0 1200 980" role="img" aria-labelledby="title desc">
   <title id="title">WEXSPACE AI governed agent fleet architecture</title>
-  <desc id="desc">Verified R07 local path from the WEXSPACE governing agent through the IEW specialist, deterministic tool, SQLite state, independent verification, and human release. Prior Gemini and ADK execution is preserved; the current R07 live trace and Cloud Run deployment remain open.</desc>
+  <desc id="desc">Verified R07 path from the WEXSPACE governing agent through the IEW specialist, deterministic tool, SQLite state, independent verification, and human release. Google ADK with Gemini 3.7 Flash through Vertex AI and the Cloud Run deployment are verified.</desc>
   <defs>
     <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#3057d5"/></marker>
     <marker id="dasharrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#a56100"/></marker>
@@ -44,11 +44,11 @@
   <text x="600" y="899" class="txt">Human review gate</text><text x="600" y="922" class="small">approval required before RELEASED</text>
 
   <rect x="35" y="250" width="305" height="95" rx="13" class="open"/>
-  <text x="188" y="280" class="txt">Google ADK + Gemini 3.7</text><text x="188" y="303" class="small">prior authenticated PASS</text><text x="188" y="326" class="small">current R07 trace: OPEN</text>
+  <text x="188" y="280" class="txt">Google ADK + Gemini 3.7</text><text x="188" y="303" class="small">Vertex AI + ADC</text><text x="188" y="326" class="small">deployed trace: PASS</text>
   <path d="M340 298 L425 337" class="dash"/>
 
   <rect x="860" y="205" width="305" height="95" rx="13" class="open"/>
-  <text x="1013" y="235" class="txt">Google Cloud Run</text><text x="1013" y="258" class="small">deployment files prepared</text><text x="1013" y="281" class="small">NOT DEPLOYED / NOT VERIFIED</text>
+  <text x="1013" y="235" class="txt">Google Cloud Run</text><text x="1013" y="258" class="small">revision 00002-9tw</text><text x="1013" y="281" class="small">DEPLOYED / INVOKED / VERIFIED</text>
   <path d="M860 252 L775 240" class="dash"/>
 
   <rect x="35" y="390" width="305" height="115" rx="13" class="control"/>

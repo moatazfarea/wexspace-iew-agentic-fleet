@@ -1,6 +1,5 @@
 {
-  "artifact_id": "DEVPOST-DRAFT-FIELD-STATE-CURRENT",
-  "current_revision": "FIELD_STATE_R04.json",
+  "artifact_id": "DEVPOST-DRAFT-FIELD-STATE-R04",
   "requirements_reconciliation": "REQUIREMENTS_RECONCILIATION_R04.json",
   "draft_access": "ACCESSIBLE_NOT_AUTHENTICATED",
   "existing_draft_verification": "BLOCKED_BY_AUTHENTICATION",
@@ -32,21 +31,17 @@
     "english_subtitles": "PASS",
     "drive_file_id": "1Gl1PDlzhJwYa5QHWpgrShj0R0rp57v7C"
   },
-  "video_url": null,
   "video_url_state": "PENDING_PUBLIC_UPLOAD",
   "cloud_gate": "PASS",
   "first_technical_victory": "PASS_7_OF_7",
   "official_deadline_utc": "2026-09-01T00:00:00Z",
-  "mandatory_cloud_proof": "PASS",
-  "official_rule_delta": "OFFICIAL_RULE_DELTA_R03.json_FINAL_DELTA_PENDING_FREEZE",
-  "post_deadline_linked_material_freeze": "MANDATORY_UNTIL_WINNERS_ANNOUNCED",
   "video_constraints": {
     "maximum_duration_minutes": 4,
     "hosting": ["YouTube", "Vimeo"],
     "visibility": "PUBLIC",
     "language": "ENGLISH_OR_COMPLETE_ENGLISH_SUBTITLES"
   },
-  "prohibited_current_additions": ["Firestore", "unsupported managed Google services", "placeholder URLs"],
+  "prohibited_additions": ["Firestore", "unsupported managed Google services", "placeholder URLs"],
   "final_submit_authority": "USER_ONLY",
   "final_submit_state": "NOT_AUTHORIZED"
 }

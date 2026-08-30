@@ -1,0 +1,79 @@
+{
+  "artifact_id": "WEXSPACE-R07-FINAL-PUBLICATION-SECURITY-DELTA-R03",
+  "scanned_at": "2026-08-30T23:42:00Z",
+  "scope": "POST_CLOUD_DOCUMENTATION_ARCHITECTURE_EVIDENCE_AND_VIDEO_DELTA",
+  "runtime_implementation_changed": false,
+  "deployment_configuration_changed": false,
+  "affected_test_rerun_required": false,
+  "preserved_unaffected_baseline": "PASS_16_OF_16",
+  "scans": {
+    "google_api_key_value": {
+      "pattern": "AIza plus 35 key characters",
+      "matches": 0,
+      "state": "PASS"
+    },
+    "github_token_value": {
+      "pattern": "classic and fine-grained GitHub token forms",
+      "matches": 0,
+      "state": "PASS"
+    },
+    "aws_access_key_value": {
+      "pattern": "AKIA access-key form",
+      "matches": 0,
+      "state": "PASS"
+    },
+    "private_key_header": {
+      "pattern": "PEM/OpenSSH private-key header",
+      "matches": 0,
+      "state": "PASS"
+    },
+    "private_user_paths": {
+      "patterns": ["/Users/<user>", "/home/<user>", "/workspace/<user>", "Windows user profile"],
+      "matches": 0,
+      "state": "PASS"
+    },
+    "email_identifiers": {
+      "personal_email_matches": 0,
+      "allowlisted_public_organizer_contact": "support@devpost.com",
+      "allowlisted_runtime_identity": "wexspace-cloud-run@wexspace-agentic-2026.iam.gserviceaccount.com",
+      "state": "PASS"
+    },
+    "unrelated_or_confidential_context": {
+      "matches": 0,
+      "synthetic_data_only": true,
+      "state": "PASS"
+    }
+  },
+  "video_review": {
+    "path": "demo/WEXSPACE_AI_HACKATHON_DEMO_R01.mp4",
+    "duration_seconds": 225,
+    "maximum_seconds": 240,
+    "resolution": "1920x1080",
+    "video_codec": "h264",
+    "subtitle_codec": "mov_text",
+    "subtitle_language": "eng",
+    "embedded_metadata_contains_private_identity": false,
+    "credentials_or_secret_values_visible": false,
+    "confidential_data_visible": false,
+    "cloud_console_ui_fabricated": false,
+    "state": "PASS"
+  },
+  "license_and_ip": {
+    "direct_dependency_register": "docs/THIRD_PARTY_DEPENDENCY_LICENSE_REGISTER.json",
+    "direct_dependencies_resolved": 5,
+    "direct_dependencies_unresolved": 0,
+    "vendored_third_party_source": false,
+    "dependency_definitions_changed_by_delta": false,
+    "new_media_source": "repository-rendered project-owned text, diagrams, and evidence only",
+    "state": "PASS"
+  },
+  "hashes": {
+    "architecture_svg_sha256": "cb10a514f48fc7d13009109ee4ffdcf75cb5bc053f8a4c668f2952fb14bf64c6",
+    "architecture_png_sha256": "4ba1b54dc7e2619a01f64a87dee2b63b7eb2a3ba8607f1b649435675313b0f61",
+    "video_sha256": "cf158113fca3028379f45a6c1052aa6f863c9f3d7a22717ed435b3d5cc2a946e",
+    "subtitles_sha256": "5902cdde31715fb83cdd5449a7b9cb032a11633cdc2aa3bd849c6484ae5688c0",
+    "thumbnail_sha256": "33b48b2a35575070dc48572b9fb017b407f851d089c267f39e22f93885451358"
+  },
+  "final_remote_readback": "OPEN_UNTIL_DOCUMENTATION_COMMIT_PUBLICATION",
+  "status": "PASS_PREPUBLICATION_DELTA_REMOTE_READBACK_OPEN"
+}
