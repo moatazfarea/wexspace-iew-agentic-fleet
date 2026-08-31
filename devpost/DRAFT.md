@@ -61,6 +61,7 @@ The hardest design choice was keeping the model useful without allowing it to be
 - Sixteen automated tests passing against the current R07 source in an isolated dependency environment; the earlier R03 checkpoint also preserved a 14/14 fresh-install PASS.
 - A live Google ADK three-agent trace using Gemini 3.7 Flash through Vertex AI and ADC on Google Cloud Run.
 - A readback-verified Cloud evidence archive with SHA-256 `7610a5a6d10bae2e7bae90939df572130669e507b686370880e232be64a0c20b` and no secret values logged.
+- A 3:39.9 judge-facing demo with a 72.1-second continuous authentic AgentFleet execution, visible engineering outputs, independent verification, human-review hold, Cloud proof, and complete English subtitles.
 
 ## What we learned
 

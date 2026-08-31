@@ -43,7 +43,7 @@
       "component_id": "NEW-007",
       "component_name": "competition tests, evidence, documentation, architecture, and submission assets",
       "paths": ["tests", "evidence", "docs", "architecture", "demo", "devpost"],
-      "status": "R07_SUBMISSION_HARDENING_PASS_CLOUD_DELTA_RECONCILED_VIDEO_DEVPOST_OPEN"
+      "status": "R07_SUBMISSION_HARDENING_PASS_VIDEO_R02_SELECTED_PUBLICATION_DEVPOST_OPEN"
     }
   ],
   "submission_hardening": {

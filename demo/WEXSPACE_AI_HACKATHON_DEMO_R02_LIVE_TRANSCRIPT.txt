@@ -1,0 +1,65 @@
+WEXSPACE AI — LIVE PROFESSIONAL WORKFLOW
+CONTINUOUS LIVE RUN — NO CUTS — AUTHENTIC APPLICATION EVENTS
+Observer: committed SQLite events from the production AgentFleet
+
+[USER GOAL] Analyze synthetic cooling-water network
+[SYNTHETIC PROJECT] UTL-NET-001-HACKATHON-SYNTHETIC
+[INPUT] source=P-101 | pressure=450.0 kPa
+[INPUT] 3 pipe segments | 2 terminal loads
+[05:15:10Z] [AGENT] GOVERNING AGENT
+           [EVENT] workflow_created  ->  QUEUED
+           [GOAL] Analyze synthetic cooling-water network
+           [EVIDENCE] input sha256 31eb746e1abc89edcb68...
+[05:15:14Z] [AGENT] GOVERNING AGENT
+           [EVENT] context_allowlist_decision  ->  PASS
+           [GATE] authorized competition context = true
+[05:15:17Z] [AGENT] GOVERNING AGENT
+           [EVENT] scope_relevance_actionability_gate  ->  PASS
+           [GATE] scope = WORK_MANAGED | actionability = ACTIONABLE_NOW
+[05:15:20Z] [AGENT] GOVERNING AGENT
+           [EVENT] policy_decision  ->  PASS
+           [POLICY] WEX-POLICY-001 allowed = true | secret_values_logged = false
+[05:15:23Z] [AGENT] GOVERNING AGENT
+           [EVENT] delegation  ->  ROUTED
+           [ROUTE] to iew_engineering_specialist
+           [TASK] deterministic hydraulic calculation
+[STATE] RUNNING | next = ENGINEERING
+[05:15:28Z] [AGENT] IEW ENGINEERING SPECIALIST
+           [EVENT] deterministic_tool_call  ->  PASS
+           [TOOL] calculate_network | swamee-jain
+           [RESULT] accepted = true | sha256 4c066c7a3e6806a85db7...
+[STATE] RUNNING | next = VERIFICATION
+[ENGINEERING OUTPUT] swamee-jain
+  S-001  velocity=1.061033 m/s  total_head=1.295647 m
+  S-002  velocity=1.506792 m/s  total_head=5.526771 m
+  S-003  velocity=1.697653 m/s  total_head=4.211510 m
+  HX-101  residual_pressure=383.295650909 kPa
+  HX-102  residual_pressure=396.155258360 kPa
+[05:15:40Z] [AGENT] GOVERNING AGENT
+           [EVENT] delegation  ->  ROUTED
+           [ROUTE] to wexspace_verification_evidence_specialist
+           [TASK] independent recalculation and evidence packaging
+[05:15:44Z] [AGENT] VERIFICATION SPECIALIST
+           [EVENT] independent_validation  ->  PASS
+           [VERIFY] independent checks pass = true
+           [EVIDENCE] verification sha256 e6cc03e0a3b120276f61...
+[STATE] AWAITING_HUMAN_REVIEW | next = HUMAN_REVIEW
+[INDEPENDENT METHOD] independent Haaland friction-factor recomputation
+  S-001  relative_difference=0.002941116  within_5_percent=true
+  S-002  relative_difference=0.003468570  within_5_percent=true
+  S-003  relative_difference=0.006646236  within_5_percent=true
+[05:15:54Z] [AGENT] GOVERNING AGENT
+           [EVENT] human_review_gate  ->  WAITING
+           [HUMAN GATE] release remains blocked pending reviewer
+
+[FINAL VERIFIED RESULT]
+  workflow_id = WFX-CE65080FC978
+  state = AWAITING_HUMAN_REVIEW
+  independent_verification = true
+  checks = 5/5
+  release_performed = false
+  calculation_sha256 = 4c066c7a3e6806a85db735b45b1f8266433b8fdac16f10d70c5572b67f32edd8
+  verification_sha256 = e6cc03e0a3b120276f61072d5b5a85f9cb22f7de02894bbcc5d9b0a2a01c9a87
+
+AUTONOMOUS PROFESSIONAL EXECUTION COMPLETE
+ACCOUNTABLE HUMAN RELEASE STILL REQUIRED

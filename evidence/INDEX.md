@@ -13,6 +13,9 @@ Every `PASS` is tied to an executed or reopened artifact. External gates remain 
 | `qualification/R07_CLOUD_OBSERVABILITY_RECHECK_R01.json` | one triggered bounded Cloud Run Console recheck and responsible-layer classification | PASS classification; Gate 7 open |
 | `qualification/R07_VERTEX_AI_CORRECTIVE_ROUTE_R01.json` | verified Vertex AI/ADC corrective-route preparation and historical Developer API failure localization | PASS |
 | `qualification/R07_VIDEO_ARTIFACT_QUALIFICATION_R01.json` | 3:45 H.264 video, English subtitle track, content/privacy review, and Drive raw readback hashes | PASS artifact; public upload open |
+| `qualification/R07_VIDEO_ARTIFACT_QUALIFICATION_R02.json` | selected 3:39.9 live-demo successor, 72-second continuous AgentFleet execution, Cloud/provenance capture, subtitles, and privacy review | PASS selected artifact; Drive/public upload open |
+| `demo/R07_VIDEO_R02_LIVE_RUN_RESULT.json` | exact structured result underlying the selected live-run capture | PASS; awaiting human review, no release |
+| `demo/R07_VIDEO_R02_LIVE_RUN_TRACE.jsonl` | nine committed events shown during the continuous live segment | PASS |
 | `qualification/R07_FINAL_PUBLICATION_SECURITY_DELTA_R03.json` | post-Cloud documentation, architecture, evidence, and video secret/privacy/IP delta | PASS prepublication; remote readback open |
 | `cloud/R07_VERTEX_CLOUD_RUN_SUCCESS_SUMMARY_R01.json` | public-safe summary of Cloud Run revision, live ADK HTTP 200, Vertex assertions, and archive identity | PASS execution; private archive pointer registration open |
 | `FINAL_QUALIFICATION_MATRIX_R01.md` | prior mandatory-gate reconciliation | PRESERVED HISTORY |

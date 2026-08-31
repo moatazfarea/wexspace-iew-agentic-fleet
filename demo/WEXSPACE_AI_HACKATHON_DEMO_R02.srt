@@ -1,0 +1,35 @@
+1
+00:00:00,000 --> 00:00:12,000
+WEXSPACE AI coordinates bounded professional responsibilities around one real engineering task.
+
+2
+00:00:12,000 --> 00:00:28,000
+Engineering inputs must be complete, calculations reproducible, checks independent, and release accountable.
+
+3
+00:00:28,000 --> 00:00:44,000
+The governing agent validates scope and routes the task. Separate specialists calculate and verify; a human controls release.
+
+4
+00:00:44,000 --> 00:01:56,067
+Continuous authentic run: governing, specialist delegation, deterministic calculation, independent verification, and the human-release hold.
+
+5
+00:01:56,067 --> 00:02:14,067
+The same workflow can pause, reopen, and resume without losing its verification or human-release boundary.
+
+6
+00:02:14,067 --> 00:02:42,900
+Authentic public-safe Cloud evidence: project, service, revision, live HTTP 200, Vertex AI identity, logs, checks, archive hash, and deployed-source provenance.
+
+7
+00:02:42,900 --> 00:02:57,900
+The public repository preserves setup, architecture, tests, evidence, disclosures, and deployed-runtime provenance.
+
+8
+00:02:57,900 --> 00:03:29,900
+WEXSPACE makes professional agent execution bounded, reproducible, independently verifiable, and human-accountable.
+
+9
+00:03:29,900 --> 00:03:39,900
+WEXSPACE AI. IEW is the first deeply implemented professional domain.

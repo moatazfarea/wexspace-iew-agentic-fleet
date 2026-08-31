@@ -1,6 +1,5 @@
 {
-  "artifact_id": "DEVPOST-DRAFT-FIELD-STATE-CURRENT",
-  "current_revision": "FIELD_STATE_R05.json",
+  "artifact_id": "DEVPOST-DRAFT-FIELD-STATE-R05",
   "requirements_reconciliation": "REQUIREMENTS_RECONCILIATION_R04.json",
   "draft_access": "AUTHENTICATION_TRANSITION_INTERRUPTED_AFTER_SECURE_PASSWORD_SUBMISSION",
   "existing_draft_verification": "PENDING_FRESH_TARGET_DOMAIN_READBACK",
