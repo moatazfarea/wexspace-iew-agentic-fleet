@@ -11,7 +11,11 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 
 from . import __version__
-from .adk_fleet import ELIGIBLE_MODEL, run_live_gemini_payload
+from .adk_fleet import (
+    ELIGIBLE_MODEL,
+    run_live_gemini_payload,
+    run_live_pae006_payload,
+)
 from .agents import AgentFleet, default_registry_path
 from .state import SQLiteStateStore
 
@@ -68,6 +72,15 @@ def worker_once() -> dict[str, Any]:
 async def live_adk_workflow(request: WorkflowRequest) -> dict[str, Any]:
     """Run the Gemini-backed ADK fleet through the configured Google route."""
     result = await run_live_gemini_payload(request.engineering_input)
+    if not result["passed"]:
+        raise HTTPException(status_code=503, detail=result)
+    return result
+
+
+@app.post("/adk/pae006/fresh")
+async def live_pae006_adk_workflow(request: WorkflowRequest) -> dict[str, Any]:
+    """Run the bounded fresh PAE-006 study through Google ADK and Gemini."""
+    result = await run_live_pae006_payload(request.engineering_input)
     if not result["passed"]:
         raise HTTPException(status_code=503, detail=result)
     return result

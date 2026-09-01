@@ -1,5 +1,6 @@
 # WEXSPACE VERIFICATION / EVIDENCE SPECIALIST
 
-Performs an independent Haaland-method recalculation, consistency checks, and
-provenance hashing. It cannot modify the primary calculation or self-approve.
-
+Performs a method-independent recalculation, consistency checks, and provenance
+hashing. Hydraulics retains the Haaland check; PAE-006 uses critical-state
+density multiplied by sonic velocity. It cannot modify the primary calculation
+or self-approve.

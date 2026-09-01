@@ -1,0 +1,35 @@
+{
+  "atmospheric_backpressure_pa_abs": 101325.0,
+  "context_sources": [
+    {
+      "authority": true,
+      "basis_status": "CONTROLLED_R00_INPUTS_WITH_EXPLICIT_WORKING_ASSUMPTIONS",
+      "claim_boundary": "ANALYTICAL_NOT_TESTED_DISCHARGE_COEFFICIENT_PENDING_FLOW_CALIBRATION",
+      "family": "PAE006_CONTROLLED_MICRO_STUDY_R19",
+      "relevance": true,
+      "scope_compatibility": true,
+      "source_id": "PAE-006_R00_CALCULATION-MASTER_INPUTS"
+    }
+  ],
+  "discharge_coefficient": 0.9,
+  "equipment_model": "PAE-006",
+  "gamma": 1.4,
+  "gas_constant_j_kg_k": 287.05,
+  "motive_air_supply_pipe_id_mm": 6.0,
+  "normal_reference_pressure_pa_abs": 101325.0,
+  "normal_reference_temperature_k": 273.15,
+  "nozzle_throat_diameter_mm": [
+    1.4,
+    1.6,
+    1.8
+  ],
+  "pressure_gauge_bar": [
+    4.0,
+    5.0,
+    6.0,
+    7.0
+  ],
+  "prior_work_boundary": "PAE-006 controlled basis pre-existed; this R19 adapter and fresh execution are new bounded work.",
+  "stagnation_temperature_k": 293.15,
+  "study_id": "PAE006-FRESH-MOTIVE-AIR-SENSITIVITY-R01"
+}
