@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "traceability_id": "WEXSPACE-PROOFDESK-JUDGING-TRACEABILITY-R01",
+  "criteria": [
+    {
+      "judging_criterion": "WebMCP leverage",
+      "implemented_feature": "Five imperative tools operate on the same state and domain functions as the human UI.",
+      "tests": [
+        "WebMCP registers five scoped tools and exposes no release tool",
+        "passing package stops at human review until a human decision"
+      ],
+      "evidence": [
+        "lib/proofdesk/webmcp.ts",
+        "evidence/WEBMCP_TOOL_CATALOG_R01.json"
+      ],
+      "demo_moment": "The browser agent creates a package, adds evidence, runs the gate, and queues review while the page updates."
+    },
+    {
+      "judging_criterion": "Execution and coherent product",
+      "implemented_feature": "Complete deliverable-contract, evidence, deterministic-gate, audit, persistence, and human-review workflow.",
+      "tests": [
+        "deterministic gate requires non-low evidence for every criterion",
+        "renders the WEXSPACE ProofDesk working surface"
+      ],
+      "evidence": [
+        "app/workbench.tsx",
+        "lib/proofdesk/domain.ts"
+      ],
+      "demo_moment": "A fresh case progresses from NO_WORK_ITEM to AWAITING_HUMAN_REVIEW."
+    },
+    {
+      "judging_criterion": "Potential impact",
+      "implemented_feature": "Agent work becomes bounded, evidence-backed, visible, and accountable before release.",
+      "tests": [
+        "passing package stops at human review until a human decision"
+      ],
+      "evidence": [
+        "README.md",
+        "SECURITY.md",
+        "ARCHITECTURE.md"
+      ],
+      "demo_moment": "The agent cannot approve release; the human-only control appears after a passing gate."
+    },
+    {
+      "judging_criterion": "Creativity and ambition",
+      "implemented_feature": "WebMCP acts as a governed shared control plane rather than a hidden automation shortcut.",
+      "tests": [
+        "WebMCP registers five scoped tools and exposes no release tool"
+      ],
+      "evidence": [
+        "ARCHITECTURE.md",
+        "PROVENANCE.md"
+      ],
+      "demo_moment": "Human and agent share one auditable state but retain different authorities."
+    }
+  ]
+}

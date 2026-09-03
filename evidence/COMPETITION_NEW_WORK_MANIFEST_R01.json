@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "manifest_id": "WEXSPACE-PROOFDESK-COMPETITION-NEW-WORK-R01",
+  "competition": "The WebMCP Challenge",
+  "challenge_id": "31011",
+  "competition_window_start": "2026-08-25T18:00:00Z",
+  "implementation_started_at_utc": "2026-09-02T23:15:00Z",
+  "prior_work": [
+    "WEXSPACE AI product name and governed-work vision",
+    "General deliverable, evidence, verification, continuity, and human-review concepts",
+    "Separate historical WEXSPACE/IEW competition implementation"
+  ],
+  "scaffold_dependency": {
+    "name": "OpenAI Sites Vinext starter",
+    "classification": "FRAMEWORK_BOILERPLATE_NOT_ORIGINAL_PRODUCT_CLAIM"
+  },
+  "competition_new_work": [
+    "WEXSPACE ProofDesk product definition",
+    "Human workbench interface",
+    "Deterministic domain and acceptance engine",
+    "Five imperative WebMCP tools",
+    "Shared human/agent state operations",
+    "Browser-local persistence and audit ledger",
+    "Human-only release boundary",
+    "Domain, WebMCP, render, and safety tests",
+    "Competition documentation and evidence"
+  ],
+  "new_source_paths": [
+    "app/workbench.tsx",
+    "lib/proofdesk/domain.ts",
+    "lib/proofdesk/webmcp.ts",
+    "tests/proofdesk-domain.test.mjs",
+    "README.md",
+    "ARCHITECTURE.md",
+    "PROVENANCE.md",
+    "SECURITY.md",
+    "evidence/"
+  ],
+  "claim_boundary": "No historical WEXSPACE or IEW artifact is claimed as newly produced by this challenge implementation."
+}

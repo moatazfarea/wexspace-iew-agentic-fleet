@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0",
+  "catalog_id": "WEXSPACE-PROOFDESK-WEBMCP-TOOLS-R01",
+  "generated_at_utc": "2026-09-02T23:27:00Z",
+  "registration_api": "document.modelContext.registerTool",
+  "source": "lib/proofdesk/webmcp.ts",
+  "tool_count": 5,
+  "tools": [
+    {
+      "name": "wexspace.inspect_workspace",
+      "read_only": true,
+      "untrusted_content": false,
+      "state_effect": "NONE"
+    },
+    {
+      "name": "wexspace.create_work_item",
+      "read_only": false,
+      "untrusted_content": false,
+      "state_effect": "REPLACES_ACTIVE_WORK_ITEM_AND_CLEARS_EVIDENCE"
+    },
+    {
+      "name": "wexspace.add_evidence",
+      "read_only": false,
+      "untrusted_content": true,
+      "state_effect": "APPENDS_EVIDENCE_AND_INVALIDATES_GATE"
+    },
+    {
+      "name": "wexspace.run_acceptance_gate",
+      "read_only": false,
+      "untrusted_content": false,
+      "state_effect": "RECOMPUTES_AND_RECORDS_GATE"
+    },
+    {
+      "name": "wexspace.prepare_human_review",
+      "read_only": false,
+      "untrusted_content": false,
+      "state_effect": "QUEUES_PASSING_PACKAGE_FOR_HUMAN_REVIEW"
+    }
+  ],
+  "deliberately_absent_capabilities": [
+    "approve_release",
+    "reject_release",
+    "delete_workspace",
+    "read_credentials",
+    "send_data_to_third_party"
+  ],
+  "verification": {
+    "test": "tests/proofdesk-domain.test.mjs",
+    "expected_tool_count": 5,
+    "release_bypass_negative_test": "PASS"
+  }
+}
