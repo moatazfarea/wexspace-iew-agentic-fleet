@@ -4,6 +4,14 @@ WEXSPACE ProofDesk is a real WebMCP-powered workbench where a human and a browse
 
 This repository is the competition-period implementation for **The WebMCP Challenge**. It is a new, isolated WEXSPACE extension; it does not claim that earlier WEXSPACE or IEW work was created during this challenge.
 
+## Live judge access
+
+- **Working application:** https://wexspace-proofdesk.moatazalqobati20.chatgpt.site/
+- **Competition source branch:** https://github.com/moatazfarea/wexspace-iew-agentic-fleet/tree/webmcp-challenge-2026
+- **Deployed runtime source:** public GitHub commit [`561df8f5bcfc40262af27706e0cc620878b738db`](https://github.com/moatazfarea/wexspace-iew-agentic-fleet/commit/561df8f5bcfc40262af27706e0cc620878b738db), tree `c036a166e9eaa2d986e55213d7522ce14b9fadfd`
+
+The site is public and requires no account. For native tool discovery, open it in the ChatGPT desktop in-app browser or Chrome 149+ with WebMCP testing enabled.
+
 ## What works
 
 - A human-first working interface for deliverable contracts, evidence, acceptance checks, audit history, and release review.
@@ -53,6 +61,18 @@ npm run dev
 ```
 
 Open the local URL printed by the development server. The visual application works in a normal modern browser. Native site-tool discovery additionally requires a current WebMCP-capable secure browser environment, such as a supported ChatGPT desktop built-in browser or a compatible Chrome build configured for WebMCP.
+
+## Two-minute judge path
+
+1. Open the [public application](https://wexspace-proofdesk.moatazalqobati20.chatgpt.site/) in a WebMCP-capable browser.
+2. Inspect the five `wexspace.*` tools.
+3. Create one work item with 2–6 required acceptance criteria.
+4. Add one medium- or high-confidence HTTPS evidence item for each criterion.
+5. Run `wexspace.run_acceptance_gate`; the score is computed deterministically from criterion coverage.
+6. Run `wexspace.prepare_human_review` and confirm that both the visible UI and the tool response reach `AWAITING_HUMAN_REVIEW` with `releasePerformed: false`.
+7. Confirm that no WebMCP tool can approve or release the package; that authority remains in the human interface.
+
+A public-path execution completed this sequence with five discovered tools, three evidence mutations, a 100% gate score, and an unreleased human-review state. The machine-readable record is in [`evidence/PUBLIC_JUDGE_PATH_R01.json`](evidence/PUBLIC_JUDGE_PATH_R01.json).
 
 ## Verify
 

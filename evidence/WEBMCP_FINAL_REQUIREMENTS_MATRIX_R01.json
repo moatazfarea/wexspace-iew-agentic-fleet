@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "matrix_id": "WEBMCP-FINAL-REQUIREMENTS-MATRIX-R01",
+  "official_source": "https://webmcp.devpost.com/rules",
+  "official_source_checked_utc": "2026-09-03T07:11:32Z",
+  "submission_deadline": "2026-09-03T20:00:00Z",
+  "current_delta": "NO_MATERIAL_CHANGE_FROM_RECOVERED_REQUIREMENTS",
+  "requirements": [
+    {
+      "requirement": "WebMCP-powered working web application",
+      "status": "PASS",
+      "evidence": ["app/workbench.tsx", "lib/proofdesk/webmcp.ts", "evidence/PUBLIC_JUDGE_PATH_R01.json"]
+    },
+    {
+      "requirement": "Public live URL accessible in a supported WebMCP browser",
+      "status": "PASS",
+      "evidence": ["https://wexspace-proofdesk.moatazalqobati20.chatgpt.site/", "evidence/PUBLIC_JUDGE_PATH_R01.json"]
+    },
+    {
+      "requirement": "Public repository with source, assets, instructions, and visible open-source license",
+      "status": "PASS",
+      "evidence": ["https://github.com/moatazfarea/wexspace-iew-agentic-fleet/tree/webmcp-challenge-2026", "README.md", "LICENSE"]
+    },
+    {
+      "requirement": "Clear prior-work versus competition-new-work documentation",
+      "status": "PASS",
+      "evidence": ["PROVENANCE.md", "evidence/COMPETITION_NEW_WORK_MANIFEST_R01.json"]
+    },
+    {
+      "requirement": "English text describing WebMCP fit, UX improvement, human-agent collaboration, and implementation",
+      "status": "PASS",
+      "evidence": ["README.md", "SUBMISSION.md"]
+    },
+    {
+      "requirement": "Public YouTube demonstration under three minutes with audio and real functioning demo",
+      "status": "PENDING_VIDEO_BUILD_AND_PUBLICATION",
+      "evidence": ["Authentic source sessions S004 and S005 are qualified; official edited video not yet public"]
+    },
+    {
+      "requirement": "Project remains free and available through judging",
+      "status": "PASS",
+      "evidence": ["Public Sites deployment requires no authentication or payment"]
+    },
+    {
+      "requirement": "Complete Devpost submission fields before deadline",
+      "status": "PENDING_EXISTING_DRAFT_COMPLETION",
+      "evidence": ["SUBMISSION.md"]
+    },
+    {
+      "requirement": "English submission materials",
+      "status": "PASS",
+      "evidence": ["README.md", "SUBMISSION.md", "ARCHITECTURE.md"]
+    },
+    {
+      "requirement": "Submission before Sep 3 2026 1:00 PM PDT",
+      "status": "OPEN_NOT_SUBMITTED",
+      "evidence": ["Official rules deadline 2026-09-03T20:00:00Z"]
+    }
+  ],
+  "final_submit_performed": false
+}

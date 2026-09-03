@@ -30,3 +30,12 @@ The application started from the OpenAI Sites Vinext starter. Standard framework
 ## Claim boundary
 
 This submission demonstrates a new WebMCP extension of WEXSPACE. It does not claim that WEXSPACE itself, the historical IEW case, or earlier governance artifacts were invented or implemented during this challenge.
+
+## Deployed runtime and documentation lineage
+
+- Public runtime source commit: `561df8f5bcfc40262af27706e0cc620878b738db`
+- Public runtime source tree: `c036a166e9eaa2d986e55213d7522ce14b9fadfd`
+- Sites build source commit: `85d5bd5f637bde75240b377d254decdd0a674deb`
+- Sites build source tree: `c036a166e9eaa2d986e55213d7522ce14b9fadfd`
+
+The differing commit IDs contain the same source tree. Later competition commits may add only submission documentation and evidence; those do not change the already deployed runtime unless explicitly stated.
