@@ -1,0 +1,8 @@
+[project]
+name = "wexspace-professional-agent-kernel"
+version = "0.1.0"
+requires-python = ">=3.10"
+description = "Challenge-new durable professional execution kernel for Agents for Humans 2026"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
