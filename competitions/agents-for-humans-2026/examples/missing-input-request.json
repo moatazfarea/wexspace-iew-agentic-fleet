@@ -1,0 +1,6 @@
+{
+  "work_id": "receiving-missing-001",
+  "title": "Prepare a receiving reconciliation for review",
+  "objective": "Compare ordered and delivered quantities without inventing missing inputs.",
+  "inputs": {"orders_csv": "orders.csv", "reviewer": "demo-operator"}
+}

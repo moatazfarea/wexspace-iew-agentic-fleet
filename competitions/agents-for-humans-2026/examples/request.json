@@ -1,0 +1,6 @@
+{
+  "work_id": "receiving-demo-001",
+  "title": "Prepare a receiving reconciliation for review",
+  "objective": "Compare ordered and delivered quantities, preserve the source evidence and prepare a package for the receiving manager.",
+  "inputs": {"orders_csv": "orders.csv", "deliveries_csv": "deliveries.csv", "reviewer": "demo-operator"}
+}

@@ -1,0 +1,9 @@
+__pycache__/
+.pytest_cache/
+.venv/
+.wexspace-state/
+*.sqlite3*
+*.egg-info/
+dist/
+build/
+private-evidence/

@@ -1,0 +1,75 @@
+{
+  "qualification_id": "AFH_LOCAL_STRANDS_INTEGRATION_R01",
+  "verified_at": "2026-09-08T15:55:04.639320+00:00",
+  "test_executed_at": "2026-09-08T08:23:24.872143+03:00",
+  "tests": 17,
+  "passed": 17,
+  "failures": 0,
+  "errors": 0,
+  "duration_seconds": 1.081,
+  "scope": "Actual Strands SDK Agent, tools, FileSessionManager, SQLite persistence; deterministic test-only model responses",
+  "live_gemini_provider": "NOT_PROVEN",
+  "google_execution_plane": "NOT_RECOVERED",
+  "provider_requests": 0,
+  "deployment": "NOT_IMPLEMENTED",
+  "live_video": "NOT_QUALIFIED",
+  "submission_ready": false,
+  "interruption_resume": {
+    "result": "PASS",
+    "method": "Bounded child exits via os._exit(23) after committed tool work; fresh process rebuilds and resumes",
+    "cursor_before": 6,
+    "cursor_after": 8,
+    "preserved_artifacts": 3,
+    "duplicate_reconciliation_events": 0,
+    "sources_removed_before_resume": true
+  },
+  "missing_input_cases": {
+    "passed": 3,
+    "tested_fields": [
+      "orders_csv",
+      "deliveries_csv",
+      "reviewer"
+    ],
+    "model_calls_while_missing": 0
+  },
+  "human_gate": {
+    "approval_and_rejection_tested": true,
+    "decision_tool_exposed_to_model": false,
+    "boundary": "Trusted local operator CLI; reviewer label is not remote identity authentication"
+  },
+  "sdk_session_restoration": "PASS_WITHIN_TEST_BOUNDARY",
+  "synthetic_scenario_latency_ms": 13.691,
+  "evidence_verified_in_scenario": 4,
+  "dependencies": {
+    "strands-agents": "1.54.0",
+    "google-genai": "2.22.0",
+    "pytest": "9.1.1"
+  },
+  "raw_junit_sha256": "c0a0d1624cd8baff2058f661e7945b2d4e50c8bc4d2851fb72ddcc130556e52d",
+  "public_junit_sha256": "06922f1f9fffb4dcf3720c78feffa7ba6c56291d890cc62384ceb86dbe89ccf0",
+  "terminal_recording_output_sha256": "0d66fa9a6c016dd5306af6545b289a97e2e78303103b66fcc3b5c1ad0f103bc8",
+  "test_rerun_on_recovery": false,
+  "kernel_rerun": false,
+  "kernel_modified": false,
+  "kernel_prior_result": "PASS_5_OF_5_PRESERVED",
+  "base_commit": "9e6d8d6e7ea69ba001dc70c06e4a60ba49ddba01",
+  "source_sha256": {
+    "src/wexspace_professional_agent/__init__.py": "f0948a3446ca42cb9b90cab49e4c236a7f9602b5bcf2a5a78bbedcc2d3dd8b0e",
+    "src/wexspace_professional_agent/__main__.py": "04b0b02bb1d3529007591ee8ad11900c141692cef21e1cd8ea424748953316e7",
+    "src/wexspace_professional_agent/core.py": "6fa022829b43fccac4cbfeeb78d9f6dc5c6960f02a468a0729ce5f955af47c7f",
+    "src/wexspace_professional_agent/durable.py": "80082bd0d496af21957b468d64f56e14aad31ea2769157446a07fe6ad4ef0630",
+    "src/wexspace_professional_agent/strands_adapter.py": "b24ed552edb379a61f3a60b83e7a5d0937263e1ee487f00075882ebafb816651",
+    "src/wexspace_professional_agent/workflow.py": "bf4cb4faa471adc0944d417f7f8f0db62cdd499b28b8eb4ae0638eb89ecb530f",
+    "tests/scripted_model.py": "e8b16b0a5d7329bc1fb41ca196fcc0ecf061b660b1a31b08df28692e8113d54c",
+    "tests/test_core.py": "3656f7104a0724239dbd6c08a03da9838dbd24ed6b43e508d503f44610f5375e",
+    "tests/test_strands_integration.py": "a04f2e21d9294311219a73b23bac9496ae4ef65b53c921a6e263498f7b39e088"
+  },
+  "provenance": "Challenge capsule integration authored by ChatGPT/Codex under user authorization. Gemini did not author or execute this delta. Existing kernel preserved. Synthetic CSV data only.",
+  "limits": [
+    "Local Linux filesystem qualification only",
+    "No cloud host, client-disconnect or video qualification",
+    "No live model response, provider cost measurement, deployment or full judge demonstration",
+    "Hashes detect changed bytes; they are not independent signed attestations"
+  ],
+  "next_atomic_node": "LIVE_GEMINI_PROVIDER_AUTH_AND_INVOCATION"
+}
