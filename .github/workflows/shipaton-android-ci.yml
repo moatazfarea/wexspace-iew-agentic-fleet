@@ -35,10 +35,10 @@ jobs:
           gradle-version: "9.6.0"
 
       - name: Unit tests
-        run: gradle :app:testTestStoreDebugUnitTest --stacktrace
+        run: gradle :app:testSandboxDebugUnitTest --stacktrace
 
-      - name: Build Test Store APK
-        run: gradle :app:assembleTestStoreDebug --stacktrace
+      - name: Build RevenueCat Test Store APK
+        run: gradle :app:assembleSandboxDebug --stacktrace
 
       - name: Build Galaxy test APK
         run: gradle :app:assembleGalaxyDebug --stacktrace
