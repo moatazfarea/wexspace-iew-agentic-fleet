@@ -47,6 +47,7 @@ public final class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(buildUi());
+        restorePersistedPackage();
         refreshBilling();
     }
 
@@ -164,6 +165,7 @@ public final class MainActivity extends Activity {
         prepareReview.setEnabled(false);
         packageState.setText("ACTIVE · " + workItem.getText().toString().trim());
         updateCoverage();
+        persistPackage();
     }
 
     private void chooseCriterionForText() {
@@ -185,6 +187,7 @@ public final class MainActivity extends Activity {
                         ));
                         renderEvidence();
                         updateCoverage();
+                        persistPackage();
                     }
                 })
                 .setNegativeButton("Cancel", null)
@@ -227,6 +230,43 @@ public final class MainActivity extends Activity {
         pendingCriterionIndex = -1;
         renderEvidence();
         updateCoverage();
+        persistPackage();
+    }
+
+    private void restorePersistedPackage() {
+        WorkPackageStore.Snapshot snapshot = WorkPackageStore.load(this);
+        if (snapshot == null) return;
+
+        workItem.setText(snapshot.workItem);
+        objective.setText(snapshot.objective);
+        deliverable.setText(snapshot.deliverable);
+        criteriaInput.setText(snapshot.criteriaRaw);
+        criteria = GateEngine.parseCriteria(snapshot.criteriaRaw);
+
+        if (snapshot.evidence != null) {
+            evidence.clear();
+            evidence.addAll(snapshot.evidence);
+        }
+
+        if (!snapshot.workItem.trim().isEmpty() && !criteria.isEmpty()) {
+            addTextEvidence.setEnabled(true);
+            addImageEvidence.setEnabled(true);
+            runGate.setEnabled(true);
+            packageState.setText("ACTIVE · " + snapshot.workItem.trim());
+            renderEvidence();
+            updateCoverage();
+        }
+    }
+
+    private void persistPackage() {
+        WorkPackageStore.save(
+                this,
+                workItem.getText().toString().trim(),
+                objective.getText().toString().trim(),
+                deliverable.getText().toString().trim(),
+                criteriaInput.getText().toString(),
+                evidence
+        );
     }
 
     private void runGate() {
