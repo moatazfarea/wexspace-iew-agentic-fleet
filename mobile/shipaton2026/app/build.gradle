@@ -1,0 +1,60 @@
+plugins {
+    id 'com.android.application'
+}
+
+def rcTestKey = System.getenv("REVENUECAT_TEST_API_KEY") ?: ""
+def rcGalaxyKey = System.getenv("REVENUECAT_GALAXY_API_KEY") ?: ""
+
+android {
+    namespace 'ai.wexspace.fielddesk.samsung'
+    compileSdk 36
+
+    defaultConfig {
+        applicationId "ai.wexspace.fielddesk.samsung"
+        minSdk 26
+        targetSdk 36
+        versionCode 1
+        versionName "0.1.0"
+    }
+
+    flavorDimensions "billing"
+    productFlavors {
+        testStore {
+            dimension "billing"
+            applicationIdSuffix ".test"
+            versionNameSuffix "-test"
+            buildConfigField "String", "REVENUECAT_API_KEY", "\"${rcTestKey}\""
+            buildConfigField "String", "REVENUECAT_STORE", "\"TEST_STORE\""
+        }
+        galaxy {
+            dimension "billing"
+            buildConfigField "String", "REVENUECAT_API_KEY", "\"${rcGalaxyKey}\""
+            buildConfigField "String", "REVENUECAT_STORE", "\"GALAXY\""
+        }
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    buildFeatures {
+        buildConfig true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    implementation 'com.revenuecat.purchases:purchases:10.15.1'
+    implementation 'com.revenuecat.purchases:purchases-store-galaxy:10.15.1'
+    testImplementation 'junit:junit:4.13.2'
+}
