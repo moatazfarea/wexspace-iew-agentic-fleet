@@ -15,7 +15,7 @@ This is intentionally more than a WebView port:
 
 ## Billing architecture
 Two build flavors keep development and production truthfully separated:
-- `testStoreDebug`: RevenueCat Test Store, using `REVENUECAT_TEST_API_KEY`.
+- `sandboxDebug`: RevenueCat Test Store, using `REVENUECAT_TEST_API_KEY`.
 - `galaxyDebug` / `galaxyRelease`: Samsung Galaxy Store via `purchases-store-galaxy`, using `REVENUECAT_GALAXY_API_KEY`. Debug uses Galaxy TEST billing mode; release uses PRODUCTION.
 
 No API key is committed.
@@ -25,7 +25,7 @@ Requires JDK 17, Android SDK 36, Gradle 9.6+, and AGP 9.4.
 
 ```bash
 cd mobile/shipaton2026
-gradle :app:testTestStoreDebugUnitTest :app:assembleTestStoreDebug
+gradle :app:testSandboxDebugUnitTest :app:assembleSandboxDebug
 gradle :app:assembleGalaxyDebug
 ```
 
