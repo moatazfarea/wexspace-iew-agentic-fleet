@@ -6,7 +6,7 @@ def rcTestKey = System.getenv("REVENUECAT_TEST_API_KEY") ?: ""
 def rcGalaxyKey = System.getenv("REVENUECAT_GALAXY_API_KEY") ?: ""
 
 android {
-    namespace 'ai.wexspace.fielddesk.samsung'
+    namespace 'ai.wexspace.fielddesk'
     compileSdk 36
 
     defaultConfig {
