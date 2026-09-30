@@ -1,0 +1,12 @@
+name: WEXSPACE Site Check
+on:
+  push:
+    branches: [ "shipaton-nextgen-20260930-r01" ]
+    paths: [ "site/**" ]
+  workflow_dispatch:
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: test -s site/index.html && test -s site/styles.css
