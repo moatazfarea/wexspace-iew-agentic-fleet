@@ -29,14 +29,8 @@ jobs:
           ffmpeg -hide_banner -loglevel error -y -ss 8 -i submission/wexspace-runtime.mp4 \
             -vf "scale=1179:2556:force_original_aspect_ratio=decrease,pad=1179:2556:(ow-iw)/2:(oh-ih)/2:color=0x071612" \
             -frames:v 1 submission/WEXSPACE_SCREENSHOT_1179x2556.png
-          python3 - <<'PY'
-          from PIL import Image
-          for p,wh in [
-            ("submission/WEXSPACE_APP_ICON_1024.png",(1024,1024)),
-            ("submission/WEXSPACE_SCREENSHOT_1179x2556.png",(1179,2556))
-          ]:
-              im=Image.open(p); assert im.size==wh,(p,im.size)
-          PY
+          test "$(ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0 submission/WEXSPACE_APP_ICON_1024.png)" = "1024x1024"
+          test "$(ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0 submission/WEXSPACE_SCREENSHOT_1179x2556.png)" = "1179x2556"
       - name: Persist assets
         shell: bash
         run: |
