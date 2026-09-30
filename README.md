@@ -55,7 +55,7 @@ Current submission media:
 - `submission/wexspace-runtime.mp4` — real Android-emulator runtime capture.
 - `submission/wexspace-runtime-meta.txt` — SHA-256 and size receipt.
 - `submission/render-shipaton-final.sh` — reproducible cinematic render script.
-- final film artifacts are written under `submission/` by the render workflow.
+- `submission/WEXSPACE_SHIPATON_NEXTGEN_R02.mp4` — 115-second cinematic submission candidate with timed narration and captions.\n- `submission/WEXSPACE_SHIPATON_NEXTGEN_R02.sha256` and `.meta.json` — final film integrity and duration receipts.
 
 The real Android capture is based on a disposable emulator and a local deterministic fixture; it does **not** prove real Google OAuth, external model inference, or RevenueCat purchase execution.
 
