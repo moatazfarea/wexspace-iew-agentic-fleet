@@ -1,0 +1,38 @@
+name: Verify WEXSPACE Shipaton final film
+on:
+  push:
+    branches: [shipaton-nextgen-20260930-r01]
+    paths:
+      - .github/workflows/verify-shipaton-final.yml
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+      - name: Install ffmpeg
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+      - name: Verify final film
+        shell: bash
+        run: |
+          set -euo pipefail
+          F=submission/WEXSPACE_SHIPATON_NEXTGEN_R02.mp4
+          test -s "$F"
+          EXPECTED="$(cut -d ' ' -f1 submission/WEXSPACE_SHIPATON_NEXTGEN_R02.sha256)"
+          ACTUAL="$(sha256sum "$F" | cut -d ' ' -f1)"
+          test "$ACTUAL" = "$EXPECTED"
+          DUR="$(ffprobe -v error -show_entries format=duration -of default=nw=1:nk=1 "$F")"
+          python3 - <<PY
+          d=float("$DUR")
+          assert 110 <= d < 120, d
+          PY
+          test "$(ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0 "$F")" = "1920x1080"
+          test -n "$(ffprobe -v error -select_streams a:0 -show_entries stream=codec_name -of default=nw=1:nk=1 "$F")"
+          echo "FINAL_VIDEO_VERIFY=PASS"
+          echo "duration=$DUR"
+          echo "sha256=$ACTUAL"
+          ffprobe -v error -show_entries stream=index,codec_type,codec_name,width,height,r_frame_rate -of json "$F"
