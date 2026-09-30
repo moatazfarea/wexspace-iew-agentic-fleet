@@ -2,7 +2,7 @@ name: Shipaton Android CI
 
 on:
   push:
-    branches: [ "shipaton-2026-mobile" ]
+    branches: [ "shipaton-2026-mobile", "shipaton-nextgen-20260930-r01" ]
     paths:
       - "mobile/shipaton2026/**"
       - ".github/workflows/shipaton-android-ci.yml"
