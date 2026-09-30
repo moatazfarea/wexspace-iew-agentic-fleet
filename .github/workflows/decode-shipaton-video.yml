@@ -1,0 +1,31 @@
+name: Decode WEXSPACE Shipaton runtime video
+on:
+  push:
+    branches: [shipaton-nextgen-20260930-r01]
+    paths:
+      - submission/wexspace-runtime.mp4.b64
+      - .github/workflows/decode-shipaton-video.yml
+permissions:
+  contents: write
+jobs:
+  decode:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: true
+      - name: Decode and verify
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p submission
+          base64 -d submission/wexspace-runtime.mp4.b64 > submission/wexspace-runtime.mp4
+          ACTUAL="$(sha256sum submission/wexspace-runtime.mp4 | cut -d ' ' -f1)"
+          test "$ACTUAL" = "62541549a44c41f082771296fbb2038dcdce4ad028b1be4a25af65e916a90e6a"
+          printf 'sha256=%s\nbytes=%s\n' "$ACTUAL" "$(wc -c < submission/wexspace-runtime.mp4)" > submission/wexspace-runtime-meta.txt
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add submission/wexspace-runtime.mp4 submission/wexspace-runtime-meta.txt
+          git commit -m "video: add verified WEXSPACE Android runtime capture" || exit 0
+          git push
