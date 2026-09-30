@@ -1,0 +1,47 @@
+name: Build Shipaton submission images
+on:
+  push:
+    branches: [shipaton-nextgen-20260930-r01]
+    paths:
+      - submission/icon-source.png.b64
+      - .github/workflows/build-shipaton-images.yml
+permissions:
+  contents: write
+jobs:
+  assets:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: true
+      - name: Install ffmpeg
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+      - name: Build exact-size icon and screenshot
+        shell: bash
+        run: |
+          set -euo pipefail
+          base64 -d submission/icon-source.png.b64 > submission/wexspace-icon-source.png
+          ffmpeg -hide_banner -loglevel error -y -i submission/wexspace-icon-source.png \
+            -vf "scale=1024:1024:flags=lanczos" -frames:v 1 submission/WEXSPACE_APP_ICON_1024.png
+          ffmpeg -hide_banner -loglevel error -y -ss 8 -i submission/wexspace-runtime.mp4 \
+            -vf "scale=1179:2556:force_original_aspect_ratio=decrease,pad=1179:2556:(ow-iw)/2:(oh-ih)/2:color=0x071612" \
+            -frames:v 1 submission/WEXSPACE_SCREENSHOT_1179x2556.png
+          python3 - <<'PY'
+          from PIL import Image
+          for p,wh in [
+            ("submission/WEXSPACE_APP_ICON_1024.png",(1024,1024)),
+            ("submission/WEXSPACE_SCREENSHOT_1179x2556.png",(1179,2556))
+          ]:
+              im=Image.open(p); assert im.size==wh,(p,im.size)
+          PY
+      - name: Persist assets
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add submission/WEXSPACE_APP_ICON_1024.png submission/WEXSPACE_SCREENSHOT_1179x2556.png
+          git commit -m "assets: add Shipaton icon and Android screenshot" || exit 0
+          git push
