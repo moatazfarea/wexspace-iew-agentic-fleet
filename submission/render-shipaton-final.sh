@@ -97,7 +97,7 @@ Next Gen source is publicly reviewable and evidence-backed.
 One workspace. Multiple specialist projects. Durable execution with proof.
 EOF
 
-if curl -fL --retry 2 --connect-timeout 15 "$VOICE_URL" -o "$OUT/voice.mp3"; then
+if curl -fL --retry 1 --connect-timeout 10 "$VOICE_URL" -o "$OUT/voice.mp3" && ffprobe -v error "$OUT/voice.mp3" >/dev/null 2>&1; then
   ffmpeg -hide_banner -loglevel error -y     -i "$OUT/video-silent.mp4" -i "$OUT/voice.mp3"     -filter_complex "[0:v]subtitles='$OUT/captions.srt':force_style='FontName=DejaVu Sans,FontSize=18,PrimaryColour=&H00FFFFFF,OutlineColour=&H90000000,BorderStyle=3,Outline=1,Shadow=0,MarginV=34'[v];[1:a]apad=pad_dur=115[a]"     -map "[v]" -map "[a]" -t 115 -c:v libx264 -preset veryfast -crf 21 -c:a aac -b:a 128k -movflags +faststart -pix_fmt yuv420p     submission/WEXSPACE_SHIPATON_NEXTGEN_R01.mp4
 else
   ffmpeg -hide_banner -loglevel error -y     -i "$OUT/video-silent.mp4"     -vf "subtitles='$OUT/captions.srt':force_style='FontName=DejaVu Sans,FontSize=18,PrimaryColour=&H00FFFFFF,OutlineColour=&H90000000,BorderStyle=3,Outline=1,Shadow=0,MarginV=34'"     -t 115 -c:v libx264 -preset veryfast -crf 21 -movflags +faststart -pix_fmt yuv420p     submission/WEXSPACE_SHIPATON_NEXTGEN_R01.mp4
