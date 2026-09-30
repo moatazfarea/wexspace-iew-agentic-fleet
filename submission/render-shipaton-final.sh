@@ -7,7 +7,6 @@ FONT="/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
 BOLD="/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
 RAW="submission/wexspace-runtime.mp4"
 ARCH="architecture/architecture_submission.png"
-VOICE_URL="https://www.aidocmaker.com/g0/audio?name=8603c14036494ea6ad14be274df717fe"
 test -s "$RAW"
 test -s "$ARCH"
 
@@ -97,11 +96,21 @@ Next Gen source is publicly reviewable and evidence-backed.
 One workspace. Multiple specialist projects. Durable execution with proof.
 EOF
 
-if curl -fL --retry 1 --connect-timeout 10 "$VOICE_URL" -o "$OUT/voice.mp3" && ffprobe -v error "$OUT/voice.mp3" >/dev/null 2>&1; then
-  ffmpeg -hide_banner -loglevel error -y     -i "$OUT/video-silent.mp4" -i "$OUT/voice.mp3"     -filter_complex "[0:v]subtitles='$OUT/captions.srt':force_style='FontName=DejaVu Sans,FontSize=18,PrimaryColour=&H00FFFFFF,OutlineColour=&H90000000,BorderStyle=3,Outline=1,Shadow=0,MarginV=34'[v];[1:a]apad=pad_dur=115[a]"     -map "[v]" -map "[a]" -t 115 -c:v libx264 -preset veryfast -crf 21 -c:a aac -b:a 128k -movflags +faststart -pix_fmt yuv420p     submission/WEXSPACE_SHIPATON_NEXTGEN_R01.mp4
-else
-  ffmpeg -hide_banner -loglevel error -y     -i "$OUT/video-silent.mp4"     -vf "subtitles='$OUT/captions.srt':force_style='FontName=DejaVu Sans,FontSize=18,PrimaryColour=&H00FFFFFF,OutlineColour=&H90000000,BorderStyle=3,Outline=1,Shadow=0,MarginV=34'"     -t 115 -c:v libx264 -preset veryfast -crf 21 -movflags +faststart -pix_fmt yuv420p     submission/WEXSPACE_SHIPATON_NEXTGEN_R01.mp4
-fi
+VOICE_URLS=(
+"https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/2f53f64d-7b4f-4317-ba1f-bd42a7bb4819.mp3"
+"https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/a659543d-8ed4-45b5-8e0e-da4d29e0d209.mp3"
+"https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/bcb0fdfa-f8d9-442b-b2f8-0f3a9b28c105.mp3"
+"https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/91705cfd-ab99-4fa4-8437-6545bb6ce43e.mp3"
+"https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/e4598076-15c1-4fa4-b58a-ab77960fb1af.mp3"
+"https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/db992e78-94bc-47b5-9b11-4a9ab1c3680d.mp3"
+"https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/706991d2-dfb3-4c28-8f53-6359d48cfb09.mp3"
+)
+for i in "${!VOICE_URLS[@]}"; do
+  curl -fL --retry 2 --connect-timeout 10 "${VOICE_URLS[$i]}" -o "$OUT/voice-$((i+1)).mp3"
+  ffprobe -v error "$OUT/voice-$((i+1)).mp3" >/dev/null
+done
 
-sha256sum submission/WEXSPACE_SHIPATON_NEXTGEN_R01.mp4 > submission/WEXSPACE_SHIPATON_NEXTGEN_R01.sha256
-ffprobe -v error -show_entries format=duration,size -of json submission/WEXSPACE_SHIPATON_NEXTGEN_R01.mp4 > submission/WEXSPACE_SHIPATON_NEXTGEN_R01.meta.json
+ffmpeg -hide_banner -loglevel error -y   -i "$OUT/video-silent.mp4"   -i "$OUT/voice-1.mp3" -i "$OUT/voice-2.mp3" -i "$OUT/voice-3.mp3"   -i "$OUT/voice-4.mp3" -i "$OUT/voice-5.mp3" -i "$OUT/voice-6.mp3" -i "$OUT/voice-7.mp3"   -filter_complex "[0:v]subtitles='$OUT/captions.srt':force_style='FontName=DejaVu Sans,FontSize=18,PrimaryColour=&H00FFFFFF,OutlineColour=&H90000000,BorderStyle=3,Outline=1,Shadow=0,MarginV=34'[v];[1:a]adelay=0|0[a1];[2:a]adelay=7000|7000[a2];[3:a]adelay=22000|22000[a3];[4:a]adelay=36000|36000[a4];[5:a]adelay=61000|61000[a5];[6:a]adelay=82000|82000[a6];[7:a]adelay=98000|98000[a7];[a1][a2][a3][a4][a5][a6][a7]amix=inputs=7:duration=longest:normalize=0,alimiter=limit=0.90,apad=pad_dur=115[a]"   -map "[v]" -map "[a]" -t 115 -c:v libx264 -preset veryfast -crf 21 -c:a aac -b:a 128k -movflags +faststart -pix_fmt yuv420p   submission/WEXSPACE_SHIPATON_NEXTGEN_R02.mp4
+
+sha256sum submission/WEXSPACE_SHIPATON_NEXTGEN_R02.mp4 > submission/WEXSPACE_SHIPATON_NEXTGEN_R02.sha256
+ffprobe -v error -show_entries format=duration,size -of json submission/WEXSPACE_SHIPATON_NEXTGEN_R02.mp4 > submission/WEXSPACE_SHIPATON_NEXTGEN_R02.meta.json
