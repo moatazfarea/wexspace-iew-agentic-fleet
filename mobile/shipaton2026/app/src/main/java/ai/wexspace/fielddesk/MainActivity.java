@@ -235,7 +235,7 @@ public final class MainActivity extends Activity {
 
     private void restorePersistedPackage() {
         WorkPackageStore.Snapshot snapshot = WorkPackageStore.load(this);
-        if (snapshot == null) return;
+        if (snapshot == null) { seedDemoPackage(); return; }
 
         workItem.setText(snapshot.workItem);
         objective.setText(snapshot.objective);
@@ -256,6 +256,35 @@ public final class MainActivity extends Activity {
             renderEvidence();
             updateCoverage();
         }
+    }
+
+
+    private void seedDemoPackage() {
+        workItem.setText("Request Scope Gate R01");
+        objective.setText("Prevent scope inflation and unauthorized promotion");
+        deliverable.setText("Deterministic governance receipt");
+        criteriaInput.setText(
+                "Discussion is not a requirement\n" +
+                "Mention is not authorization\n" +
+                "Completed work stays closed");
+        criteria = GateEngine.parseCriteria(criteriaInput.getText().toString());
+        evidence.clear();
+        String[] notes = {
+                "Current request is separated from brainstormed ideas.",
+                "Mentioned providers remain non-mutating until explicitly authorized.",
+                "Verified completed work is not rerun without material invalidation."
+        };
+        for (int i = 0; i < notes.length; i++) {
+            evidence.add(new EvidenceEntry(i, EvidenceEntry.Kind.TEXT, notes[i], sha256(notes[i].getBytes())));
+        }
+        addTextEvidence.setEnabled(true);
+        addImageEvidence.setEnabled(true);
+        runGate.setEnabled(true);
+        GateEngine.GateResult result = GateEngine.evaluate(criteria, evidence);
+        prepareReview.setEnabled(result.pass);
+        packageState.setText("DEMO · Request Scope Gate R01");
+        renderEvidence();
+        updateCoverage();
     }
 
     private void persistPackage() {
