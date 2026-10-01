@@ -1,0 +1,53 @@
+{
+  "schema": 1,
+  "component": "WEXSPACE Studio OS Adapter Qualification",
+  "timestamp": "2026-10-01T00:25:25.721Z",
+  "rows": [
+    {
+      "name": "node",
+      "status": "PASS",
+      "detail": "v24.21.0"
+    },
+    {
+      "name": "three",
+      "status": "PASS",
+      "detail": "180"
+    },
+    {
+      "name": "motion",
+      "status": "PASS",
+      "detail": "function"
+    },
+    {
+      "name": "playwright",
+      "status": "PASS",
+      "detail": "function"
+    },
+    {
+      "name": "lottie-web",
+      "status": "PASS",
+      "detail": "file:///home/runner/work/wexspace-iew-agentic-fleet/wexspace-iew-agentic-fleet/studio-os/node_modules/lottie-web/build/player/lottie.js"
+    },
+    {
+      "name": "ffmpeg",
+      "status": "PASS",
+      "detail": "ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers"
+    },
+    {
+      "name": "ffprobe",
+      "status": "PASS",
+      "detail": "ffprobe version 6.1.1-3ubuntu5 Copyright (c) 2007-2023 the FFmpeg developers"
+    },
+    {
+      "name": "Xvfb",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "xdotool",
+      "status": "PASS",
+      "detail": "/usr/bin/xdotool"
+    }
+  ],
+  "pass": true
+}
