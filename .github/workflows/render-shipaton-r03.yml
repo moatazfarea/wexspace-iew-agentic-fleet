@@ -1,0 +1,214 @@
+name: Render WEXSPACE Cinematic R03
+
+on:
+  push:
+    branches:
+      - shipaton-nextgen-20260930-r01
+    paths:
+      - .github/workflows/render-shipaton-r03.yml
+      - mobile/shipaton2026/**
+      - studio-os/film/**
+      - brand/**
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: wexspace-cinematic-r03
+  cancel-in-progress: true
+
+jobs:
+  render:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      FILM_DIR: studio-os/film
+      OUT_DIR: submission/r03-build
+      VOICE_URL: https://www.aidocmaker.com/g0/audio?name=5a421efc758c41b1b4609a777c7bec76
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: shipaton-nextgen-20260930-r01
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "9.6.0"
+
+      - name: Install capture dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg xvfb xdotool imagemagick
+          mkdir -p "$OUT_DIR" "$FILM_DIR/captures"
+          ffmpeg -version | head -1
+          Xvfb -version 2>&1 | head -2 || true
+
+      - name: Build branded Android app
+        working-directory: mobile/shipaton2026
+        shell: bash
+        run: |
+          set -euo pipefail
+          gradle :app:testSandboxDebugUnitTest :app:assembleSandboxDebug --stacktrace
+          APK="$(find app/build/outputs/apk -type f -name '*sandbox*debug*.apk' | head -1)"
+          test -s "$APK"
+          cp "$APK" "$GITHUB_WORKSPACE/$OUT_DIR/WEXSPACE_NEXTGEN_R03.apk"
+          sha256sum "$GITHUB_WORKSPACE/$OUT_DIR/WEXSPACE_NEXTGEN_R03.apk"
+
+      - name: Boot disposable Android emulator and capture real screens
+        shell: bash
+        run: |
+          set -euo pipefail
+          SDKMANAGER="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          AVDMANAGER="$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager"
+          "$SDKMANAGER" 'emulator' 'system-images;android-35;google_apis;x86_64' >/dev/null
+          export ANDROID_AVD_HOME="$RUNNER_TEMP/avd"
+          mkdir -p "$ANDROID_AVD_HOME"
+          printf 'no\n' | "$AVDMANAGER" create avd -n wxfilm -k 'system-images;android-35;google_apis;x86_64' >/dev/null
+          "$ANDROID_HOME/emulator/emulator" -avd wxfilm -port 5554 -no-window -no-audio -no-boot-anim -no-snapshot -gpu swiftshader_indirect >/tmp/emulator.log 2>&1 &
+          echo $! > /tmp/emulator.pid
+          adb -s emulator-5554 wait-for-device
+          for i in $(seq 1 120); do
+            [ "$(adb -s emulator-5554 shell getprop sys.boot_completed | tr -d '\r')" = "1" ] && break
+            sleep 2
+          done
+          test "$(adb -s emulator-5554 shell getprop sys.boot_completed | tr -d '\r')" = "1"
+          adb -s emulator-5554 shell wm size 1179x2556
+          adb -s emulator-5554 shell wm density 440
+          adb -s emulator-5554 shell settings put global window_animation_scale 0
+          adb -s emulator-5554 shell settings put global transition_animation_scale 0
+          adb -s emulator-5554 shell settings put global animator_duration_scale 0
+          adb -s emulator-5554 install -r "$OUT_DIR/WEXSPACE_NEXTGEN_R03.apk" >/tmp/install.log
+          grep -q Success /tmp/install.log
+          adb -s emulator-5554 shell am start -W -n ai.wexspace.fielddesk.samsung.sandbox/ai.wexspace.fielddesk.CommandCenterActivity >/tmp/launch.log
+          sleep 2
+
+          cat > /tmp/taptext.py <<'PY'
+          import re, subprocess, sys, time, xml.etree.ElementTree as ET
+          needle=sys.argv[1]
+          subprocess.run(["adb","-s","emulator-5554","shell","uiautomator","dump","/sdcard/window.xml"],check=True,stdout=subprocess.DEVNULL)
+          xml=subprocess.check_output(["adb","-s","emulator-5554","exec-out","cat","/sdcard/window.xml"])
+          root=ET.fromstring(xml)
+          for n in root.iter("node"):
+              text=(n.attrib.get("text") or "")+" "+(n.attrib.get("content-desc") or "")
+              if needle.lower() in text.lower():
+                  m=re.match(r"\[(\d+),(\d+)\]\[(\d+),(\d+)\]",n.attrib["bounds"])
+                  if not m: continue
+                  x=(int(m.group(1))+int(m.group(3)))//2
+                  y=(int(m.group(2))+int(m.group(4)))//2
+                  subprocess.run(["adb","-s","emulator-5554","shell","input","tap",str(x),str(y)],check=True)
+                  time.sleep(1.2)
+                  sys.exit(0)
+          raise SystemExit("text not found: "+needle)
+          PY
+
+          adb -s emulator-5554 exec-out screencap -p > "$FILM_DIR/captures/home.png"
+          cp "$FILM_DIR/captures/home.png" "$OUT_DIR/WEXSPACE_SCREENSHOT_1179x2556_R03.png"
+
+          python3 /tmp/taptext.py "UTL-NET-001"
+          adb -s emulator-5554 exec-out screencap -p > "$FILM_DIR/captures/engineering.png"
+
+          adb -s emulator-5554 shell input keyevent 4; sleep 1
+          python3 /tmp/taptext.py "Request Scope Gate"
+          adb -s emulator-5554 exec-out screencap -p > "$FILM_DIR/captures/qa.png"
+
+          adb -s emulator-5554 shell input keyevent 4; sleep 1
+          python3 /tmp/taptext.py "Production Job #001"
+          adb -s emulator-5554 exec-out screencap -p > "$FILM_DIR/captures/studio.png"
+
+          adb -s emulator-5554 emu kill >/dev/null 2>&1 || true
+
+          identify "$FILM_DIR/captures/home.png"
+          convert brand/wexspace-logo.png -resize 1024x1024! "$OUT_DIR/WEXSPACE_APP_ICON_1024_R03.png"
+
+      - name: Prepare cinematic voice and browser compositor
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL --retry 3 "$VOICE_URL" -o "$OUT_DIR/wexspace-r03-voice.mp3"
+          test -s "$OUT_DIR/wexspace-r03-voice.mp3"
+          ffprobe -v error -show_entries format=duration -of default=nk=1:nw=1 "$OUT_DIR/wexspace-r03-voice.mp3"
+
+          CHROME="$(command -v google-chrome || command -v chromium || true)"
+          if [ -z "$CHROME" ]; then
+            echo "Chrome not preinstalled" >&2
+            exit 1
+          fi
+          echo "$CHROME" > /tmp/chrome_path
+
+          Xvfb :99 -screen 0 1920x1080x24 -ac -nolisten tcp >/tmp/xvfb.log 2>&1 &
+          echo $! > /tmp/xvfb.pid
+          export DISPLAY=:99
+          python3 -m http.server 8080 -d "$FILM_DIR" >/tmp/http.log 2>&1 &
+          echo $! > /tmp/http.pid
+          sleep 2
+          "$CHROME" --no-sandbox --disable-dev-shm-usage --disable-infobars --kiosk --window-position=0,0 --window-size=1920,1080 http://127.0.0.1:8080/index.html >/tmp/chrome.log 2>&1 &
+          echo $! > /tmp/chrome.pid
+          sleep 5
+
+      - name: Record 60fps cinematic master
+        shell: bash
+        run: |
+          set -euo pipefail
+          export DISPLAY=:99
+          ffmpeg -hide_banner -loglevel warning -y             -f x11grab -framerate 60 -video_size 1920x1080 -i :99.0             -t 116 -c:v libx264 -preset veryfast -crf 18 -pix_fmt yuv420p             "$OUT_DIR/wexspace-r03-silent.mp4" >/tmp/ffmpeg-capture.log 2>&1 &
+          CAP=$!
+          sleep 0.45
+          xdotool key F9
+          wait "$CAP"
+          test -s "$OUT_DIR/wexspace-r03-silent.mp4"
+
+      - name: Mix voice, procedural cinematic bed, and finalize
+        shell: bash
+        run: |
+          set -euo pipefail
+          ffmpeg -hide_banner -loglevel error -y             -ss 0.45 -i "$OUT_DIR/wexspace-r03-silent.mp4"             -i "$OUT_DIR/wexspace-r03-voice.mp3"             -f lavfi -i "sine=frequency=55:sample_rate=48000:duration=115"             -f lavfi -i "anoisesrc=color=pink:sample_rate=48000:duration=115:amplitude=0.012"             -filter_complex "[1:a]apad=pad_dur=115,atrim=0:115,volume=1.12[vo];[2:a]volume=0.016[drone];[3:a]lowpass=f=1100,volume=0.22[air];[vo][drone][air]amix=inputs=3:duration=longest:normalize=0[a]"             -map 0:v -map "[a]" -t 115             -c:v libx264 -preset medium -crf 18 -r 60 -pix_fmt yuv420p             -c:a aac -b:a 192k -movflags +faststart             "$OUT_DIR/WEXSPACE_SHIPATON_NEXTGEN_R03.mp4"
+
+          ffprobe -v error -show_entries stream=avg_frame_rate,width,height -show_entries format=duration,size -of json             "$OUT_DIR/WEXSPACE_SHIPATON_NEXTGEN_R03.mp4" > "$OUT_DIR/WEXSPACE_SHIPATON_NEXTGEN_R03.meta.json"
+          sha256sum "$OUT_DIR/WEXSPACE_SHIPATON_NEXTGEN_R03.mp4" > "$OUT_DIR/WEXSPACE_SHIPATON_NEXTGEN_R03.sha256"
+
+          python3 - <<'PY'
+          import json
+          p="submission/r03-build/WEXSPACE_SHIPATON_NEXTGEN_R03.meta.json"
+          d=json.load(open(p))
+          dur=float(d["format"]["duration"])
+          rate=d["streams"][0]["avg_frame_rate"]
+          assert dur < 120.0, dur
+          assert rate in ("60/1","60000/1000"), rate
+          print("R03 QA PASS",dur,rate,d["streams"][0]["width"],d["streams"][0]["height"])
+          PY
+
+      - name: Promote R03 submission assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp "$OUT_DIR/WEXSPACE_SHIPATON_NEXTGEN_R03.mp4" submission/
+          cp "$OUT_DIR/WEXSPACE_SHIPATON_NEXTGEN_R03.meta.json" submission/
+          cp "$OUT_DIR/WEXSPACE_SHIPATON_NEXTGEN_R03.sha256" submission/
+          cp "$OUT_DIR/WEXSPACE_SCREENSHOT_1179x2556_R03.png" submission/
+          cp "$OUT_DIR/WEXSPACE_APP_ICON_1024_R03.png" submission/
+          git config user.name "wexspace-ci"
+          git config user.email "wexspace-ci@users.noreply.github.com"
+          git add submission/WEXSPACE_SHIPATON_NEXTGEN_R03.*                   submission/WEXSPACE_SCREENSHOT_1179x2556_R03.png                   submission/WEXSPACE_APP_ICON_1024_R03.png
+          git commit -m "video: promote branded 60fps WEXSPACE cinematic R03"
+          git push origin HEAD:shipaton-nextgen-20260930-r01
+
+      - name: Upload production evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: wexspace-cinematic-r03
+          path: |
+            submission/r03-build/WEXSPACE_NEXTGEN_R03.apk
+            submission/r03-build/WEXSPACE_SHIPATON_NEXTGEN_R03.mp4
+            submission/r03-build/WEXSPACE_SHIPATON_NEXTGEN_R03.meta.json
+            submission/r03-build/WEXSPACE_SHIPATON_NEXTGEN_R03.sha256
+            submission/r03-build/WEXSPACE_SCREENSHOT_1179x2556_R03.png
+            submission/r03-build/WEXSPACE_APP_ICON_1024_R03.png
+          retention-days: 30
+          compression-level: 0
