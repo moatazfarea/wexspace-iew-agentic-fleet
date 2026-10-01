@@ -25,7 +25,7 @@ jobs:
     env:
       FILM_DIR: studio-os/film
       OUT_DIR: submission/r03-build
-      VOICE_URL: https://www.aidocmaker.com/g0/audio?name=5a421efc758c41b1b4609a777c7bec76
+      VOICE_URL: https://www.aidocmaker.com/g0/audio?name=d43f11754c8b4885a882f5a4eeee6ddf
     steps:
       - uses: actions/checkout@v4
         with:
