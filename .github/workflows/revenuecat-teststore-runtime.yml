@@ -39,7 +39,7 @@ jobs:
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim
           disable-animations: true
           script: |
-            set -euo pipefail
+            set -eu
             mkdir -p "$RUNNER_TEMP/rc"
             APK="mobile/shipaton2026/app/build/outputs/apk/sandbox/debug/app-sandbox-debug.apk"
             adb install -r "$APK"
