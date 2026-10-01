@@ -126,6 +126,7 @@ jobs:
           adb -s emulator-5554 emu kill >/dev/null 2>&1 || true
 
           identify "$FILM_DIR/captures/home.png"
+          cp brand/wexspace-logo.png "$FILM_DIR/wexspace-logo.png"
           convert brand/wexspace-logo.png -resize 1024x1024! "$OUT_DIR/WEXSPACE_APP_ICON_1024_R03.png"
 
       - name: Prepare cinematic voice and browser compositor
