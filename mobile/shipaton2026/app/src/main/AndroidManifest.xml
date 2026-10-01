@@ -9,6 +9,9 @@
         android:roundIcon="@drawable/wexspace_logo"
         android:theme="@style/AppTheme"
         android:supportsRtl="true">
+        <activity android:name=".PumpSkidActivity" android:exported="false" />
+        <activity android:name=".SolarStationActivity" android:exported="false" />
+        <activity android:name=".RemoteLinkActivity" android:exported="false" />
         <activity android:name=".EngineeringActivity" android:exported="false" />
         <activity android:name=".StudioActivity" android:exported="false" />
         <activity android:name=".MainActivity" android:exported="false" />
