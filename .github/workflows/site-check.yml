@@ -9,4 +9,22 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - run: test -s site/index.html && test -s site/styles.css
+      - name: Static integrity
+        run: |
+          test -s site/index.html
+          test -s site/styles.css
+          test -s site/app.js
+          test -s site/assets/wexspace-logo.png
+          grep -q "WEXSPACE AI" site/index.html
+          grep -q "assets/wexspace-logo.png" site/index.html
+      - name: Local HTTP readback
+        run: |
+          python3 -m http.server 8080 -d site >/tmp/site.log 2>&1 &
+          PID=$!
+          trap 'kill $PID || true' EXIT
+          for i in $(seq 1 20); do curl -fsS http://127.0.0.1:8080/ >/tmp/page.html && break; sleep 1; done
+          grep -q "WEXSPACE AI" /tmp/page.html
+          curl -fsS -o /tmp/logo.png http://127.0.0.1:8080/assets/wexspace-logo.png
+          test -s /tmp/logo.png
+      - name: Container build
+        run: docker build -t wexspace-site-check site
