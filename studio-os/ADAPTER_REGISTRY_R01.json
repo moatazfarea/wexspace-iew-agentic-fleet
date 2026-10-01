@@ -1,0 +1,17 @@
+{
+  "schema": 1,
+  "component": "WEXSPACE Studio OS Media Capability Broker",
+  "truth_states": ["SPECIFIED","IMPLEMENTED","INTEGRATED","QUALIFIED","PRODUCTION_QUALIFIED"],
+  "adapters": [
+    {"id":"android-emulator","family":"capture_surface","state":"INTEGRATED","license":"Android SDK terms","role":"real Android submission surface"},
+    {"id":"playwright","family":"automation","state":"IMPLEMENTED","version":"1.55.0","license":"Apache-2.0","role":"browser/control surface automation"},
+    {"id":"ffmpeg","family":"capture_render","state":"PRODUCTION_QUALIFIED","license":"LGPL/GPL depending build","role":"60fps capture, encode, mux, audio mix"},
+    {"id":"xvfb","family":"display","state":"IMPLEMENTED","license":"X11","role":"virtual 1920x1080 display for deterministic capture"},
+    {"id":"xdotool","family":"input","state":"IMPLEMENTED","license":"BSD-style/GPL dependencies per distribution","role":"capture trigger and desktop input"},
+    {"id":"three","family":"3d_motion","state":"IMPLEMENTED","version":"0.180.0","license":"MIT","role":"3D scenes and spatial motion"},
+    {"id":"motion","family":"ui_motion","state":"IMPLEMENTED","version":"12.23.24","license":"MIT","role":"timeline and UI motion primitives"},
+    {"id":"lottie-web","family":"vector_motion","state":"IMPLEMENTED","version":"5.13.0","license":"MIT","role":"vector animation adapter"},
+    {"id":"devpost-brand-asset","family":"brand","state":"INTEGRATED","role":"current WEXSPACE logo synchronized from owner-controlled Devpost project"},
+    {"id":"revenuecat-android","family":"monetization","state":"INTEGRATED","version":"10.15.1","role":"Test Store/Galaxy offering, purchase, CustomerInfo and restore"}
+  ]
+}
