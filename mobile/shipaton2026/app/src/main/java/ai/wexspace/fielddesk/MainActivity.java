@@ -54,23 +54,23 @@ public final class MainActivity extends Activity {
     private View buildUi() {
         ScrollView scroll = new ScrollView(this);
         scroll.setFillViewport(true);
-        scroll.setBackgroundColor(Color.rgb(7, 22, 18));
+        scroll.setBackgroundColor(WexspaceBrand.BG);
 
         LinearLayout root = new LinearLayout(this);
         root.setOrientation(LinearLayout.VERTICAL);
         root.setPadding(dp(18), dp(22), dp(18), dp(40));
         scroll.addView(root);
 
-        TextView brand = label("WEXSPACE FieldDesk", 26, true);
-        brand.setTextColor(Color.rgb(123, 245, 194));
+        TextView brand = label("WEXSPACE / SOFTWARE QA", 26, true);
+        brand.setTextColor(WexspaceBrand.CYAN);
         root.addView(brand);
 
-        TextView subtitle = label("Governed field evidence workbench", 14, false);
-        subtitle.setTextColor(Color.LTGRAY);
+        TextView subtitle = label("Request scope · evidence · deterministic gate · human release", 14, false);
+        subtitle.setTextColor(WexspaceBrand.MUTED);
         root.addView(subtitle);
 
         billingState = label("Billing: checking…", 13, false);
-        billingState.setTextColor(Color.rgb(180, 220, 204));
+        billingState.setTextColor(WexspaceBrand.MUTED);
         billingState.setPadding(0, dp(14), 0, dp(10));
         root.addView(billingState);
 
@@ -100,7 +100,7 @@ public final class MainActivity extends Activity {
         root.addView(create);
 
         packageState = label("No active package", 14, true);
-        packageState.setTextColor(Color.WHITE);
+        packageState.setTextColor(WexspaceBrand.TEXT);
         packageState.setPadding(0, dp(12), 0, dp(4));
         root.addView(packageState);
 
@@ -142,7 +142,7 @@ public final class MainActivity extends Activity {
         root.addView(prepareReview);
 
         TextView footer = label(
-                "Local-first MVP. Evidence coverage is computed deterministically; human authority remains the final release boundary.",
+                "Software / Governance QA · Deterministic coverage gate · human authority remains the final release boundary.",
                 12, false);
         footer.setTextColor(Color.GRAY);
         footer.setPadding(0, dp(20), 0, 0);
@@ -289,7 +289,7 @@ public final class MainActivity extends Activity {
             String hash = item.getSha256() == null ? "" : item.getSha256();
             if (hash.length() > 12) hash = hash.substring(0, 12) + "…";
             TextView row = label((i + 1) + ". " + item.getKind() + " → " + criterion + "\nSHA-256: " + hash, 12, false);
-            row.setTextColor(Color.LTGRAY);
+            row.setTextColor(WexspaceBrand.MUTED);
             row.setPadding(0, dp(6), 0, dp(6));
             evidenceList.addView(row);
         }
@@ -308,7 +308,7 @@ public final class MainActivity extends Activity {
     private void showBillingResult(boolean pro, String message) {
         runOnUiThread(() -> {
             billingState.setText(message);
-            billingState.setTextColor(pro ? Color.rgb(123, 245, 194) : Color.rgb(180, 220, 204));
+            billingState.setTextColor(pro ? Color.rgb(123, 245, 194) : WexspaceBrand.MUTED);
         });
     }
 
@@ -334,9 +334,9 @@ public final class MainActivity extends Activity {
     private EditText input(String hint) {
         EditText e = new EditText(this);
         e.setHint(hint);
-        e.setTextColor(Color.WHITE);
+        e.setTextColor(WexspaceBrand.TEXT);
         e.setHintTextColor(Color.GRAY);
-        e.setBackgroundColor(Color.rgb(18, 48, 40));
+        e.setBackgroundColor(WexspaceBrand.PANEL_2);
         e.setPadding(dp(12), dp(10), dp(12), dp(10));
         LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
