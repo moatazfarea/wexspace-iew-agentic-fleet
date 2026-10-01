@@ -13,7 +13,7 @@ ok("three",THREE.REVISION);
 ok("motion",typeof animate);
 ok("lottie-web",typeof lottie.loadAnimation);
 ok("playwright",typeof chromium.launch);
-for(const [name,args] of [["ffmpeg",["-version"]],["ffprobe",["-version"]],["Xvfb",["-help"]],["xdotool",["version"]]]){
+for(const [name,args] of [["ffmpeg",["-version"]],["ffprobe",["-version"]],["Xvfb",["-help"]],["xdotool",["help"]]]){
   try{ok(name,bin(name,args));}catch(e){rows.push({name,status:"FAIL",detail:String(e.message).slice(0,220)});}
 }
 const pass=rows.every(x=>x.status==="PASS");
