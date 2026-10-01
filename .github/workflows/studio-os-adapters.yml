@@ -1,0 +1,50 @@
+name: Qualify Studio OS adapters
+
+on:
+  push:
+    branches:
+      - shipaton-nextgen-20260930-r01
+    paths:
+      - studio-os/package.json
+      - studio-os/qualify-adapters.mjs
+      - studio-os/ADAPTER_REGISTRY_R01.json
+      - .github/workflows/studio-os-adapters.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  qualify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: shipaton-nextgen-20260930-r01
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: studio-os/package-lock.json
+      - name: Install system capture adapters
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg xvfb xdotool
+      - name: Install Studio OS libraries
+        working-directory: studio-os
+        run: |
+          npm install --package-lock-only
+          npm ci
+      - name: Qualify adapters
+        working-directory: studio-os
+        run: npm run qualify
+      - name: Persist adapter receipt
+        run: |
+          cp studio-os/STUDIO_OS_ADAPTER_QUALIFICATION_R01.json studio-os/ADAPTER_QUALIFICATION_CURRENT.json
+          git config user.name "wexspace-ci"
+          git config user.email "wexspace-ci@users.noreply.github.com"
+          git add studio-os/package-lock.json studio-os/ADAPTER_QUALIFICATION_CURRENT.json
+          git diff --cached --quiet && exit 0
+          git commit -m "studio(adapters): persist qualification receipt"
+          git push origin HEAD:shipaton-nextgen-20260930-r01
