@@ -1,0 +1,16 @@
+{
+  "name": "wexspace-studio-os",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "engines": {"node": ">=20"},
+  "dependencies": {
+    "playwright": "1.55.0",
+    "three": "0.180.0",
+    "motion": "12.23.24",
+    "lottie-web": "5.13.0"
+  },
+  "scripts": {
+    "qualify": "node qualify-adapters.mjs"
+  }
+}
