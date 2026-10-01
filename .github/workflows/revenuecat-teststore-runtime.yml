@@ -1,0 +1,98 @@
+name: RevenueCat Test Store runtime qualification
+on:
+  push:
+    branches: [ "shipaton-nextgen-20260930-r01" ]
+    paths:
+      - ".github/workflows/revenuecat-teststore-runtime.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  qualify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      REVENUECAT_TEST_API_KEY: ${{ secrets.REVENUECAT_TEST_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "9.6.0"
+      - name: Build sandbox APK with secured public SDK key
+        working-directory: mobile/shipaton2026
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$REVENUECAT_TEST_API_KEY"
+          gradle :app:assembleSandboxDebug --stacktrace
+      - name: Launch emulator and exercise RevenueCat Test Store
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 35
+          arch: x86_64
+          profile: pixel_6
+          target: default
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim
+          disable-animations: true
+          script: |
+            set -euo pipefail
+            mkdir -p "$RUNNER_TEMP/rc"
+            APK="mobile/shipaton2026/app/build/outputs/apk/sandbox/debug/app-sandbox-debug.apk"
+            adb install -r "$APK"
+            PKG="ai.wexspace.fielddesk.samsung.sandbox"
+            adb shell am start -W -n "$PKG/ai.wexspace.fielddesk.MainActivity"
+            sleep 8
+            adb shell uiautomator dump /sdcard/before.xml >/dev/null
+            adb pull /sdcard/before.xml "$RUNNER_TEMP/rc/before.xml" >/dev/null
+            adb exec-out screencap -p > "$RUNNER_TEMP/rc/before.png"
+            python3 - <<'PY'
+            import re, subprocess, xml.etree.ElementTree as ET, os
+            p=os.environ["RUNNER_TEMP"]+"/rc/before.xml"
+            root=ET.parse(p).getroot()
+            for n in root.iter("node"):
+                if n.attrib.get("text")=="Unlock Pro":
+                    m=re.match(r"\[(\d+),(\d+)\]\[(\d+),(\d+)\]",n.attrib["bounds"])
+                    x=(int(m.group(1))+int(m.group(3)))//2; y=(int(m.group(2))+int(m.group(4)))//2
+                    subprocess.check_call(["adb","shell","input","tap",str(x),str(y)])
+                    print("clicked_unlock_pro")
+                    break
+            else:
+                raise SystemExit("Unlock Pro button not found")
+            PY
+            sleep 8
+            adb shell uiautomator dump /sdcard/purchase.xml >/dev/null || true
+            adb pull /sdcard/purchase.xml "$RUNNER_TEMP/rc/purchase.xml" >/dev/null || true
+            adb exec-out screencap -p > "$RUNNER_TEMP/rc/purchase.png"
+            python3 - <<'PY'
+            import re, subprocess, xml.etree.ElementTree as ET, os
+            p=os.environ["RUNNER_TEMP"]+"/rc/purchase.xml"
+            if not os.path.exists(p): raise SystemExit(0)
+            root=ET.parse(p).getroot()
+            pats=("purchase","subscribe","continue","confirm","buy","monthly","unlock")
+            for n in root.iter("node"):
+                t=(n.attrib.get("text") or "").strip().lower()
+                if t and any(k in t for k in pats) and n.attrib.get("clickable")=="true":
+                    m=re.match(r"\[(\d+),(\d+)\]\[(\d+),(\d+)\]",n.attrib["bounds"])
+                    if m:
+                        x=(int(m.group(1))+int(m.group(3)))//2; y=(int(m.group(2))+int(m.group(4)))//2
+                        subprocess.call(["adb","shell","input","tap",str(x),str(y)])
+                        print("clicked_purchase_candidate",t)
+                        break
+            PY
+            sleep 12
+            adb shell uiautomator dump /sdcard/final.xml >/dev/null || true
+            adb pull /sdcard/final.xml "$RUNNER_TEMP/rc/final.xml" >/dev/null || true
+            adb exec-out screencap -p > "$RUNNER_TEMP/rc/final.png"
+            adb logcat -d > "$RUNNER_TEMP/rc/logcat.txt"
+            grep -E "WEXSPACE Pro active|Purchase verified\. Pro unlocked\.|Purchase completed" "$RUNNER_TEMP/rc/final.xml" && echo "REVENUECAT_RUNTIME_PASS=1" | tee "$RUNNER_TEMP/rc/result.txt" || (echo "REVENUECAT_RUNTIME_PASS=0" | tee "$RUNNER_TEMP/rc/result.txt"; exit 1)
+      - name: Upload RevenueCat runtime evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: revenuecat-teststore-runtime-evidence
+          path: ${{ runner.temp }}/rc/
+          retention-days: 3
