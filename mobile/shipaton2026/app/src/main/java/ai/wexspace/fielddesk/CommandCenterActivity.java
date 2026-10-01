@@ -50,9 +50,9 @@ public final class CommandCenterActivity extends Activity {
         root.addView(state,margin(0,0,0,dp(18)));
 
         root.addView(label("ACTIVE PROJECTS"));
-        root.addView(projectCard("01","MECHANICAL ENGINEERING","UTL-NET-001 · Cooling Water Network","Deterministic hydraulics + independent verification","OPEN ENGINEERING",v->startActivity(new Intent(this,EngineeringActivity.class))),margin(0,0,0,dp(12)));
-        root.addView(projectCard("02","SOFTWARE / GOVERNANCE QA","Request Scope Gate · RCS","Acceptance criteria, evidence and human release boundary","OPEN QA",v->startActivity(new Intent(this,MainActivity.class))),margin(0,0,0,dp(12)));
-        root.addView(projectCard("03","STUDIO OS","Production Job #001","60fps capture, cinematic timeline, evidence and QA","OPEN STUDIO",v->startActivity(new Intent(this,StudioActivity.class))),margin(0,0,0,dp(18)));
+        root.addView(projectCard("01","MECHANICAL ENGINEERING","Pump Skid · Duty Point","Deterministic hydraulics + independent verification","OPEN PUMP SKID",v->startActivity(new Intent(this,PumpSkidActivity.class))),margin(0,0,0,dp(12)));
+        root.addView(projectCard("02","ENERGY ENGINEERING","Solar Micro-Station","PV + battery + inverter sizing with energy-balance verification","OPEN SOLAR",v->startActivity(new Intent(this,SolarStationActivity.class))),margin(0,0,0,dp(12)));
+        root.addView(projectCard("03","TELECOM + POWER","Remote Link Rescue","Evidence freeze, multi-specialist recovery and human approval","OPEN RESCUE",v->startActivity(new Intent(this,RemoteLinkActivity.class))),margin(0,0,0,dp(18)));
 
         root.addView(label("EXECUTION FABRIC"));
         LinearLayout fabric=card();fabric.setPadding(dp(16),dp(16),dp(16),dp(16));
