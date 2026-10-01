@@ -1,0 +1,36 @@
+name: Sync WEXSPACE brand asset
+on:
+  push:
+    branches:
+      - shipaton-nextgen-20260930-r01
+    paths:
+      - .github/workflows/sync-brand-assets.yml
+permissions:
+  contents: write
+jobs:
+  sync:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: shipaton-nextgen-20260930-r01
+      - name: Fetch current Devpost logo
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p brand mobile/shipaton2026/app/src/main/res/drawable-nodpi site/assets
+          curl -fL --retry 3 -o brand/wexspace-logo.png "https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/005/460/930/datas/original.png"
+          cp brand/wexspace-logo.png mobile/shipaton2026/app/src/main/res/drawable-nodpi/wexspace_logo.png
+          cp brand/wexspace-logo.png site/assets/wexspace-logo.png
+          sha256sum brand/wexspace-logo.png > brand/wexspace-logo.sha256
+          file brand/wexspace-logo.png
+      - name: Commit brand assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "wexspace-ci"
+          git config user.email "wexspace-ci@users.noreply.github.com"
+          git add brand mobile/shipaton2026/app/src/main/res/drawable-nodpi/wexspace_logo.png site/assets/wexspace-logo.png
+          git diff --cached --quiet && exit 0
+          git commit -m "brand: sync new WEXSPACE logo from Devpost"
+          git push origin HEAD:shipaton-nextgen-20260930-r01
